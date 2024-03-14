@@ -1,10 +1,11 @@
 import { Link, Outlet } from "react-router-dom";
 import { Suspense } from "react";
+import scss from "./Header.module.scss";
 
 const Header = () => {
   return (
     <>
-      <header>
+      <header className={scss.header}>
         <Link to="/">Home</Link>
         <Link to="/login">Login</Link>
       </header>

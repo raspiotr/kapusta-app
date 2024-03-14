@@ -1,35 +1,36 @@
 import { useState } from "react";
-import styles from "./Balance.module.css";
+import scss from "./Balance.module.scss";
 
 const Balance = () => {
-  const [balance, setBalance] = useState("");
-
-  const changeBalance = (e) => {
-    setBalance(e.target.value);
-  };
+  const [balance] = useState(1000000);
 
   const confirmBalance = () => {
     console.log(`Your balance: ${balance} UAH is confirmed`);
   };
 
   return (
-    <div className={styles.container}>
-      <label className={styles.balance}>Balance: </label>
-      <div className={styles.inputGroup}>
-        <input
-          className={styles.inputBalance}
-          id="balance"
-          type="number"
-          value={balance}
-          onChange={changeBalance}
-          placeholder="00.00"
-          min="0"
-        />
-        <span className={styles.currency}>UAH</span>
+    <div className={scss.container}>
+      <label className={scss.name}>Balance: </label>
+      <div className={scss.box}>
+        <div className={scss.balanceBox}>
+          <span
+            className={scss.balance}
+            // id="balance"
+            // type="number"
+            // value=
+
+            // placeholder="00.00"
+            // min="0"
+          >
+            {balance}
+          </span>
+          <span className={scss.currency}>UAH</span>
+        </div>
+
+        <button onClick={confirmBalance} className={scss.confirm}>
+          Confirm
+        </button>
       </div>
-      <button onClick={confirmBalance} className={styles.confirm}>
-        Confirm
-      </button>
     </div>
   );
 };

@@ -12,9 +12,11 @@ const Home = () => {
   };
 
   return (
-    <main>
-      <button>TO TRANSACTION</button>
-      <Link to="/reports">Reports</Link>
+    <main className={scss.mainContainer}>
+      <button className={scss.transactionBtn}>TO TRANSACTION</button>
+      <div className={scss.reports}>
+        <Link to="/reports">Reports 📊</Link>
+      </div>
       <Balance />
       <Calendar />
       <div className={scss.bottomButtons}>

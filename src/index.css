@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  font-family: "Roboto", sans-serif;
 }
 
 button {
@@ -7,4 +8,9 @@ button {
   border: none;
   background: none;
   cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }
