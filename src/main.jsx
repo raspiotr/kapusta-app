@@ -4,10 +4,13 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
 
+
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter basename="/goit-gr2-kapusta/">
       <App />
     </BrowserRouter>
+    
   </React.StrictMode>
 );
