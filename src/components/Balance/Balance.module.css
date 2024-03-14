@@ -1,0 +1,63 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  margin: auto;
+  width: 100%;
+    
+  }
+  
+  .balance {
+    font-family: 'Roboto', sans-serif; 
+    font-size: 15px;
+    color: #888888; 
+    margin-right: 10px;
+    font-weight: 550;
+    
+  }
+  
+  .inputGroup {
+    font-family: 'Roboto', sans-serif; 
+    border: 3px solid #ffffff ;
+    border-radius: 20px;
+    padding-right: 20px;
+    font-weight: 700;
+    font-size: 15px;
+    margin-left: 10px;
+  }
+
+  .inputBalance {
+    font-size: 15px;
+    border: none;
+    outline: none;
+    text-align: right;
+    padding: 15px 5px 15px 5px;
+    font-weight: 700;
+    color: black;
+    background-color: transparent;
+    width: 100px;
+  }
+  
+  .confirm {
+    background-color: transparent; 
+    color: #888888; 
+    padding: 15px 40px 15px 40px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    margin-left: 20px; 
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 300;
+    border: 3px solid #ffffff ;
+    
+  }
+  
+  .confirm:hover {
+    background-color: #FF751D;
+    color: white;
+    border: 3px solid #FF751D ;
+  }
+  
+

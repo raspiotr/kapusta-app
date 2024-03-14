@@ -6,7 +6,7 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter basename="/goit-gr2-kapusta/">
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode>
