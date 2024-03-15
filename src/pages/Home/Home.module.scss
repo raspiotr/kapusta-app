@@ -4,7 +4,10 @@
 }
 
 .transactionBtn {
-  margin: 16px 0;
+  margin: 16px 0 0 10px;
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 }
 
 .bottomButtons {
@@ -14,6 +17,7 @@
   position: fixed;
   left: 0;
   bottom: 0;
+  z-index: 3;
 }
 
 .button {
@@ -21,8 +25,32 @@
   height: 100%;
 }
 
-.reports {
+.mainWindow {
+  background-color: white;
+  height: 616px;
+  width: 100%;
+  border-radius: 0 30px 30px;
+}
+
+.upWindow {
   display: flex;
-  justify-content: center;
-  margin: 16px 0;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 24px 40px 0;
+}
+
+.balance {
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    height: 44px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 40px 0 60px 0;
+  }
+  & a {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0;
+  }
 }

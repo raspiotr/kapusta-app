@@ -1,8 +1,7 @@
-import React from "react";
-import s from "./Container.module.css";
+import scss from "./Container.module.scss";
 
-function Container({ children }) {
-  return <div className={s.container}>{children}</div>;
-}
+const Container = ({ children }) => {
+  return <div className={scss.container}>{children}</div>;
+};
 
 export default Container;
