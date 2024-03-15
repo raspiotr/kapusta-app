@@ -1,0 +1,41 @@
+.modal {
+    position: relative;
+    width: 288px;
+    height: 163px;
+    border-radius: 30px;
+    background-color: #1e2a78;
+  }
+  
+  .triangle {
+    position: absolute;
+    top: -8px;
+    left: 30px;
+    width: 0;
+    height: 0;
+    border-left: 14.8px solid transparent;
+    border-right: 14.8px solid transparent;
+    border-top: 8px solid #1e2a78;
+  }
+  
+  .messageContainer {
+    position: absolute;
+    top: 30px;
+    left: 15px;
+    width: 258px;
+    height: 122px;
+    border-radius: 30px;
+    background-color: #1e2a78;
+    padding: 20px;
+  }
+  
+  .messageTitle {
+    color: white;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .messageText {
+    color: white;
+    font-size: 12px;
+  }
+  
