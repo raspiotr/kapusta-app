@@ -1,0 +1,23 @@
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 380px;
+    height: 194px;
+    border-radius: 30px;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .buttonContainer {
+    margin-top: 20px;
+  }
+  
+  .button {
+    width: 125px;
+    height: 44px;
+    border-radius: 16px;
+    margin-right: 20px;
+  }
+  
