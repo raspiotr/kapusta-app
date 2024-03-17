@@ -10,6 +10,7 @@
   padding: 45px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
+  background-color: #FFFFFF;
 
   .closeIcon {
     position: absolute;
@@ -37,7 +38,27 @@
     height: 44px;
     border-radius: 16px;
     font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+  }
+
+  .button.yes {
+    background-color: #FF751D;
+    color: white;
     border: none;
   }
+  
+  .button.no {
+    background-color: white;
+    color: black;
+    border: 2px solid #F2F5FC;
+
+    &:hover {
+      background-color: #FF751D;
+      color: white;
+      border: none;
+    }
+  }
+  
 }
   
