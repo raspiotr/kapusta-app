@@ -1,0 +1,13 @@
+.bottomButtons {
+  background-color: #f5f6fb;
+  width: 100vw;
+  height: 50px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+
+.button {
+  width: 50%;
+  height: 100%;
+}/*# sourceMappingURL=Home.module.css.map */
