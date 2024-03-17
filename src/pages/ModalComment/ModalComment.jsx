@@ -17,9 +17,17 @@ const ModalComment = () => {
         { month: 'June', amount: '$1700' },
     ];
 
+    const handleAsksModalYes = () => {
+        setIsAsksModalVisible(false);
+    };
+
+    const handleAsksModalNo = () => {
+        setIsAsksModalVisible(false);
+    };
+
     return ( 
         <>
-            <AsksModal isVisible={isAsksModalVisible} />
+            <AsksModal isVisible={isAsksModalVisible} onYes={handleAsksModalYes} onNo={handleAsksModalNo} />
             <HelloModal isVisible={isHelloModalVisible} />
             <SummaryModal data={summaryData} />
         </>
