@@ -8,6 +8,7 @@ const Login = lazy(() => import("./pages/Login/Login"));
 const Register = lazy(() => import("./pages/Register/Register"));
 const Reports = lazy(() => import("./pages/Reports/Reports"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
+const ModalComment = lazy(() => import("./pages/ModalComment/ModalComment"));
 
 // const Expenses = lazy(() => import("./components/Expenses/Expenses"));
 // const Income = lazy(() => import("./components/Income/Income"));
@@ -24,6 +25,7 @@ function App() {
             <Route path="register" element={<Register />} />
             <Route index element={<Home />}></Route>
             <Route path="reports" element={<Reports />} />
+            <Route path="/modal-comment" element={<ModalComment />} />  
             <Route path="*" element={<NotFound />} />
             {/* 
             <Route
