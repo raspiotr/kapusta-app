@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './HelloModal.module.scss';
+import styles from '../HelloModal/HelloModal.module.scss';
 
 const HelloModal = ({ isVisible }) => {
   if (!isVisible) {
