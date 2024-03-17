@@ -1,0 +1,75 @@
+@import "normalize.css";
+
+/*main variables*/
+
+$mainColor: #ffffff;
+$secondaryColor: #f2f5fc;
+$accentColor: #ff751d;
+$accentShadyColor: rgba(251, 124, 47, 0.2);
+$textColor: #000000;
+$secondaryTextColor: #52555f;
+$expenceColor: #e7192e;
+$modalBackground: #1d346a;
+$primaryFontStyle: "Roboto", sans-serif;
+
+/*all colors*/
+
+$bg-grey-color: #f5f6fb;
+$bg-white-color: #fff;
+$bg-white-color-tab: #fefefe;
+$bg-white-color-tab-non-active: #fafbfd;
+$bg-input-color: #f6f7fb;
+$bg-avatar-color: #f5f6fa;
+$bg-stripe-color: #e0e5eb;
+$box-shadow-color: rgba(170, 178, 197, 0.2);
+
+/*breakpoints*/
+
+$breakpoint-mobile: 767.98px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1280px;
+
+/*renderowanie logo*/
+
+$logo-picture-color: #dfe2eb;
+$logo-picture-shadow: #f5f6fb;
+$logo-primary-color: #fb7c2f;
+$logo-secondary-color: rgba(251, 124, 47, 0.2);
+
+/*buttons*/
+
+$btn-orange-bg-color: #ff751d;
+$btn-orange-text-color: #fff;
+$btn-orange-box-shadow: rgba(255, 107, 8, 0.35);
+$btn-grey-bg-color: #f5f6fb;
+$btn-grey-text-color: #52555f;
+$btn-grey-black-text-color: #000;
+$btn-grey-box-shadow-color: rgba(170, 178, 197, 0.4);
+$btn-grey-drop-shadow-color: rgba(82, 85, 95, 0.15);
+$btn-white-border-color: #f6f7fc;
+$btn-grey-border-color: #fff;
+
+/*kolory podstawowe tekstu*/
+
+$text-color-primary: rgba(82, 85, 95, 0.7);
+$text-color-placeholders: #c7ccdc;
+$text-color-secondary: #52555f;
+$text-active-tab: #ff751d;
+$text-inactive-tab: #000000;
+
+/*wydatki i dochody*/
+
+$expenses-text-color: #e53935;
+$profits-text-color: #407946;
+$line-bg-color: #e0e5eb;
+
+/*nieaktywne kategorie*/
+
+$non-active-product-category-img: #071f41;
+$non-active-product-category-bg: #f5f6fb;
+
+/*aktywne kategorie*/
+/*wykresy*/
+
+$active-product-category-img: #ff751d;
+$active-product-category-bg: #ffdac0;
