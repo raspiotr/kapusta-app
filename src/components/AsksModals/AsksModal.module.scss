@@ -1,23 +1,43 @@
 .modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 380px;
-    height: 194px;
-    border-radius: 30px;
-    text-align: center;
-    padding: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  height: 194px;
+  border-radius: 30px;
+  text-align: center;
+  padding: 45px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+
+  .closeIcon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 12px;
+    height: 12px;
+    stroke: #52555F;
+  }
+
+  p {
+    font-size: 14px;
+    margin-bottom: 30px;
+    margin-top: 5px;
   }
   
   .buttonContainer {
-    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 10px;
   }
   
   .button {
     width: 125px;
     height: 44px;
     border-radius: 16px;
-    margin-right: 20px;
+    font-size: 12px;
+    border: none;
   }
+}
   
