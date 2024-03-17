@@ -1,0 +1,69 @@
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & input {
+    outline: none;
+    height: 40px;
+    padding-left: 15px;
+  }
+}
+
+.inputsBox {
+  width: 100%;
+}
+
+.description {
+  width: 297px;
+  border: 3px solid lightgrey;
+  border-radius: 20px 20px 0 0;
+  border-bottom: 0;
+}
+
+.category {
+  width: 297px;
+  border: 3px solid lightgrey;
+  border-radius: 0 0 20px 0;
+}
+
+// .valueBox {
+//   margin-left: 20px;
+// }
+
+.value {
+  position: relative;
+  left: 25px;
+  margin: 32px;
+  width: 183px;
+  border: 3px solid lightgrey;
+  border-radius: 20px;
+}
+
+.calculator {
+  display: inline-block;
+  height: 46px;
+  width: 40px;
+  position: relative;
+  right: 55px;
+  border-left: 3px solid lightgrey;
+  text-align: center;
+  line-height: 46px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  & button {
+    height: 44px;
+    width: 130px;
+    border-radius: 22px;
+    background-color: lightgrey;
+
+    &:first-child {
+      background-color: darkorange;
+      color: white;
+    }
+  }
+}

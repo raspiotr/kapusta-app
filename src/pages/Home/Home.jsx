@@ -6,6 +6,7 @@ import { useState } from "react";
 import Container from "../../components/Container/Container";
 import Input from "../../components/Inputs/Input";
 import { useMediaQuery } from "react-responsive";
+import Transaction from "../../components/Transaction/Transaction";
 
 const Home = () => {
   const [isActive, setIsActive] = useState(true);
@@ -32,11 +33,11 @@ const Home = () => {
               <div>
                 <Link to="/reports">Reports 📊</Link>
               </div>
-              <Balance />{" "}
+              <Balance />
             </>
           ) : (
             <>
-              <Balance />{" "}
+              <Balance />
               <div>
                 <Link to="/reports">Reports 📊</Link>
               </div>
@@ -52,7 +53,7 @@ const Home = () => {
           <div className={scss.mainWindow}>
             <div className={scss.upWindow}>
               <Calendar />
-              <Input isOpen={isOpen} closeModal={openModalBtn} />
+              <Transaction />
             </div>
           </div>
         )}
