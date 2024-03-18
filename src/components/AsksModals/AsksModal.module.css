@@ -1,0 +1,55 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  height: 194px;
+  border-radius: 30px;
+  text-align: center;
+  padding: 45px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  background-color: #FFFFFF;
+}
+.modal .closeIcon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 12px;
+  height: 12px;
+  stroke: #52555F;
+}
+.modal p {
+  font-size: 14px;
+  margin-bottom: 30px;
+  margin-top: 5px;
+}
+.modal .buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 10px;
+}
+.modal .button {
+  width: 125px;
+  height: 44px;
+  border-radius: 16px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+.modal .button.yes {
+  background-color: #FF751D;
+  color: white;
+  border: none;
+}
+.modal .button.no {
+  background-color: white;
+  color: black;
+  border: 2px solid #F2F5FC;
+}
+.modal .button.no:hover {
+  background-color: #FF751D;
+  color: white;
+  border: none;
+}/*# sourceMappingURL=AsksModal.module.css.map */

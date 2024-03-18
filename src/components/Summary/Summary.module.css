@@ -1,0 +1,14 @@
+.summaryTable {
+  width: 230px;
+  border-collapse: collapse;
+  margin-top: 40px;
+  border: 2px solid transparent;
+  background-color: lightgray;
+  border-radius: 20px;
+}
+
+.summaryTable th,
+.summaryTable td {
+  border-bottom: 3px solid #f2f5fc;
+  padding: 8px;
+}/*# sourceMappingURL=Summary.module.css.map */

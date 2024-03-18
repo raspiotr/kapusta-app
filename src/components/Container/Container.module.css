@@ -1,0 +1,15 @@
+.container {
+  margin: 0 auto 0 auto;
+  padding: 0;
+  width: 320px;
+}
+@media screen and (min-width: 768px) {
+  .container {
+    width: 768px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .container {
+    width: 1280px;
+  }
+}/*# sourceMappingURL=Container.module.css.map */

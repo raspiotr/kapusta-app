@@ -1,22 +1,23 @@
+@import "../../assets/variables";
 .modal {
-    position: relative;
-    width: 288px;
-    height: 152px;
-    border-radius: 30px;
-    background-color: #1D346A;
-    padding: 30px;
-    box-sizing: border-box;
-    margin-top: 30px;
-  
+  position: relative;
+  width: 288px;
+  height: 152px;
+  border-radius: 30px;
+  background-color: #1d346a;
+  padding: 30px;
+  box-sizing: border-box;
+  margin-top: 30px;
+
   .triangle {
     position: absolute;
     top: -16px;
     left: 55px;
     border-left: 14.8px solid transparent;
     border-right: 14.8px solid transparent;
-    border-bottom: 16px solid #1D346A;
+    border-bottom: 16px solid #1d346a;
   }
-  
+
   .messageContainer {
     border-radius: 30px;
     text-align: center;
@@ -24,15 +25,15 @@
     flex-direction: column;
     gap: 25px;
   }
-  
-  .messageTitle, .messageText {
+
+  .messageTitle,
+  .messageText {
     color: white;
     font-size: 14px;
     margin: 0px;
   }
-  
+
   .messageText {
     font-size: 12px;
   }
 }
-  

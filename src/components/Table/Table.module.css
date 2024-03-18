@@ -1,0 +1,27 @@
+.table {
+  margin-top: 48px;
+}
+@media screen and (min-width: 768px) {
+  .table {
+    width: 624px;
+    border-spacing: 0;
+    border: 1px solid #f2f2f2;
+    background-color: #f2f2f2;
+    border-bottom: 0;
+    border-radius: 20px 20px 0 0;
+  }
+}
+.table th {
+  text-align: left;
+  padding: 8px;
+}
+.table td {
+  border-top: none;
+  padding: 8px;
+}
+@media screen and (min-width: 768px) {
+  .table td {
+    background-color: white;
+    border-bottom: 1px solid #f2f2f2;
+  }
+}/*# sourceMappingURL=Table.module.css.map */

@@ -1,20 +1,13 @@
-import { useScreenSize } from "../Hooks/useScreen";
+import { useScreenSize } from "../../hooks/useScreenSize";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/auth/operations";
-import {
-  Container,
-  UserArea,
-  LogoutButton,
-  Avatar,
-  Name,
-  LogoutIcon,
-} from "./UserMenu.module";
+import styles from "./UserMenu.module.scss"; // Importuj klasy stylu SCSS
 import logoutSvg from "../../images/PNG/logout 1";
-import { selectUserEmail } from "../../redux/Auth/selectors";
+import { selectUserName } from "../../redux/Auth/selectors";
 
 export const UserMenu = () => {
-  const userEmail = useSelector(selectUserEmail);
-  const firstLetter = userEmail ? userEmail.charAt(0).toUpperCase() : "";
+  const userName = useSelector(selectUserName);
+  const firstLetter = userName ? userName.charAt(0).toUpperCase() : "";
 
   const dispatch = useDispatch();
 
@@ -23,29 +16,32 @@ export const UserMenu = () => {
   const { mobileScreen } = useScreenSize();
 
   return (
-    <Container>
-      <UserArea>
+    <div className={styles.container}>
+      <div className={styles.userArea}>
         {mobileScreen ? (
-          <Avatar>{firstLetter}</Avatar>
+          <span className={styles.avatar}>{firstLetter}</span>
         ) : (
           <>
-            <Avatar>{firstLetter}</Avatar> <Name>{userEmail}</Name>
+            <span className={styles.avatar}>{firstLetter}</span>
+            <span className={styles.name}>{userName}</span>
           </>
         )}
-      </UserArea>{" "}
+      </div>{" "}
       {mobileScreen ? (
         <>
-          <LogoutButton onClick={handleLogout}>
-            <LogoutIcon>
-              <image href={logoutSvg} />
-            </LogoutIcon>
-          </LogoutButton>
+          <button className={styles.logoutButton} onClick={handleLogout}>
+            <div className={styles.logoutIcon}>
+              <img src={logoutSvg} alt="Logout" />
+            </div>
+          </button>
         </>
       ) : (
         <>
-          <LogoutButton onClick={handleLogout}>Exit</LogoutButton>
+          <button className={styles.logoutButton} onClick={handleLogout}>
+            Exit
+          </button>
         </>
       )}
-    </Container>
+    </div>
   );
 };
