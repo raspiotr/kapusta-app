@@ -8,6 +8,7 @@ import Input from "../../components/Inputs/Input";
 import { useMediaQuery } from "react-responsive";
 import Transaction from "../../components/Transaction/Transaction";
 import Table from "../../components/Table/Table";
+import Summary from "../../components/Summary/Summary";
 
 const Home = () => {
   const [isActive, setIsActive] = useState(true);
@@ -49,15 +50,19 @@ const Home = () => {
           <>
             <Calendar />
             <Input isOpen={isOpen} closeModal={openModalBtn} />
+            <Table />
           </>
         ) : (
-          <div className={scss.mainWindow}>
-            <div className={scss.upWindow}>
-              <Calendar />
-              <Transaction />
+          <>
+            <div className={scss.mainWindow}>
+              <div className={scss.upWindow}>
+                <Calendar />
+                <Transaction />
+              </div>
+              <Table />
             </div>
-            <Table />
-          </div>
+            <Summary />
+          </>
         )}
 
         <>
