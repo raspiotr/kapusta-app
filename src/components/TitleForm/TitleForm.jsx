@@ -1,17 +1,12 @@
-import {
-  StyledContainer,
-  StyledParagraph,
-  StyledHeading,
-  StyledDollar,
-} from "./TitleForm.module";
+import "./TitleForm.css";
 
 export const MainLogo = () => {
   return (
-    <StyledContainer>
-      <StyledHeading>
-        Kapu<StyledDollar>$</StyledDollar>ta
-      </StyledHeading>
-      <StyledParagraph>SMART FINANCE</StyledParagraph>
-    </StyledContainer>
+    <div className="title-container">
+      <h1 className="title-heading">
+        Kapu<span className="title-dollar">$</span>ta
+      </h1>
+      <p className="title-paragraph">SMART FINANCE</p>
+    </div>
   );
 };
