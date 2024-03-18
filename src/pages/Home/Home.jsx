@@ -7,6 +7,7 @@ import Container from "../../components/Container/Container";
 import Input from "../../components/Inputs/Input";
 import { useMediaQuery } from "react-responsive";
 import Transaction from "../../components/Transaction/Transaction";
+import Table from "../../components/Table/Table";
 
 const Home = () => {
   const [isActive, setIsActive] = useState(true);
@@ -55,6 +56,7 @@ const Home = () => {
               <Calendar />
               <Transaction />
             </div>
+            <Table />
           </div>
         )}
 
