@@ -1,7 +1,7 @@
 import { useScreenSize } from "../../hooks/useScreenSize";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/auth/operations";
-import styles from "./UserMenu.module.scss"; // Importuj klasy stylu SCSS
+import styles from "./UserMenu.module.scss";
 import logoutSvg from "../../images/PNG/logout 1";
 import { selectUserName } from "../../redux/Auth/selectors";
 
