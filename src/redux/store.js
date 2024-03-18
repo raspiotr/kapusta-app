@@ -12,22 +12,26 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import persistReducer from 'redux-persist/es/persistReducer';
+import { reportsReducer } from './reports/reports.slice';
+import { reportsQuerReducer } from './reportsQuery/reportsQuery.slice';
+import { transactionsReduser } from './transaction/transactions.slice';
+import { authReduser } from './auth/auth.slice';
 
 
+const authPersistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['token'],
+};
 
-  const authPersistConfig = {
-    key: 'auth',
-    storage,
-    whitelist: ['token'],
-  };
-  export const store = configureStore({
-    reducer: {
-      auth: persistReducer(authPersistConfig),
-      transactions: '',
-      reports: '',
-      reportsQuery:'' ,
-    },
-    middleware: getDefaultMiddleware =>
+export const store = configureStore({
+  reducer: {
+    auth: persistReducer(authPersistConfig, authReduser),
+    transactions: transactionsReduser,
+    reports: reportsReducer,
+    reportsQuery: reportsQuerReducer,
+  },
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [
@@ -45,5 +49,4 @@ import persistReducer from 'redux-persist/es/persistReducer';
       },
     }),
 });
-
 export const persistor = persistStore(store);
