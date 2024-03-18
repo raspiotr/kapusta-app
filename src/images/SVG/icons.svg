@@ -2,6 +2,11 @@
 overflov="hidden">
     <defs>
 
+        <symbol id="icon-close" viewBox="0 0 14 14">
+            <path d="M1 1L13 13" stroke-width="2"/>
+            <path d="M1 13L13 0.999999" stroke-width="2"/>
+        </symbol>
+
         <symbol id="icon-logo" viewBox="0 0 90 31">
             <rect x="6" y="5" width="33" height="26" rx="8" fill="#FB7C2F"/>
             <rect width="33" height="26" rx="8" fill="#FB7C2F" fill-opacity="0.2"/>

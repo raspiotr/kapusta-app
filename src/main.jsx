@@ -9,11 +9,8 @@ import App from "./App.jsx";
 import "./index.css";
 
 
-
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    
     <Provider store={store}>
       <BrowserRouter basename="/goit-gr2-kapusta/">
         <App />

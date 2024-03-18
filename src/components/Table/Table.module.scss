@@ -1,0 +1,24 @@
+.table {
+  width: 624px;
+  margin-top: 48px;
+  border-spacing: 0;
+  border: 1px solid #f2f2f2;
+  background-color: #f2f2f2;
+  border-bottom: 0;
+
+  & thead {
+    border-radius: 20px;
+  }
+
+  th {
+    text-align: left;
+    padding: 8px;
+  }
+
+  td {
+    background-color: white;
+    border-top: none;
+    border-bottom: 1px solid #f2f2f2;
+    padding: 8px;
+  }
+}

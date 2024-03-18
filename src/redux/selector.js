@@ -1,3 +1,4 @@
+
 export const selectIsLoggedIn = store => store.auth.isLoggedIn;
 
 export const selectUser = store => store.auth.user.email;
@@ -37,3 +38,6 @@ export const selectIsLoading = store => store.transactions.isLoading;
 export const selectDataChart = store => store.reportsQuery.filteredData;
 
 export const selectReportsQuery = store => store.reportsQuery.reportsQuery;
+
+export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
+
