@@ -1,4 +1,5 @@
 import scss from "./Table.module.scss";
+import { useMediaQuery } from "react-responsive";
 
 const data = [
   {
@@ -16,17 +17,23 @@ const data = [
 ];
 
 const Table = () => {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   return (
     <table className={scss.table}>
-      <thead>
-        <tr>
-          <th>DATE</th>
-          <th>DESCRIPTION</th>
-          <th>CATEGORY</th>
-          <th>SUM</th>
-          <th></th>
-        </tr>
-      </thead>
+      {!isMobile ? (
+        <thead>
+          <tr>
+            <th>DATE</th>
+            <th>DESCRIPTION</th>
+            <th>CATEGORY</th>
+            <th>SUM</th>
+            <th></th>
+          </tr>
+        </thead>
+      ) : (
+        ""
+      )}
+
       <tbody>
         {data.map((row, index) => (
           <tr key={index}>
