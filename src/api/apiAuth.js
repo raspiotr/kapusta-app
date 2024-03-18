@@ -1,34 +1,49 @@
-import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { Report } from 'notiflix/build/notiflix-report-aio';
 
+axios.defaults.baseURL = 'https://kapusta-backend-827563b0830f.herokuapp.com/';
+axios.defaults.validateStatus();
 
-const initialState = {
-  user: { email: null, id: null },
-  token: null,
-  isLoggedIn: false,
-  isLoadingCurrentUser: false,
-  isFetchingCurrentUser: false,
+export const registerAPI = async user => {
+  try {
+    const { data } = await axios.post('/auth/register', user);
+    return data;
+  } catch (error) {
+    if (error.response.status === 409) {
+      Report.failure(`User ${user.email} is existing`);
+    }
+  }
 };
 
-export const authSlice = createSlice({
-  name: 'auth',
-  initialState,
-  reducers: {
-    addAccessToken: (state, action) => {
-      state.token = action.payload;
+export const loginAPI = async user => {
+  const { data } = await axios.post('auth/login', user);
+  return data;
+};
+
+export const logoutAPI = async () => {
+  const { data } = await axios.post('auth/logout');
+  return data;
+};
+
+export const googleLoginAPI = async () => {
+  const response = await axios.get('/auth/google', {
+    headers: {
+      accept: '*/*',
     },
-  },
- // extraReducers: builder => {
-   // builder
-      // login
-      
-     // })
-      // logout
-      
-      // refresh user
-     
- // },
-});
+  });
+  console.log('response', response);
+  return response;
+};
 
-export const authReduser = authSlice.reducer;
+export const fullUserInfoAPI = async () => {
+  const { data } = await axios.get('user');
+  return data;
+};
 
-export const { addAccessToken } = authSlice.actions;
+export const setAuthHeader = token => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
+export const clearAuthHeader = () => {
+  axios.defaults.headers.common.Authorization = '';
+};

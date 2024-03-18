@@ -23,7 +23,7 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route index element={<Home />}></Route>
-            <Route path="reports" element={<Reports />} />
+            <Route path="reports" element={<Reports />}> </Route>
             <Route path="*" element={<NotFound />} />
             {/* 
             <Route

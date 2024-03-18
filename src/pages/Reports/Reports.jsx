@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
-
-const Reports = () => {
+import { ReportsInfo } from '../../components/Reports/ReportsInfo/ReportsInfo';
+import ReportsNav from '../../components/Reports/ReportsNav/ReportsNav'; 
+import scss from './Reports.module.scss'
+ const Reports = () =>  {
   return (
-    <>
-      <Link to="/">Go back</Link>
-    </>
+    <div className={scss.box}>
+      <ReportsNav/>
+      <ReportsInfo/>
+    </div>
   );
 };
-export default Reports;
+export default Reports
