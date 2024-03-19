@@ -1,5 +1,7 @@
+@import "../../assets/variables";
+
 .bottomButtons {
-  background-color: #f5f6fb;
+  background-color: $btn-grey-bg-color;
   width: 100vw;
   height: 50px;
   position: fixed;
@@ -15,6 +17,7 @@
 .button {
   width: calc(50%);
   height: 100%;
+  background-color: #fafbfd;
   @media screen and (min-width: 768px) {
     width: 138px;
     height: 100%;

@@ -1,10 +1,7 @@
-import cabbageGroupImage from "../../images/desktop/kapusta.png";
-import { StyledContainer, StyledImage } from "./BackgroundCont.module";
+import scss from "./BackgroundCont.module.scss";
 
-export const BackgroundCont = () => {
-  return (
-    <StyledContainer>
-      <StyledImage src={cabbageGroupImage} alt="Cabbages" />
-    </StyledContainer>
-  );
+const BackgroundCont = () => {
+  return <div className={scss.container}></div>;
 };
+
+export default BackgroundCont;

@@ -1,10 +1,12 @@
+// @import "../../assets/variables.scss";
 .box {
-    padding-top: 16px;  
+  padding-top: 16px;
 }
 .mainContainer {
     display: flex;
     flex-direction: column;
   }
+
   .balance {
     display: flex;
     flex-direction: column;
@@ -17,3 +19,4 @@
       gap: 20px;
     }
   }
+

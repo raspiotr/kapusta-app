@@ -1,3 +1,4 @@
+@import "../../assets/variables.scss";
 .summaryTable {
   width: 230px;
   border-collapse: collapse;
@@ -9,6 +10,6 @@
 
 .summaryTable th,
 .summaryTable td {
-  border-bottom: 3px solid #f2f5fc;
+  border-bottom: 2px solid white;
   padding: 8px;
 }

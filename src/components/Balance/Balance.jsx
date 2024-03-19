@@ -2,7 +2,7 @@ import { useState } from "react";
 import scss from "./Balance.module.scss";
 
 const Balance = () => {
-  const [balance] = useState(1000000);
+  const [balance] = useState(100000);
 
   const confirmBalance = () => {
     console.log(`Your balance: ${balance} UAH is confirmed`);
@@ -13,17 +13,14 @@ const Balance = () => {
       <label className={scss.name}>Balance: </label>
       <div className={scss.box}>
         <div className={scss.balanceBox}>
-          <span
+          <input
             className={scss.balance}
-            // id="balance"
-            // type="number"
-            // value=
-
-            // placeholder="00.00"
-            // min="0"
-          >
-            {balance}
-          </span>
+            id="balance"
+            type="number"
+            // value={balance}
+            placeholder="00.00"
+            min="0"
+          />
           <span className={scss.currency}>UAH</span>
         </div>
 

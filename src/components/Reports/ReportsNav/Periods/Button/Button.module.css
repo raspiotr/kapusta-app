@@ -1,0 +1,15 @@
+.box {
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  background-color: transparent;
+  border: transparent;
+  padding: 0%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}/*# sourceMappingURL=Button.module.css.map */

@@ -1,0 +1,10 @@
+@import "../../assets/variables";
+
+.container {
+  position: absolute;
+  z-index: -1;
+  border-radius: 0 0 0 200px;
+  width: 100vw;
+  height: 40%;
+  background-color: $secondaryColor;
+}

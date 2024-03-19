@@ -1,56 +1,54 @@
 import { Suspense } from "react";
-import { Outlet } from "react-router-dom";
-import {
-  Container,
-  Header,
-  Link,
-  LogoSVG,
-  LogoContainer,
-  Nav,
-} from "./Layout.module";
+import { Outlet, Link } from "react-router-dom";
+import styles from "../Layout/Layout.module.scss";
 import { Loader } from "components/Loader/Loader";
 import logoKapusta from "../../images/PNG/logo icon-logo";
 import { useSelector } from "react-redux";
-import { selectIsLoggedIn } from "../../redux/selector";
-import { UserMenu } from "components/UserMenu/UserMenu";
+import { selectIsLoggedIn } from "../../redux/auth/operations";
+import { UserMenu } from "../UserMenu/Usermenu";
 
 const Layout = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const AuthorizedNav = () => {
     return (
-      <Nav>
-        <LogoContainer>
-          <Link to="/" end>
-            <LogoSVG>
-              <image href={logoKapusta} />
-            </LogoSVG>
+      <div className={styles.nav}>
+        <div className={styles.logoContainer}>
+          <Link to="/" className={styles.link} end>
+            <div className={styles.logoSVG}>
+              <image src={logoKapusta} alt="Logo Kapusta" />
+            </div>
           </Link>
-        </LogoContainer>
+        </div>
         <UserMenu />
-      </Nav>
+      </div>
     );
   };
+
   const UnauthorizedNav = () => {
     return (
-      <Nav>
-        <LogoContainer>
-          <Link to="/" end>
-            <LogoSVG>
-              <image href={logoKapusta} />
-            </LogoSVG>
+      <div className={styles.nav}>
+        <div className={styles.logoContainer}>
+          <Link to="/" className={styles.link} end>
+            <div className={styles.logoSVG}>
+              <image src={logoKapusta} alt="Logo Kapusta" />
+            </div>
           </Link>
-        </LogoContainer>
-      </Nav>
+        </div>
+      </div>
     );
   };
+
   return (
-    <Container>
-      <Header>{isLoggedIn ? <AuthorizedNav /> : <UnauthorizedNav />}</Header>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        {isLoggedIn ? <AuthorizedNav /> : <UnauthorizedNav />}
+      </header>
       <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
-    </Container>
+    </div>
   );
 };
+
 export default Layout;

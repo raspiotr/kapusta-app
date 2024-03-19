@@ -3,6 +3,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media screen and (min-width: 1280px) {
+    flex-direction: row;
+  }
   & input {
     outline: none;
     height: 40px;
@@ -21,25 +24,25 @@
 
 .description {
   width: 297px;
-  border: 3px solid lightgrey;
+  border: 3px solid #f5f6fb;
   border-radius: 20px 20px 0 0;
   border-bottom: 0;
   @media screen and (min-width: 768px) {
     width: 170px;
     border-radius: 20px 0 0 0;
-    border: 3px solid lightgrey;
+    border: 3px solid #f5f6fb;
     border-right: 0;
   }
 }
 
 .category {
   width: 297px;
-  border: 3px solid lightgrey;
+  border: 3px solid #f5f6fb;
   border-radius: 0 0 20px 0;
   @media screen and (min-width: 768px) {
     width: 170px;
     border-radius: 20px 0 0 0;
-    border: 3px solid lightgrey;
+    border: 3px solid #f5f6fb;
     border-right: 0;
     border-radius: 0;
   }
@@ -54,11 +57,11 @@
   left: 25px;
   margin: 32px;
   width: 183px;
-  border: 3px solid lightgrey;
+  border: 3px solid #f5f6fb;
   border-radius: 20px;
   @media screen and (min-width: 768px) {
     margin: 0;
-    border: 3px solid lightgrey;
+    border: 3px solid #f5f6fb;
     border-radius: 0 20px 20px 0;
     width: 100px;
   }
@@ -70,12 +73,15 @@
   width: 40px;
   position: relative;
   right: 55px;
-  border-left: 3px solid lightgrey;
+  border-left: 3px solid #f5f6fb;
   text-align: center;
   line-height: 46px;
   @media screen and (min-width: 768px) {
     right: 25px;
     border: 0;
+  }
+  @media screen and (min-width: 1280px) {
+    display: inline;
   }
 }
 
@@ -88,11 +94,19 @@
     margin: 32px 0 0 70px;
     gap: 15px;
   }
+  @media screen and (min-width: 1280px) {
+    justify-content: right;
+    margin: 0;
+  }
   & button {
     height: 44px;
     width: 130px;
     border-radius: 22px;
-    background-color: lightgrey;
+    background-color: #f5f6fb;
+
+    &:hover {
+      scale: 1.1;
+    }
 
     &:first-child {
       background-color: darkorange;

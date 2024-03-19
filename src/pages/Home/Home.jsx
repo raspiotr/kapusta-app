@@ -15,6 +15,7 @@ const Home = () => {
   const [isActive, setIsActive] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 768 });
+  const isDesktop = useMediaQuery({ minWidth: 1280 });
 
   const handleClick = () => {
     setIsActive(!isActive);
@@ -28,7 +29,7 @@ const Home = () => {
     <Container>
       <main className={scss.mainContainer}>
         <div className={scss.transactionBtn}>
-          <button onClick={openModalBtn}>← TO TRANSACTION</button>
+          <button onClick={openModalBtn}> +- TO TRANSACTION</button>
         </div>
         <div className={scss.balance}>
           {isMobile ? (
@@ -61,9 +62,12 @@ const Home = () => {
                 <Calendar />
                 <Transaction />
               </div>
-              <Table />
+              <div className={scss.bottomWindow}>
+                <Table />
+                {isDesktop && <Summary />}
+              </div>
             </div>
-            <Summary />
+            {!isDesktop && <Summary />}
           </>
         )}
         {isMobile && <Buttons isActive={isActive} handleClick={handleClick} />}
