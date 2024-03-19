@@ -3,7 +3,7 @@ import Balance from "../../components/Balance/Balance";
 import Buttons from "../../components/Buttons/Buttons";
 import Calendar from "../../components/Calendar/Calendar";
 import scss from "./Home.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Container from "../../components/Container/Container";
 import Input from "../../components/Inputs/Input";
 import { useMediaQuery } from "react-responsive";
@@ -16,6 +16,9 @@ const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const isDesktop = useMediaQuery({ minWidth: 1280 });
+  const [date, setDate] = useState(new Date());
+
+  useEffect(() => {}, [date]);
 
   const handleClick = () => {
     setIsActive(!isActive);
@@ -51,7 +54,7 @@ const Home = () => {
         {!isMobile && <Buttons isActive={isActive} handleClick={handleClick} />}
         {isMobile ? (
           <>
-            <Calendar />
+            <Calendar selectedDate={date} setSelectedDate={setDate} />
             <Input isOpen={isOpen} closeModal={openModalBtn} />
             <Table isActive={isActive} />
           </>
@@ -59,7 +62,7 @@ const Home = () => {
           <>
             <div className={scss.mainWindow}>
               <div className={scss.upWindow}>
-                <Calendar />
+                <Calendar selectedDate={date} setSelectedDate={setDate} />
                 <Transaction />
               </div>
               <div className={scss.bottomWindow}>
