@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectReports } from '../../../redux/selector';
 import { ReportsList } from './List/ReportsList';
-
+import { ReportsTable } from './Table/ReportsTable';
 import { filteredDataAction } from '../../../redux/reportsQuery/reportsQuery.slice';
 
 import scss from './ReportsInfo.module.scss'
@@ -48,6 +48,7 @@ export const ReportsInfo = () => {
         
 
         <ReportsList onChange={budget}></ReportsList>
+        <ReportsTable onChange={budget}></ReportsTable>
       </div>
       
     </div>

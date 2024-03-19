@@ -30,12 +30,16 @@ export const ReportsList = ({ onChange }) => {
   );
   // Check if expenses or incomes data
   useEffect(() => {
-    if (onChange === 'expenses') {
-      setData(expensesData ?? {});
-      setActive('');
-    } else {
-      setData(incomesData ?? {});
-      setActive('');
+    try {
+      if (onChange === 'expenses') {
+        setData(expensesData ?? {});
+        setActive('');
+      } else {
+        setData(incomesData ?? {});
+        setActive('');
+      }
+    } catch (error) {
+      console.error("Error fetching data from API:", error.message);
     }
   }, [onChange, expensesData, incomesData]);
   // Click handler
