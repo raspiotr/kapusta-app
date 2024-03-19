@@ -1,5 +1,25 @@
 import axios from "axios";
 
+export const getTransactions = async ({ type, token }) => {
+  const req = await axios.get(`/api/transactions/${type}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return req.data;
+};
+
+export const addTransaction = async ({ type, token, body }) => {
+  const req = await axios.post(`/api/transactions/${type}`, body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return req.data;
+};
+
+// te ponizej narazie sa nieuzywane
+
 export const addIncomeAPI = async (info) => {
   const { data } = await axios.post("/api/transaction/income", info);
   return data;
@@ -44,13 +64,4 @@ export const getPeriodDataAPI = async (date) => {
 export const updateBalanceAPI = async (value) => {
   const { data } = await axios.patch("/api/user/balance", value);
   return data;
-};
-
-export const getTransactions = async ({ type, token }) => {
-  const req = await axios.get(`/api/transactions/${type}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return req.data;
 };
