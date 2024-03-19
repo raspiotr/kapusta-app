@@ -53,7 +53,7 @@ const Home = () => {
           <>
             <Calendar />
             <Input isOpen={isOpen} closeModal={openModalBtn} />
-            <Table />
+            <Table isActive={isActive} />
           </>
         ) : (
           <>
@@ -63,7 +63,7 @@ const Home = () => {
                 <Transaction />
               </div>
               <div className={scss.bottomWindow}>
-                <Table />
+                <Table isActive={isActive} />
                 {isDesktop && <Summary />}
               </div>
             </div>
