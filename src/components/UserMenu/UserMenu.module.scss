@@ -1,0 +1,52 @@
+@import "../../assets/variables";
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.userArea {
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.avatar {
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-right: 12px;
+  color: var(--btn-grey-text-color);
+  letter-spacing: 0.04em;
+  text-align: center;
+  background-color: var(--bg-avatar-color);
+  border-radius: 50px;
+}
+
+.name {
+  padding: 9px 20px 9px 0px;
+  color: var(--secondaryTextColor);
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.logoutButton {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--btn-grey-text-color);
+  letter-spacing: 0.04em;
+  border: none;
+  background: none;
+  text-decoration: underline;
+  cursor: pointer;
+  border-left: 1px solid var(--bg-stripe-color);
+  padding: 11px 20px;
+}
+
+.logoutIcon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+}
