@@ -10,7 +10,7 @@
   padding: 45px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 
   .closeIcon {
     position: absolute;
@@ -18,7 +18,7 @@
     right: 20px;
     width: 12px;
     height: 12px;
-    stroke: #52555F;
+    stroke: #52555f;
   }
 
   p {
@@ -26,13 +26,13 @@
     margin-bottom: 30px;
     margin-top: 5px;
   }
-  
+
   .buttonContainer {
     display: flex;
     justify-content: space-between;
     padding: 0px 10px;
   }
-  
+
   .button {
     width: 125px;
     height: 44px;
@@ -43,22 +43,20 @@
   }
 
   .button.yes {
-    background-color: #FF751D;
+    background-color: #ff751d;
     color: white;
     border: none;
   }
-  
+
   .button.no {
     background-color: white;
     color: black;
-    border: 2px solid #F2F5FC;
+    border: 2px solid #f2f5fc;
 
     &:hover {
-      background-color: #FF751D;
+      background-color: #ff751d;
       color: white;
       border: none;
     }
   }
-  
 }
-  

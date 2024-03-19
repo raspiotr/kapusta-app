@@ -1,6 +1,9 @@
+@import "./assets/_variables.scss";
+
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
+  background-color: $mainColor;
 }
 
 button {

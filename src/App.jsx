@@ -1,6 +1,5 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 
 const Header = lazy(() => import("./components/Header/Header"));
 const Home = lazy(() => import("./pages/Home/Home"));
@@ -25,7 +24,7 @@ function App() {
             <Route path="register" element={<Register />} />
             <Route index element={<Home />}></Route>
             <Route path="reports" element={<Reports />} />
-            <Route path="/modal-comment" element={<ModalComment />} />  
+            <Route path="/modal-comment" element={<ModalComment />} />
             <Route path="*" element={<NotFound />} />
             {/* 
             <Route

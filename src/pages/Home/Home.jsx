@@ -28,7 +28,7 @@ const Home = () => {
     <Container>
       <main className={scss.mainContainer}>
         <div className={scss.transactionBtn}>
-          <button onClick={openModalBtn}>← TO TRANSACTION</button>
+          <button onClick={openModalBtn}> +- TO TRANSACTION</button>
         </div>
         <div className={scss.balance}>
           {isMobile ? (
