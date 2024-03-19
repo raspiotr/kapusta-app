@@ -17,7 +17,7 @@ const Balance = () => {
             className={scss.balance}
             id="balance"
             type="number"
-            value={balance}
+            // value={balance}
             placeholder="00.00"
             min="0"
           />

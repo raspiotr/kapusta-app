@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import scss from "./Transaction.module.scss";
+import { addCategory } from "../../api/apiCategory";
 
 const Transaction = () => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [value, setValue] = useState("");
+  const [categories, setCategories] = useState([]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -38,6 +40,19 @@ const Transaction = () => {
     setValue("");
   };
 
+  const getCategory = async () => {
+    try {
+      const categories = await addCategory();
+      return setCategories(categories.data);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getCategory();
+  }, []);
+
   return (
     <form className={scss.form}>
       <div className={scss.inputsBox}>
@@ -58,9 +73,9 @@ const Transaction = () => {
           placeholder="Product category"
         />
         <datalist id="category">
-          <option>Zakupy</option>
-          <option>Transport</option>
-          <option>Praca</option>
+          {categories.map((category) => (
+            <option key={category._id}>{category.categoryName}</option>
+          ))}
         </datalist>
         <div className={scss.valueBox}>
           <input
