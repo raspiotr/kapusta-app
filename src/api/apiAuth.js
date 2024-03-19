@@ -6,7 +6,7 @@ axios.defaults.validateStatus();
 
 export const registerAPI = async user => {
   try {
-    const { data } = await axios.post('/auth/register', user);
+    const { data } = await axios.post('/api/auth/register', user);
     return data;
   } catch (error) {
     if (error.response.status === 409) {
@@ -16,12 +16,12 @@ export const registerAPI = async user => {
 };
 
 export const loginAPI = async user => {
-  const { data } = await axios.post('auth/login', user);
+  const { data } = await axios.post('/api/auth/login', user);
   return data;
 };
 
 export const logoutAPI = async () => {
-  const { data } = await axios.post('auth/logout');
+  const { data } = await axios.post('api/auth/logout');
   return data;
 };
 
@@ -36,7 +36,7 @@ export const googleLoginAPI = async () => {
 };
 
 export const fullUserInfoAPI = async () => {
-  const { data } = await axios.get('user');
+  const { data } = await axios.get('api/auth/current');
   return data;
 };
 
