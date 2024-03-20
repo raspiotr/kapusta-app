@@ -1,8 +1,90 @@
-@import "../../assets/variables";
+
+
 .header {
-  position: relative;
-  z-index: 3;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  width: 320px;
   height: 56px;
-  border-bottom: 1px solid black;
-  background-color: white;
+  padding-left: 25px;
+  padding-right: 25px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 772px) {
+  .header {
+    width: 772px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .header {
+    width: 1280px;
+  }
+}
+
+.logo{
+  width: 90px;
+  height: 31px;
+}
+
+.usermenu{
+  display: flex;
+  text-align: right;
+  gap: 15px;
+}
+
+.avatar{
+  width: 32px;
+  height: 32px;
+}
+
+.userName {
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.06px;
+  letter-spacing: 0.04em;
+  text-align: right;
+  margin-left: 1rem;
+  color: #52555F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actions {
+  width: 24px;
+  height: 24px;
+  fill: #E0E5EB;
+  position: relative;
+  margin-top: 3px;
+}
+
+.separator {
+  width: 1px;
+  height: 36px;
+  background-color: #E0E5EB;
+  margin: 0 1rem;
+}
+
+.exitLink {
+  color: #52555F;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.06px;
+  letter-spacing: 0.04em;
+  text-decoration: underline;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main {
+  padding: 1rem;
 }
