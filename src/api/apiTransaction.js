@@ -46,19 +46,24 @@ export const deleteTransactionAPI = async (id) => {
   return data;
 };
 
-export const getIncomeCategoriesAPI = async () => {
-  const { data } = await axios.get("/api/transaction/income-categories");
-  return data;
+
+
+export const getExpenseCategoriesAPI = async ({transactionType, token }) => {
+  const req = await axios.get(`/api/reports/${transactionType}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return req.data;
 };
 
-export const getExpenseCategoriesAPI = async () => {
-  const { data } = await axios.get("/api/transaction/expense-categories");
-  return data;
-};
-
-export const getPeriodDataAPI = async (date) => {
-  const { data } = await axios.get(`/api/transaction/period-data?date=${date}`);
-  return data;
+export const getPeriodDataAPI = async ({ transactionType, year, month, token }) => {
+  const req = await axios.get(`/api/reports/${transactionType}/${year}/${month}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return req.data;
 };
 
 export const updateBalanceAPI = async (value) => {
