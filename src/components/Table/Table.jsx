@@ -1,6 +1,9 @@
 import scss from "./Table.module.scss";
 import { useMediaQuery } from "react-responsive";
-import { getTransactions } from "../../api/apiTransaction";
+import {
+  getTransactionsAPI,
+  deleteTransactionAPI,
+} from "../../api/apiTransaction";
 import { useEffect, useState } from "react";
 
 const Table = ({ isActive }) => {
@@ -9,11 +12,20 @@ const Table = ({ isActive }) => {
 
   const showTransactions = async () => {
     let type = isActive ? "expense" : "income";
-    let token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMDg3MDI4MiwiZXhwIjoxNzExNDc1MDgyfQ.FF_Gif1IT1pbyeFnXnos_ThL8gGtAZ4fbi79dKyxlE4";
     try {
-      const req = await getTransactions({ type, token });
+      const req = await getTransactionsAPI({ type });
       return setTransaction(req.data);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  const deleteTransaction = async (event) => {
+    const id = event.target.id;
+    console.log(id);
+
+    try {
+      return await deleteTransactionAPI(id);
     } catch (error) {
       console.error(error.message);
     }
@@ -21,7 +33,7 @@ const Table = ({ isActive }) => {
 
   useEffect(() => {
     showTransactions();
-  }, [isActive, transaction]);
+  }, [isActive]);
 
   return (
     <table className={scss.table}>
@@ -49,7 +61,13 @@ const Table = ({ isActive }) => {
             <td>{row.category}</td>
             <td>{row.amount}</td>
             <td>
-              <button className={scss.trashButton}>🗑️</button>
+              <button
+                id={row._id}
+                className={scss.trashButton}
+                onClick={deleteTransaction}
+              >
+                🗑️
+              </button>
             </td>
           </tr>
         ))}
