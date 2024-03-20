@@ -37,7 +37,7 @@ const Home = () => {
         <div className={scss.balance}>
           {isMobile ? (
             <>
-              <div>
+              <div className={scss.reports}>
                 <Link to="/reports">Reports 📊</Link>
               </div>
               <Balance />
@@ -45,7 +45,7 @@ const Home = () => {
           ) : (
             <>
               <Balance />
-              <div>
+              <div className={scss.reports}>
                 <Link to="/reports">Reports 📊</Link>
               </div>
             </>

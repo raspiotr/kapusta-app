@@ -1,28 +1,27 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { monthNames } from '../Period.Utils';
-import Button  from '../Button/Button';
-import styles from './Calendar.module.css'; 
+import Button from '../Button/Button';
+import styles from './Calendar.module.css';
 
- const Calendar = ({
+const Calendar = ({
   onClose,
   currentMonth,
   currentYear,
   onChangeDate,
 }) => {
-  
-  const handleYear = (name) => {
-    onChangeDate(name);
+
+  const handleYear = (event) => {
+    const newYear = parseInt(event.currentTarget.textContent);
+    onChangeDate(newYear, currentMonth); // Przekazujemy nowy rok i bieżący miesiąc
   };
 
- 
   const handleMonth = (event) => {
     const choosedMonth = event.currentTarget.textContent;
     const monthIndex = monthNames.indexOf(choosedMonth);
-    onChangeDate(monthIndex);
+    onChangeDate(currentYear, monthIndex); // Przekazujemy bieżący rok i nowy miesiąc
   };
 
-  
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.code === 'Escape') {
@@ -36,7 +35,6 @@ import styles from './Calendar.module.css';
     };
   }, [onClose]);
 
-  // Obsługa zamknięcia kalendarza po kliknięciu w tło
   const handleBackdrop = (event) => {
     if (event.target === event.currentTarget) {
       onClose();
@@ -44,17 +42,16 @@ import styles from './Calendar.module.css';
   };
 
   return (
-    <div onClick={handleBackdrop} className={styles.backdrop}> 
-      <div className={styles.calendarbox}> 
+    <div onClick={handleBackdrop} className={styles.backdrop}>
+      <div className={styles.calendarbox}>
         <Button onButtonClick={handleYear}>
-        {' '}
-          <p className={styles.year}>{currentYear}</p> 
+          <p className={styles.year}>{currentYear}</p>
         </Button>
 
         <ul>
           {monthNames.map((el) => (
             <p
-              className={`${styles.calendarItem} ${el === currentMonth ? styles.active : ''}`} 
+              className={`${styles.calendarItem} ${el === currentMonth ? styles.active : ''}`}
               onClick={handleMonth}
               key={el}
             >
@@ -73,4 +70,5 @@ Calendar.propTypes = {
   currentYear: PropTypes.number.isRequired,
   onChangeDate: PropTypes.func.isRequired,
 };
-export default Calendar
+
+export default Calendar;

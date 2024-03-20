@@ -1,8 +1,10 @@
+
 import  { useState, useEffect } from 'react';
 import './ReportsList.module.scss';
 import { useSelector } from 'react-redux';
 import { getPeriodDataAPI } from '../../../../api/apiTransaction';
 import { selectSelectedMonth, selectSelectedYear } from '../../../../redux/reducers/calendarReducer';
+
 
 export const ReportsList = () => {
   const [active, setActive] = useState('');
@@ -32,6 +34,7 @@ export const ReportsList = () => {
     
     const result = await getPeriodDataAPI({ transactionType, year, month, token });
     return result;
+
   };
 
   const handleChange = (event) => {
