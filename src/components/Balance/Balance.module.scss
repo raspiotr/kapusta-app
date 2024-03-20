@@ -41,18 +41,24 @@
     border-radius: 22px;
     border: 3px solid #fff;
   }
+  input::placeholder {
+    color: black; /* Zmiana koloru tekstu placeholdera na niebieski */
+  }
 }
 
 .balance {
   display: block;
   border: 0;
-  outline: none;
   background-color: transparent;
   width: 60px;
   text-align: right;
+  font-size: medium;
+  font-weight: 600;
+  color: black;
 }
 
 .confirm {
+  color: $secondaryTextColor;
   width: 140px;
   background-color: transparent;
   border-radius: 0 22px 22px 0;
@@ -64,8 +70,13 @@
     border-radius: 22px;
   }
   &:hover {
-    background-color: darkorange;
+    background-color: $accentColor;
     color: white;
-    border: 3px solid darkorange;
+    border: 3px solid $accentColor;
   }
+}
+
+.currency {
+  font-size: medium;
+  font-weight: 600;
 }

@@ -1,18 +1,16 @@
-import React from 'react';
-import LoginForm from '../../components/LoginForm/LoginForm';
+import Container from "../../components/Container/Container";
+import LoginForm from "../../components/LoginForm/LoginForm";
 
 const Login = () => {
   const handleLogin = (formData) => {
-    console.log('Login data:', formData);
+    console.log("Login data:", formData);
   };
 
   return (
-    <div>
-      <h1>Logowanie</h1>
+    <Container>
       <LoginForm onLogin={handleLogin} />
-    </div>
+    </Container>
   );
 };
 
 export default Login;
-

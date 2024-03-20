@@ -54,13 +54,13 @@ const Header = ({ user }) => {
             </MediaQuery>
 
             {isMobile ? (
-              <Link to="/logout">
+              <Link to="/login">
                 <svg className={scss.actions}>
                   <use xlinkHref={`${icons}#icon-logout`} />
                 </svg>
               </Link>
             ) : (
-              <Link to="/logout" className={scss.exitLink}>
+              <Link to="/login" className={scss.exitLink}>
                 Exit
               </Link>
             )}

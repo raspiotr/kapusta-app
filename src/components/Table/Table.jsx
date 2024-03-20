@@ -5,6 +5,7 @@ import {
   deleteTransactionAPI,
 } from "../../api/apiTransaction";
 import { useEffect, useState } from "react";
+import trash from "../../images/SVG/delete.svg";
 
 const Table = ({ isActive }) => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -22,7 +23,7 @@ const Table = ({ isActive }) => {
 
   const deleteTransaction = async (event) => {
     const id = event.target.id;
-    console.log(id);
+    console.log("id", id);
 
     try {
       return await deleteTransactionAPI(id);
@@ -39,7 +40,7 @@ const Table = ({ isActive }) => {
     <table className={scss.table}>
       {!isMobile ? (
         <thead>
-          <tr>
+          <tr className={scss.titles}>
             <th>DATE</th>
             <th>DESCRIPTION</th>
             <th>CATEGORY</th>
@@ -54,19 +55,58 @@ const Table = ({ isActive }) => {
       <tbody>
         {transaction.map((row) => (
           <tr key={row._id}>
-            <td>{`${String(row.day).padStart(2, "0")}.${String(
-              row.month
-            ).padStart(2, "0")}.${row.year}`}</td>
-            <td>{row.description}</td>
-            <td>{row.category}</td>
-            <td>{row.amount}</td>
+            {isMobile ? (
+              <>
+                <td className={scss.dataText}>
+                  <div className={scss.upperText}>{row.description}</div>
+                  <div className={scss.lowerText}>
+                    <div>
+                      {`${String(row.day).padStart(2, "0")}.${String(
+                        row.month
+                      ).padStart(2, "0")}.${row.year}`}
+                    </div>
+                    <div>{row.category}</div>
+                  </div>
+                </td>
+                <td
+                  className={scss.amount}
+                  style={
+                    isActive
+                      ? {
+                          color: "red",
+                        }
+                      : { color: "green" }
+                  }
+                >
+                  {isActive && "- "}
+                  {row.amount} <span>PLN</span>
+                </td>
+              </>
+            ) : (
+              <>
+                <td>{`${String(row.day).padStart(2, "0")}.${String(
+                  row.month
+                ).padStart(2, "0")}.${row.year}`}</td>
+                <td>{row.description}</td>
+                <td>{row.category}</td>
+                <td
+                  className={scss.amount}
+                  style={
+                    isActive
+                      ? {
+                          color: "red",
+                        }
+                      : { color: "green" }
+                  }
+                >
+                  {isActive && "- "} {row.amount} <span>PLN</span>
+                </td>
+              </>
+            )}
+
             <td>
-              <button
-                id={row._id}
-                className={scss.trashButton}
-                onClick={deleteTransaction}
-              >
-                🗑️
+              <button className={scss.trashButton} onClick={deleteTransaction}>
+                <img id={row._id} src={trash} alt="" />
               </button>
             </td>
           </tr>

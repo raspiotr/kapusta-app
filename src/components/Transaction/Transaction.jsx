@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import scss from "./Transaction.module.scss";
 import { addCategory } from "../../api/apiCategory";
 import { addTransactionAPI } from "../../api/apiTransaction";
+import calculator from "../../images/SVG/calculator.svg";
 
 const Transaction = () => {
   const [description, setDescription] = useState("");
@@ -106,7 +107,9 @@ const Transaction = () => {
             placeholder="UTH"
             type="number"
           />
-          <samp className={scss.calculator}>🧮</samp>
+          <samp className={scss.calculator}>
+            <img src={calculator} alt="" />
+          </samp>
         </div>
       </div>
       <div className={scss.buttons}>
