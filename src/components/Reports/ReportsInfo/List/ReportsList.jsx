@@ -1,94 +1,65 @@
-import { useState, useEffect, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectReports } from '../../../../redux/selector';
-import { categoryOrkToEng } from '../../../../hooks/useCategory';
-import { filteredDataAction } from '../../../../redux/reportsQuery/reportsQuery.slice';
+import { useState, useEffect } from 'react';
 import './ReportsList.module.scss'; // Upewnij się, że nazwa pliku i ścieżka są poprawne
+import { getPeriodDataAPI } from '../../../../api/apiTransaction';
 
-import PropTypes from 'prop-types';
-
-// Reports List
-export const ReportsList = ({ onChange }) => {
-  // State
+export const ReportsList = () => {
   const [active, setActive] = useState('');
-  const [data, setData] = useState({});
-  // Selectors
-  const { reports } = useSelector(selectReports);
-  // Dispatch
-  const dispatch = useDispatch();
-  // Vars
-  const valueArr = [];
-  // Expenses Data
-  const expensesData = useMemo(
-    () => reports?.expenses?.expensesData ?? {},
-    [reports]
-  );
-  // Incomes Data
-  const incomesData = useMemo(
-    () => reports?.incomes?.incomesData ?? {},
-    [reports]
-  );
-  // Check if expenses or incomes data
+  const [reports, setReports] = useState([]);
+  const [transactionType, setType] = useState('expense'); // Domyślnie ustaw typ transakcji jako 'expense'
+
   useEffect(() => {
+    getReportsData(transactionType, setReports);
+  }, [transactionType]);
+
+  const getReportsData = async (transactionType, setReports) => {
+    const date = new Date();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    console.log('Year:', year, 'Month:', month)
+    const body = {
+      month,
+      year,
+    };
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMDg3MDI4MiwiZXhwIjoxNzExNDc1MDgyfQ.FF_Gif1IT1pbyeFnXnos_ThL8gGtAZ4fbi79dKyxlE4";
     try {
-      if (onChange === 'expenses') {
-        setData(expensesData ?? {});
-        setActive('');
-      } else {
-        setData(incomesData ?? {});
-        setActive('');
-      }
+      const result = await getPeriodDataAPI({ transactionType, token, body });
+      setReports(result);
     } catch (error) {
-      console.error("Error fetching data from API:", error.message);
+      console.error('Błąd pobierania danych z API:', error.message);
     }
-  }, [onChange, expensesData, incomesData]);
-  // Click handler
-  const clickEventHandler = event => {
-    setActive(event.currentTarget.id);
-    const filteredValueArr = valueArr.filter(
-      item => item[0].replace(/\s+/g, '') === event.currentTarget.id
-    );
-    dispatch(filteredDataAction(filteredValueArr));
   };
 
-  const entries = Object.entries(data) ?? [];
+  const handleChange = (event) => {
+    const { value } = event.target;
+    setType(value);
+  };
 
-  
-  let listItemClassName = '';
-  if (onChange === 'expenses') {
-    listItemClassName = 'scss.item'; 
-  } else if (onChange === 'income') {
-    listItemClassName = 'scss.itemIncome'; 
-  }
-  if (entries.length === 0) {
-    return <p>Brak danych do wyświetlenia</p>;
-  }
+  const handleItemClick = (item) => {
+    setActive(item);
+    // Tutaj możesz dodać logikę obsługi kliknięcia na elementach listy raportów
+  };
+
   return (
     <div>
-  <ul className={`${onChange === 'income' ? 'incomeList' : ''} scss.list`}>
-    {entries.map(item => {
-      const categoryName = item[0];
-      const total = item[1].total;
-      valueArr.push(item);
-      console.log(categoryOrkToEng(categoryName));
-      return (
-        
-        <li
-          key={categoryName}
-          onClick={clickEventHandler}
-          className={`${listItemClassName} ${categoryName === active ? 'active' : ''}`}
-        >
-          <p>{total}.00</p>
-          <p>{categoryOrkToEng(categoryName)}</p>
-        </li>
-        
-      );
-    })}
-  </ul>
-</div>
+      <select value={transactionType} onChange={handleChange}>
+        <option value="expense">Expense</option>
+        <option value="income">Income</option>
+      </select>
+      <ul>
+        {reports.map(item => (
+          <li
+            key={item.id}
+            onClick={() => handleItemClick(item)}
+            className={`${item === active ? 'active' : ''}`}
+          >
+            <p>{item.total}.00</p>
+            <p>{item.categoryName}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
-ReportsList.propTypes = {
-  onChange: PropTypes.oneOf(['expenses', 'income']).isRequired,
-};
+export default ReportsList;

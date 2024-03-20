@@ -40,8 +40,8 @@ export const fullUserInfoAPI = async () => {
   return data;
 };
 
-export const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+export const setAuthHeader = () => {
+  axios.defaults.headers.common.Authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMDg1OTEyMCwiZXhwIjoxNzExNDYzOTIwfQ.0TFtR1YTRBIokS3z5z3DXABhhaeNi2iT3VzAxZSnuiI`;
 };
 
 export const clearAuthHeader = () => {
