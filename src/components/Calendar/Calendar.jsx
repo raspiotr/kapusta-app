@@ -1,10 +1,10 @@
-// Calendar.jsx
-
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css"; // Import stylów react-datepicker
+import scss from "./Calendar.module.scss";
+import calendar from "../../images/SVG/calendar.svg";
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedDate } from '../../redux/actions/calendarActions';
-import styles from './Calendar.module.scss';
+
 
 const Calendar = () => {
   const dispatch = useDispatch();
@@ -15,8 +15,12 @@ const Calendar = () => {
   };
 
   return (
-    <div className={styles.calendar}>
+
+    <div className={scss.calendar}>
+      <img src={calendar} alt="" />
+
       <DatePicker
+        className={scss.date}
         selected={selectedDate}
         onChange={handleDateChange}
         dateFormat="dd.MM.yyyy"

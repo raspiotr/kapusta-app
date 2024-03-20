@@ -10,6 +10,8 @@ import { useMediaQuery } from "react-responsive";
 import Transaction from "../../components/Transaction/Transaction";
 import Table from "../../components/Table/Table";
 import Summary from "../../components/Summary/Summary";
+import arrow from "../../images/SVG/arrow.svg";
+import reports from "../../images/SVG/reports.svg";
 
 const Home = () => {
   const [isActive, setIsActive] = useState(true);
@@ -32,13 +34,18 @@ const Home = () => {
     <Container>
       <main className={scss.mainContainer}>
         <div className={scss.transactionBtn}>
-          <button onClick={openModalBtn}> +- TO TRANSACTION</button>
+          <button onClick={openModalBtn}>
+            <img src={arrow} alt="" />
+            TO TRANSACTION
+          </button>
         </div>
         <div className={scss.balance}>
           {isMobile ? (
             <>
               <div className={scss.reports}>
-                <Link to="/reports">Reports 📊</Link>
+                <Link to="/reports">
+                  Reports <img src={reports} alt="" />
+                </Link>
               </div>
               <Balance />
             </>
@@ -46,7 +53,9 @@ const Home = () => {
             <>
               <Balance />
               <div className={scss.reports}>
-                <Link to="/reports">Reports 📊</Link>
+                <Link to="/reports">
+                  Reports <img src={reports} alt="" />
+                </Link>
               </div>
             </>
           )}

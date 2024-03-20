@@ -1,6 +1,7 @@
-// @import "../../assets/variables.scss";
+@import "../../assets/variables.scss";
 .table {
   margin-bottom: 50px;
+  color: $secondaryTextColor;
 
   @media screen and (min-width: 768px) {
     width: 624px;
@@ -18,12 +19,40 @@
 
   th {
     text-align: left;
-    padding: 8px;
+    padding: 8px 0;
+    &:nth-child(1) {
+      width: 100px;
+    }
+    &:nth-child(2) {
+      width: 250px;
+    }
+    &:nth-child(3) {
+      width: 150px;
+    }
+    &:nth-child(4) {
+      width: 100px;
+    }
+  }
+  @media screen and (min-width: 1280px) {
+    th {
+      &:nth-child(1) {
+        width: 100px;
+      }
+      &:nth-child(2) {
+        width: 400px;
+      }
+      &:nth-child(3) {
+        width: 200px;
+      }
+      &:nth-child(4) {
+        width: 100px;
+      }
+    }
   }
 
   td {
     border-top: none;
-    padding: 8px;
+    padding: 8px 0;
     @media screen and (min-width: 768px) {
       background-color: white;
       border-bottom: 1px solid #f5f6fb;
@@ -31,8 +60,41 @@
   }
 }
 
+.titles {
+  & th:first-child,
+  & th:nth-child(4) {
+    text-align: center;
+  }
+}
+
 .trashButton {
+  margin-left: 10px;
+  @media screen and (min-width: 768px) {
+    margin: 0 20px 0 40px;
+  }
   &:hover {
     scale: 1.1;
   }
+}
+
+.upperText {
+  font-size: 16px;
+}
+
+.lowerText {
+  font-size: 9px;
+  display: flex;
+  gap: 30px;
+}
+
+.dataText {
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.amount {
+  font-weight: 600;
+  text-align: right;
 }
