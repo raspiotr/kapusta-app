@@ -1,4 +1,5 @@
-// @import "../../assets/variables";
+@import "../../assets/variables";
+
 .container {
   display: flex;
   flex-direction: column;
@@ -11,6 +12,7 @@
 
 .name {
   margin-bottom: 10px;
+  color: $secondaryTextColor;
   @media screen and (min-width: 768px) {
     margin: 0 20px 0 0;
   }

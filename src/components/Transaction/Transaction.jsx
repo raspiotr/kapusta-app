@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import scss from "./Transaction.module.scss";
 import { addCategory } from "../../api/apiCategory";
-import { addTransaction } from "../../api/apiTransaction";
+import { addTransactionAPI } from "../../api/apiTransaction";
 
 const Transaction = () => {
   const [description, setDescription] = useState("");
@@ -33,7 +33,7 @@ const Transaction = () => {
     setValue("");
   };
 
-  const addSingleTransaction = async (event) => {
+  const addTransaction = async (event) => {
     event.preventDefault();
     const date = new Date();
 
@@ -50,11 +50,8 @@ const Transaction = () => {
       amount: value,
     };
     let type = "expense" || "income";
-    let token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMDg3MDI4MiwiZXhwIjoxNzExNDc1MDgyfQ.FF_Gif1IT1pbyeFnXnos_ThL8gGtAZ4fbi79dKyxlE4";
-
     try {
-      return await addTransaction({ type, token, body });
+      return await addTransactionAPI({ type, body });
     } catch (error) {
       console.error(error.message);
     }
@@ -113,7 +110,7 @@ const Transaction = () => {
         </div>
       </div>
       <div className={scss.buttons}>
-        <button onClick={addSingleTransaction}>INPUT</button>
+        <button onClick={addTransaction}>INPUT</button>
         <button onClick={handleClear}>CLEAR</button>
       </div>
     </form>

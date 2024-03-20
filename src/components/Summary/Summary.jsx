@@ -1,15 +1,25 @@
+import { useEffect, useState } from "react";
+import { getSummaryAPI } from "../../api/apiTransaction";
 import scss from "./Summary.module.scss";
 
-const data = [
-  { month: "January", amount: "$1000" },
-  { month: "February", amount: "$1500" },
-  { month: "March", amount: "$1200" },
-  { month: "April", amount: "$1800" },
-  { month: "May", amount: "$2000" },
-  { month: "June", amount: "$1700" },
-];
-
 const Summary = () => {
+  const [summary, setSummary] = useState([]);
+
+  const showSummary = async () => {
+    let type = "expense" || "income";
+
+    try {
+      const req = await getSummaryAPI({ type });
+      return setSummary(req.data);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    showSummary();
+  }, []);
+
   return (
     <div className={scss.summarySection}>
       <table className={scss.summaryTable}>
@@ -21,10 +31,10 @@ const Summary = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) => (
+          {summary.map((item, index) => (
             <tr key={index}>
               <td>{item.month}</td>
-              <td>{item.amount}</td>
+              <td>{item.total}</td>
             </tr>
           ))}
         </tbody>
