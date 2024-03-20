@@ -1,33 +1,40 @@
-import { useState, useEffect } from 'react';
-import './ReportsList.module.scss'; // Upewnij się, że nazwa pliku i ścieżka są poprawne
+
+import  { useState, useEffect } from 'react';
+import './ReportsList.module.scss';
+import { useSelector } from 'react-redux';
 import { getPeriodDataAPI } from '../../../../api/apiTransaction';
+import { selectSelectedMonth, selectSelectedYear } from '../../../../redux/reducers/calendarReducer';
+
 
 export const ReportsList = () => {
   const [active, setActive] = useState('');
   const [reports, setReports] = useState([]);
-  const [transactionType, setType] = useState('expense'); // Domyślnie ustaw typ transakcji jako 'expense'
+  const [transactionType, setType] = useState('expense');
+  const selectedMonth = useSelector(selectSelectedMonth);
+  const selectedYear = useSelector(selectSelectedYear);
 
   useEffect(() => {
-    getReportsData(transactionType, setReports);
-  }, [transactionType]);
-
-  const getReportsData = async (transactionType, setReports) => {
-    const date = new Date();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    console.log('Year:', year, 'Month:', month)
-    const body = {
-      month,
-      year,
+    const fetchData = async () => {
+      try {
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMDg3MDI4MiwiZXhwIjoxNzExNDc1MDgyfQ.FF_Gif1IT1pbyeFnXnos_ThL8gGtAZ4fbi79dKyxlE4"; // Ustaw swój token
+        const result = await getReportsData(transactionType, selectedYear,selectedMonth + 1, token);
+        setReports(result);
+      } catch (error) {
+        console.error('Błąd pobierania danych z API:', error.message);
+      }
     };
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMDg3MDI4MiwiZXhwIjoxNzExNDc1MDgyfQ.FF_Gif1IT1pbyeFnXnos_ThL8gGtAZ4fbi79dKyxlE4";
-    try {
-      const result = await getPeriodDataAPI({ transactionType, token, body });
-      setReports(result);
-    } catch (error) {
-      console.error('Błąd pobierania danych z API:', error.message);
-    }
+
+    fetchData();
+  }, [selectedMonth, selectedYear, transactionType]);
+
+  const getReportsData = async (transactionType,year,month, token) => {
+    console.log('Transaction type:', transactionType);
+    console.log('Month:', month);
+    console.log('Year:', year);
+    
+    const result = await getPeriodDataAPI({ transactionType, year, month, token });
+    return result;
+
   };
 
   const handleChange = (event) => {
