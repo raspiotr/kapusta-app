@@ -1,22 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectReports } from '../../../redux/selector';
 import { ReportsList } from './List/ReportsList';
-import { ReportsTable } from './Table/ReportsTable';
 import { filteredDataAction } from '../../../redux/reportsQuery/reportsQuery.slice';
-
-import scss from './ReportsInfo.module.scss'
+import scss from './ReportsInfo.module.scss';
 import Button from '../ReportsNav/Periods/Button/Button';
-// Reports Info
+import { getExpenseCategoriesAPI } from '../../../api/apiTransaction'; // Importujemy funkcję pobierającą kategorie wydatków z API
+
 export const ReportsInfo = () => {
   // State
   const [budget, setBudget] = useState('expenses');
-  console.log('Current budget:', budget);
-  // Selectors
-  const { reports } = useSelector(selectReports);
-  console.log('Reports data:', reports);
+
+  // Selector
+  const reports = useSelector(selectReports);
+
   // Dispatch
   const dispatch = useDispatch();
+
   // Handle click
   const handleClick = () => {
     if (budget === 'expenses') {
@@ -27,6 +27,24 @@ export const ReportsInfo = () => {
     setBudget('expenses');
     dispatch(filteredDataAction([]));
   };
+
+  // Fetch expense categories from API
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const token =      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMDg3MDI4MiwiZXhwIjoxNzExNDc1MDgyfQ.FF_Gif1IT1pbyeFnXnos_ThL8gGtAZ4fbi79dKyxlE4"
+        
+        const categories = await getExpenseCategoriesAPI({ transactionType: budget, token });
+        console.log('Expense categories:', categories);
+        // Tutaj możesz zaktualizować stan lub wysłać akcję z pobranymi kategoriami
+      } catch (error) {
+        console.error('Błąd pobierania kategorii z API:', error.message);
+      }
+    };
+
+    fetchCategories();
+  }, [budget]); // Wywołujemy tylko wtedy, gdy zmienia się wartość 'budget'
+
   return (
     <div>
       <ul className={scss.list}>
@@ -41,16 +59,12 @@ export const ReportsInfo = () => {
       </ul>
 
       <div className={scss.box}>
+        <Button onButtonClick={handleClick}>
+          <p className={scss.navText}>{budget}</p>
+        </Button>
+        <ReportsList ></ReportsList>
         
-          <Button onButtonClick={handleClick}>
-            <p className={scss.navText}>{budget}</p>
-          </Button>
-        
-
-        <ReportsList onChange={budget}></ReportsList>
-        <ReportsTable onChange={budget}></ReportsTable>
       </div>
-      
     </div>
   );
 };
