@@ -16,18 +16,18 @@ const ModalComment = () => {
   };
 
   const chartData = [
-    { category: 'Продукты', amount: '2000' },
-    { category: 'Транспорт', amount: '1500' },
-    { category: 'Развлечения', amount: '1000' },
-    { category: 'Продукты', amount: '2000' },
-    { category: 'Транспорт', amount: '1500' },
-    { category: 'Развлечения', amount: '1000' },
-    { category: 'Продукты', amount: '2000' },
-    { category: 'Транспорт', amount: '1500' },
-    { category: 'Развлечения', amount: '1000' },
-    { category: 'Продукты', amount: '2000' },
-    { category: 'Транспорт', amount: '1500' },
-    { category: 'Развлечения', amount: '1000' },
+    { category: "Продукты", amount: "2000" },
+    { category: "Транспорт", amount: "1500" },
+    { category: "Развлечения", amount: "1000" },
+    { category: "Продукты", amount: "2000" },
+    { category: "Транспорт", amount: "1500" },
+    { category: "Развлечения", amount: "1000" },
+    { category: "Продукты", amount: "2000" },
+    { category: "Транспорт", amount: "1500" },
+    { category: "Развлечения", amount: "1000" },
+    { category: "Продукты", amount: "2000" },
+    { category: "Транспорт", amount: "1500" },
+    { category: "Развлечения", amount: "1000" },
   ];
 
   return (
