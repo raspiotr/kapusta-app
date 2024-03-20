@@ -21,7 +21,7 @@ const Balance = () => {
             placeholder="00.00"
             min="0"
           />
-          <span className={scss.currency}>UAH</span>
+          <span className={scss.currency}>PLN</span>
         </div>
 
         <button onClick={confirmBalance} className={scss.confirm}>

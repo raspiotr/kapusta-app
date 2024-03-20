@@ -9,7 +9,7 @@ import "./index.scss";
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter basename="/goit-gr2-kapusta/">
+      <BrowserRouter basename="/goit-gr2-kapusta">
         <App />
       </BrowserRouter>
     </Provider>

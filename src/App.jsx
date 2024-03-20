@@ -9,11 +9,6 @@ const Reports = lazy(() => import("./pages/Reports/Reports"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 const ModalComment = lazy(() => import("./pages/ModalComment/ModalComment"));
 
-// const Expenses = lazy(() => import("./components/Expenses/Expenses"));
-// const Income = lazy(() => import("./components/Income/Income"));
-// const ReportExpenses = lazy(() => import("./pages/Reports/RepExpenses"));
-// const ReportIncome = lazy(() => import("./pages/Reports/RepIncome"));
-
 function App() {
   return (
     <>
@@ -26,40 +21,6 @@ function App() {
             <Route path="reports" element={<Reports />} />
             <Route path="/modal-comment" element={<ModalComment />} />
             <Route path="*" element={<NotFound />} />
-            {/* 
-            <Route
-              path="login"
-              element={<RestrictedRoute component={Login} path="/" />}
-            />
-            <Route
-              path="register"
-              element={<RestrictedRoute component={Register} path="/" />}
-            />
-            <Route
-              index
-              element={<PrivateRoute component={Expenses} path="/expenses" />}
-            />
-            <Route
-              index
-              element={<PrivateRoute component={Income} path="/income" />}
-            />
-
-            <Route
-              index
-              element={
-                <PrivateRoute
-                  component={ReportExpenses}
-                  path="/reports/expenses"
-                />
-              }
-            />
-
-            <Route
-              index
-              element={
-                <PrivateRoute component={ReportIncome} path="/reports/income" />
-              }
-            /> */}
           </Route>
         </Routes>
       </Suspense>
