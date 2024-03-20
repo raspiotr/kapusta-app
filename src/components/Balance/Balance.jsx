@@ -1,11 +1,19 @@
-import { useState } from "react";
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { setBalance } from '../../redux/actions/balanceActions';
+import { updateBalanceAPI } from '../../api/apiTransaction'; // Importujemy funkcję updateBalanceAPI
 import scss from "./Balance.module.scss";
 
-const Balance = () => {
-  const [balance] = useState(100000);
-
-  const confirmBalance = () => {
-    console.log(`Your balance: ${balance} UAH is confirmed`);
+export const Balance = ({ balance, setBalance }) => {
+  const confirmBalance = async () => { // Aktualizujemy funkcję confirmBalance na asynchroniczną
+    const newBalance = document.getElementById('balance').value;
+    try {
+      await updateBalanceAPI({ balance: newBalance }); // Wywołujemy funkcję updateBalanceAPI
+      setBalance(newBalance);
+      console.log(`Your balance: ${newBalance} UAH is confirmed`);
+    } catch (error) {
+      console.error('Error updating balance:', error.message);
+    }
   };
 
   return (
@@ -17,7 +25,7 @@ const Balance = () => {
             className={scss.balance}
             id="balance"
             type="number"
-            // value={balance}
+            value={balance}
             placeholder="00.00"
             min="0"
           />
@@ -32,4 +40,22 @@ const Balance = () => {
   );
 };
 
-export default Balance;
+Balance.propTypes = {
+  balance: PropTypes.number.isRequired,
+  setBalance: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    balance: state.balance.balance,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setBalance: (newBalance) => dispatch(setBalance(newBalance)),
+  };
+};
+
+const ConnectedBalance = connect(mapStateToProps, mapDispatchToProps)(Balance);
+export default ConnectedBalance;
