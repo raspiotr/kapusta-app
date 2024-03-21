@@ -1,11 +1,5 @@
 @import "../../assets/variables";
 
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .form {
   display: flex;
   align-items: center;
@@ -17,6 +11,11 @@
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
   color: $secondaryTextColor;
   margin-bottom: 40px;
+  width: 280px;
+  @media screen and (min-width: 768px) {
+    width: 326px;
+    padding: 40px 80px 20px;
+  }
 }
 
 .firstText {
@@ -29,6 +28,7 @@
   color: black;
   width: 100%;
   text-align: left;
+  margin-bottom: 5px;
 }
 
 .inputs {
@@ -38,6 +38,9 @@
   height: 52px;
   border-radius: 26px;
   padding-left: 20px;
+  @media screen and (min-width: 768px) {
+    width: 280px;
+  }
 }
 
 .googleLogin {
@@ -62,13 +65,7 @@
   width: 100%;
   margin: 30px 0;
   @media screen and (min-width: 768px) {
-    justify-content: left;
-    margin: 32px 0 0 100px;
     gap: 15px;
-  }
-  @media screen and (min-width: 1280px) {
-    justify-content: right;
-    margin: 0;
   }
   & button {
     height: 44px;
