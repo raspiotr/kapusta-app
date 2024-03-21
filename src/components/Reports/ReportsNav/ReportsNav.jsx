@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Balance from '../../Balance/Balance'
+import {Balance} from '../../Balance/Balance'
 import {Periods} from './Periods/Periods'
 import styles from './ReportsNav.module.scss';
 

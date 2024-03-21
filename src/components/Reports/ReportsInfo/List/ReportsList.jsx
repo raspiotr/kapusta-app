@@ -1,23 +1,21 @@
-
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './ReportsList.module.scss';
-import { useSelector } from 'react-redux';
 import { getPeriodDataAPI } from '../../../../api/apiTransaction';
 import { selectSelectedMonth, selectSelectedYear } from '../../../../redux/reducers/calendarReducer';
+import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
-
-export const ReportsList = () => {
+export const ReportsList = ({ transactionType }) => {
   const [active, setActive] = useState('');
   const [reports, setReports] = useState([]);
-  const [transactionType, setType] = useState('expense');
   const selectedMonth = useSelector(selectSelectedMonth);
   const selectedYear = useSelector(selectSelectedYear);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMDg3MDI4MiwiZXhwIjoxNzExNDc1MDgyfQ.FF_Gif1IT1pbyeFnXnos_ThL8gGtAZ4fbi79dKyxlE4"; // Ustaw swój token
-        const result = await getReportsData(transactionType, selectedYear,selectedMonth + 1, token);
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMDkzMjk2NCwiZXhwIjoxNzExNTM3NzY0fQ.Xf8oOxwtX-tiLZ2Pvv33qcXCkSAs-JJgEsM8Jyzxqqc";
+        const result = await getReportsData(transactionType, selectedYear, selectedMonth + 1, token);
         setReports(result);
       } catch (error) {
         console.error('Błąd pobierania danych z API:', error.message);
@@ -25,22 +23,18 @@ export const ReportsList = () => {
     };
 
     fetchData();
-  }, [selectedMonth, selectedYear, transactionType]);
+  }, [selectedMonth, selectedYear, transactionType]); // Tutaj dodajemy te zależności
 
-  const getReportsData = async (transactionType,year,month, token) => {
-    console.log('Transaction type:', transactionType);
-    console.log('Month:', month);
-    console.log('Year:', year);
-    
-    const result = await getPeriodDataAPI({ transactionType, year, month, token });
-    return result;
-
+  const getReportsData = async (transactionType, year, month, token) => {
+    try {
+      const result = await getPeriodDataAPI({ transactionType, year, month, token });
+      return result.data;
+    } catch (error) {
+      throw new Error('Błąd pobierania danych z API: ' + error.message);
+    }
   };
 
-  const handleChange = (event) => {
-    const { value } = event.target;
-    setType(value);
-  };
+ 
 
   const handleItemClick = (item) => {
     setActive(item);
@@ -49,10 +43,7 @@ export const ReportsList = () => {
 
   return (
     <div>
-      <select value={transactionType} onChange={handleChange}>
-        <option value="expense">Expense</option>
-        <option value="income">Income</option>
-      </select>
+     
       <ul>
         {reports.map(item => (
           <li
@@ -60,13 +51,24 @@ export const ReportsList = () => {
             onClick={() => handleItemClick(item)}
             className={`${item === active ? 'active' : ''}`}
           >
-            <p>{item.total}.00</p>
-            <p>{item.categoryName}</p>
+            <p>{item.category}</p>
+            <svg
+              width="56"
+              height="56"
+              className={item.iconName === active ? 'active' : ''}
+            >
+              <use href={`${item.categoryImageUrl}#${item.iconName}`}></use>
+            </svg>
+            <p>{item.total} UAH</p>
           </li>
         ))}
       </ul>
     </div>
   );
+};
+
+ReportsList.propTypes = {
+  transactionType: PropTypes.string.isRequired,
 };
 
 export default ReportsList;

@@ -1,19 +1,20 @@
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { setBalance } from '../../redux/actions/balanceActions';
-import { updateBalanceAPI } from '../../api/apiTransaction'; // Importujemy funkcję updateBalanceAPI
+import  { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setBalance } from '../../redux/reducers/balanceReducer';
 import scss from "./Balance.module.scss";
 
-export const Balance = ({ balance, setBalance }) => {
-  const confirmBalance = async () => { // Aktualizujemy funkcję confirmBalance na asynchroniczną
-    const newBalance = document.getElementById('balance').value;
-    try {
-      await updateBalanceAPI({ balance: newBalance }); // Wywołujemy funkcję updateBalanceAPI
-      setBalance(newBalance);
-      console.log(`Your balance: ${newBalance} UAH is confirmed`);
-    } catch (error) {
-      console.error('Error updating balance:', error.message);
-    }
+export const Balance = () => {
+  const dispatch = useDispatch();
+  const balanceFromRedux = useSelector(state => state.balance.balance);
+  const [inputValue, setInputValue] = useState(balanceFromRedux);
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const confirmBalance = async () => {
+    dispatch(setBalance(inputValue)); // Wysłanie akcji Reduxa z nową wartością salda
+    console.log(`Your balance: ${inputValue} UAH is confirmed`);
   };
 
   return (
@@ -25,11 +26,12 @@ export const Balance = ({ balance, setBalance }) => {
             className={scss.balance}
             id="balance"
             type="number"
-            value={balance}
+            value={inputValue}
+            onChange={handleInputChange} // Obsługa zmiany wartości pola input
             placeholder="00.00"
             min="0"
           />
-          <span className={scss.currency}>PLN</span>
+          <span className={scss.currency}>UAH</span>
         </div>
 
         <button onClick={confirmBalance} className={scss.confirm}>
@@ -39,23 +41,3 @@ export const Balance = ({ balance, setBalance }) => {
     </div>
   );
 };
-
-Balance.propTypes = {
-  balance: PropTypes.number.isRequired,
-  setBalance: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => {
-  return {
-    balance: state.balance.balance,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setBalance: (newBalance) => dispatch(setBalance(newBalance)),
-  };
-};
-
-const ConnectedBalance = connect(mapStateToProps, mapDispatchToProps)(Balance);
-export default ConnectedBalance;
