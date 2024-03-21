@@ -1,5 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
 import { Suspense, useState, useEffect } from "react";
+import BackgroundCont from "../../components/BackgroundCont/BackgroundCont";
+import Container from "../../components/Container/Container";
 import MediaQuery from "react-responsive";
 import scss from "./Header.module.scss";
 import icons from "../../images/SVG/icons.svg";
@@ -69,7 +71,10 @@ const Header = ({ user }) => {
       </header>
       <Suspense fallback={<div>Loading...</div>}>
         <main>
-          <Outlet />
+          <BackgroundCont />
+          <Container>
+            <Outlet />
+          </Container>
         </main>
       </Suspense>
     </>

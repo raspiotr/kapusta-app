@@ -4,7 +4,6 @@ import Buttons from "../../components/Buttons/Buttons";
 import Calendar from "../../components/Calendar/Calendar";
 import scss from "./Home.module.scss";
 import { useEffect, useState } from "react";
-import Container from "../../components/Container/Container";
 import Input from "../../components/Inputs/Input";
 import { useMediaQuery } from "react-responsive";
 import Transaction from "../../components/Transaction/Transaction";
@@ -31,60 +30,58 @@ const Home = () => {
   };
 
   return (
-    <Container>
-      <main className={scss.mainContainer}>
-        <div className={scss.transactionBtn}>
-          <button onClick={openModalBtn}>
-            <img src={arrow} alt="" />
-            TO TRANSACTION
-          </button>
-        </div>
-        <div className={scss.balance}>
-          {isMobile ? (
-            <>
-              <div className={scss.reports}>
-                <Link to="/reports">
-                  Reports <img src={reports} alt="" />
-                </Link>
-              </div>
-              <Balance />
-            </>
-          ) : (
-            <>
-              <Balance />
-              <div className={scss.reports}>
-                <Link to="/reports">
-                  Reports <img src={reports} alt="" />
-                </Link>
-              </div>
-            </>
-          )}
-        </div>
-        {!isMobile && <Buttons isActive={isActive} handleClick={handleClick} />}
+    <div className={scss.mainContainer}>
+      <div className={scss.transactionBtn}>
+        <button onClick={openModalBtn}>
+          <img src={arrow} alt="" />
+          TO TRANSACTION
+        </button>
+      </div>
+      <div className={scss.balance}>
         {isMobile ? (
           <>
-            <Calendar selectedDate={date} setSelectedDate={setDate} />
-            <Input isOpen={isOpen} closeModal={openModalBtn} />
-            <Table isActive={isActive} />
+            <div className={scss.reports}>
+              <Link to="/reports">
+                Reports <img src={reports} alt="" />
+              </Link>
+            </div>
+            <Balance />
           </>
         ) : (
           <>
-            <div className={scss.mainWindow}>
-              <div className={scss.upWindow}>
-                <Calendar selectedDate={date} setSelectedDate={setDate} />
-                <Transaction />
-              </div>
-              <div className={scss.bottomWindow}>
-                <Table isActive={isActive} />
-                {isDesktop && <Summary />}
-              </div>
+            <Balance />
+            <div className={scss.reports}>
+              <Link to="/reports">
+                Reports <img src={reports} alt="" />
+              </Link>
             </div>
-            {!isDesktop && <Summary />}
           </>
         )}
-        {isMobile && <Buttons isActive={isActive} handleClick={handleClick} />}
-      </main>
-    </Container>
+      </div>
+      {!isMobile && <Buttons isActive={isActive} handleClick={handleClick} />}
+      {isMobile ? (
+        <>
+          <Calendar selectedDate={date} setSelectedDate={setDate} />
+          <Input isOpen={isOpen} closeModal={openModalBtn} />
+          <Table isActive={isActive} />
+        </>
+      ) : (
+        <>
+          <div className={scss.mainWindow}>
+            <div className={scss.upWindow}>
+              <Calendar selectedDate={date} setSelectedDate={setDate} />
+              <Transaction />
+            </div>
+            <div className={scss.bottomWindow}>
+              <Table isActive={isActive} />
+              {isDesktop && <Summary />}
+            </div>
+          </div>
+          {!isDesktop && <Summary />}
+        </>
+      )}
+      {isMobile && <Buttons isActive={isActive} handleClick={handleClick} />}
+    </div>
   );
 };
 export default Home;

@@ -1,4 +1,3 @@
-import Container from "../../components/Container/Container";
 import LoginForm from "../../components/LoginForm/LoginForm";
 
 const Login = () => {
@@ -6,11 +5,7 @@ const Login = () => {
     console.log("Login data:", formData);
   };
 
-  return (
-    <Container>
-      <LoginForm onLogin={handleLogin} />
-    </Container>
-  );
+  return <LoginForm onLogin={handleLogin} />;
 };
 
 export default Login;
