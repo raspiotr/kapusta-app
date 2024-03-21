@@ -25,6 +25,10 @@
   flex-direction: row;
 }
 
+.parent {
+  position: relative;
+}
+
 .balanceBox {
   display: flex;
   flex-direction: row;
