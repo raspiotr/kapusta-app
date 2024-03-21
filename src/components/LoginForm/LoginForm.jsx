@@ -3,13 +3,15 @@ import { Link } from "react-router-dom";
 import scss from "./LoginForm.module.scss";
 import google from "../../images/SVG/google.svg";
 
-const LoginForm = ({ onLogin }) => {
+const LoginForm = () => {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [register, setRegister] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onLogin({ email, password });
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("Login: ", { email, name, password });
   };
 
   return (
@@ -34,12 +36,34 @@ const LoginForm = ({ onLogin }) => {
           className={scss.inputs}
           type="email"
           placeholder="your@email.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
+        {register && (
+          <>
+            <h5 className={scss.titles}>User name:</h5>
+            <input
+              className={scss.inputs}
+              type="name"
+              placeholder="User name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </>
+        )}
         <h5 className={scss.titles}>Password:</h5>
-        <input className={scss.inputs} type="password" placeholder="Password" />
+        <input
+          className={scss.inputs}
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <div className={scss.buttons}>
-          <button>LOG IN</button>
-          <button>REGISTRATION</button>
+          <button name="toSubmit">{register ? "LOG IN" : "SIGN UP "}</button>
+          <button onClick={() => setRegister(!register)}>
+            {register ? "REGISTRATION" : "LOGIN"}
+          </button>
         </div>
       </form>
     </div>
