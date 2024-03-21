@@ -1,20 +1,23 @@
-// reducers/balanceReducer.js
+// balanceReducer.js
+
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    balance: 100000, // Domyślna wartość balansu
-  };
-  
-  const balanceReducer = (state = initialState, action) => {
-    switch (action.type) {
-      case 'SET_BALANCE':
-        return {
-          ...state,
-          balance: action.payload,
-        };
-      default:
-        return state;
-    }
-  };
-  
-  export default balanceReducer;
+  balance: 0,
+};
+
+export const balanceReducer = createSlice({
+  name: 'balance',
+  initialState,
+  reducers: {
+    setBalance: (state, action) => {
+      state.balance = action.payload;
+    },
+  },
+});
+
+export const { setBalance } = balanceReducer.actions;
+
+export default balanceReducer.reducer;
+
   

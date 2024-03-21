@@ -60,7 +60,7 @@ export const getExpenseAPI = async () => {
 };
 
 export const getExpenseCategoriesAPI = async ({ transactionType, token }) => {
-  const req = await axios.get(`/api/reports/${transactionType}`, {
+  const req = await axios.get(`https://kapusta-backend-827563b0830f.herokuapp.com/api/reports/${transactionType}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -69,7 +69,7 @@ export const getExpenseCategoriesAPI = async ({ transactionType, token }) => {
 };
 
 export const getIncomeCategoriesAPI = async () => {
-  const { data } = await axios.get("/api/reports/income");
+  const { data } = await axios.get("https://kapusta-backend-827563b0830f.herokuapp.com/api/reports/income");
   return data;
 };
 
@@ -80,7 +80,7 @@ export const getPeriodDataAPI = async ({
   token,
 }) => {
   const req = await axios.get(
-    `/api/reports/${transactionType}/${year}/${month}`,
+    `https://kapusta-backend-827563b0830f.herokuapp.com/api/reports/${transactionType}/${year}/${month}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,

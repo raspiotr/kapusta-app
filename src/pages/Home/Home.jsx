@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Balance from "../../components/Balance/Balance";
+import {Balance} from "../../components/Balance/Balance";
 import Buttons from "../../components/Buttons/Buttons";
 import Calendar from "../../components/Calendar/Calendar";
 import scss from "./Home.module.scss";
