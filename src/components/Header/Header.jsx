@@ -1,15 +1,21 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { Suspense, useState, useEffect } from "react";
 import BackgroundCont from "../../components/BackgroundCont/BackgroundCont";
 import Container from "../../components/Container/Container";
+import AsksModals from "../AsksModals/AsksModal";
 import MediaQuery from "react-responsive";
 import scss from "./Header.module.scss";
 import icons from "../../images/SVG/icons.svg";
 
 const Header = ({ user }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const mockUser = {
     firstName: "John",
     lastName: "Doe",
+  };
+
+  const openModalBtn = () => {
+    setIsOpen(!isOpen);
   };
 
   const [isMobile, setIsMobile] = useState(false);
@@ -30,6 +36,11 @@ const Header = ({ user }) => {
 
   return (
     <>
+      <AsksModals
+        isOpen={isOpen}
+        closeModal={openModalBtn}
+        text={"Do you really want to leave?"}
+      />
       <header>
         <div className={scss.header}>
           <svg className={scss.logo}>
@@ -56,15 +67,15 @@ const Header = ({ user }) => {
             </MediaQuery>
 
             {isMobile ? (
-              <Link to="/login">
+              <button onClick={openModalBtn} className={scss.exitLink}>
                 <svg className={scss.actions}>
                   <use xlinkHref={`${icons}#icon-logout`} />
                 </svg>
-              </Link>
+              </button>
             ) : (
-              <Link to="/login" className={scss.exitLink}>
+              <button onClick={openModalBtn} className={scss.exitLink}>
                 Exit
-              </Link>
+              </button>
             )}
           </div>
         </div>
