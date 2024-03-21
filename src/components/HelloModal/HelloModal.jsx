@@ -1,18 +1,14 @@
-import styles from "../HelloModal/HelloModal.module.scss";
+import scss from "../HelloModal/HelloModal.module.scss";
 
-const HelloModal = ({ isVisible }) => {
-  if (!isVisible) {
-    return null;
-  }
-
+const HelloModal = () => {
   return (
-    <div className={styles.modal}>
-      <div className={styles.triangle}></div>
-      <div className={styles.messageContainer}>
-        <p className={styles.messageTitle}>
+    <div className={scss.modal}>
+      <div className={scss.triangle}></div>
+      <div className={scss.messageContainer}>
+        <p className={scss.messageTitle}>
           Hello! To get started, enter the current balance of your account!
         </p>
-        <p className={styles.messageText}>
+        <p className={scss.messageText}>
           You can't spend money until you have it :)
         </p>
       </div>

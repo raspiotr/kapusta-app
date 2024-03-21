@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setBalance } from "../../redux/reducers/balanceReducer";
 import AsksModals from "../AsksModals/AsksModal";
+import HelloModal from "../HelloModal/HelloModal";
 import scss from "./Balance.module.scss";
 
 export const Balance = () => {
@@ -34,13 +35,18 @@ export const Balance = () => {
         <label className={scss.name}>Balance: </label>
         <div className={scss.box}>
           <div className={scss.balanceBox}>
+            {inputValue === 0 && (
+              <div className={scss.parent}>
+                <HelloModal />
+              </div>
+            )}
             <input
               className={scss.balance}
               id="balance"
               type="number"
               value={inputValue}
               onChange={handleInputChange}
-              placeholder="00.00"
+              // placeholder="00.00"
               min="0"
             />
             <span className={scss.currency}>UAH</span>
