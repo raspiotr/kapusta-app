@@ -1,26 +1,35 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSelectedDate } from '../../../../../redux/actions/calendarActions.js';
 import { monthNames } from '../Period.Utils';
 import Button from '../Button/Button';
 import styles from './Calendar.module.css';
 
-const Calendar = ({
-  onClose,
-  currentMonth,
-  currentYear,
-  onChangeDate,
-}) => {
+const Calendar = ({ onClose }) => {
+  const dispatch = useDispatch();
+  const selectedDate = useSelector(state => state.calendar.selectedDate);
+
+  const [selectedYear, setSelectedYear] = useState(selectedDate.year);
+  const [selectedMonth, setSelectedMonth] = useState(monthNames[selectedDate.month - 1]);
 
   const handleYear = (event) => {
     const newYear = parseInt(event.currentTarget.textContent);
-    onChangeDate(newYear, currentMonth); // Przekazujemy nowy rok i bieżący miesiąc
+    setSelectedYear(newYear);
+    dispatch(setSelectedDate({ year: newYear, month: selectedDate.month }));
   };
 
   const handleMonth = (event) => {
     const choosedMonth = event.currentTarget.textContent;
-    const monthIndex = monthNames.indexOf(choosedMonth);
-    onChangeDate(currentYear, monthIndex); // Przekazujemy bieżący rok i nowy miesiąc
+    const monthIndex = monthNames.indexOf(choosedMonth) + 1;
+    setSelectedMonth(choosedMonth);
+    dispatch(setSelectedDate({ year: selectedYear, month: monthIndex }));
   };
+
+  useEffect(() => {
+    setSelectedYear(selectedDate.year);
+    setSelectedMonth(monthNames[selectedDate.month - 1]);
+  }, [selectedDate]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -45,13 +54,13 @@ const Calendar = ({
     <div onClick={handleBackdrop} className={styles.backdrop}>
       <div className={styles.calendarbox}>
         <Button onButtonClick={handleYear}>
-          <p className={styles.year}>{currentYear}</p>
+          <p className={styles.year}>{selectedYear}</p>
         </Button>
 
         <ul>
           {monthNames.map((el) => (
             <p
-              className={`${styles.calendarItem} ${el === currentMonth ? styles.active : ''}`}
+              className={`${styles.calendarItem} ${el === selectedMonth ? styles.active : ''}`}
               onClick={handleMonth}
               key={el}
             >
@@ -66,9 +75,6 @@ const Calendar = ({
 
 Calendar.propTypes = {
   onClose: PropTypes.func.isRequired,
-  currentMonth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  currentYear: PropTypes.number.isRequired,
-  onChangeDate: PropTypes.func.isRequired,
 };
 
 export default Calendar;

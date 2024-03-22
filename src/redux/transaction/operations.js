@@ -1,59 +1,32 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { fullUserInfoAPI } from '../../api/apiAuth';
 import {
-  addIncomeAPI,
-  getIncomeAPI,
-  addExpenseAPI,
-  getExpenseAPI,
+  addTransactionAPI,
+  getTransactionsAPI,
   updateBalanceAPI,
   deleteTransactionAPI,
 } from '../../api/apiTransaction.js';
 
-// AddIncome transaction Thunk
-export const addIncome = createAsyncThunk(
-  'transactions/addIncome',
-  async (value, thunkAPI) => {
+export const fetchTransactions = createAsyncThunk(
+  'transactions/fetchTransactions',
+  async (type, thunkAPI) => {
     try {
-      const data = await addIncomeAPI(value);
+      const data = await getTransactionsAPI({ type });
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue({ error: 'Failed to fetch transactions' });
     }
   }
 );
-// Get income transactions Thunk
-export const getIncome = createAsyncThunk(
-  'transactions/getIncome',
-  async (_, thunkAPI) => {
+
+export const addNewTransaction = createAsyncThunk(
+  'transactions/addTransaction',
+  async ({ type, body }, thunkAPI) => {
     try {
-      const data = await getIncomeAPI();
+      const data = await addTransactionAPI({ type, body });
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-// Add expense transaction Thunk
-export const addExpense = createAsyncThunk(
-  'transactions/addExpense',
-  async (value, thunkAPI) => {
-    try {
-      const data = await addExpenseAPI(value);
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-// Get expenses transactions Thunk
-export const getExpenses = createAsyncThunk(
-  'transactions/getExpenses',
-  async (_, thunkAPI) => {
-    try {
-      const data = await getExpenseAPI();
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue({ error: 'Failed to add transaction' });
     }
   }
 );

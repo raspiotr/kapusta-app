@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMDkzMjk2NCwiZXhwIjoxNzExNTM3NzY0fQ.Xf8oOxwtX-tiLZ2Pvv33qcXCkSAs-JJgEsM8Jyzxqqc";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZmQ5OTlhODU0MGRlMjFkYTkxODk2MSIsImlhdCI6MTcxMTExODc3MiwiZXhwIjoxNzExNzIzNTcyfQ.Rk1yYyi-D4rwxwKlgvCYD0NYT7Vtcx75_OLbhEOpefY";
 
 export const getTransactionsAPI = async ({ type }) => {
   const req = await axios.get(`/api/transactions/${type}`, {
@@ -12,8 +12,8 @@ export const getTransactionsAPI = async ({ type }) => {
   return req.data;
 };
 
-export const addTransactionAPI = async ({ type, body }) => {
-  const req = await axios.post(`/api/transactions/${type}`, body, {
+export const addTransactionAPI = async ({ type, body, token }) => {
+  const req = await axios.post(`https://kapusta-backend-827563b0830f.herokuapp.com/api/transactions/${type}`, body, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -39,25 +39,7 @@ export const deleteTransactionAPI = async (id) => {
   return req.data;
 };
 
-export const addIncomeAPI = async (info) => {
-  const { data } = await axios.post("/api/transaction/income", info);
-  return data;
-};
 
-export const getIncomeAPI = async () => {
-  const { data } = await axios.get("/api/transaction/income");
-  return data;
-};
-
-export const addExpenseAPI = async (info) => {
-  const { data } = await axios.post("/api/transaction/expense", info);
-  return data;
-};
-
-export const getExpenseAPI = async () => {
-  const { data } = await axios.get("/api/transaction/expense");
-  return data;
-};
 
 export const getExpenseCategoriesAPI = async ({ transactionType, token }) => {
   const req = await axios.get(`https://kapusta-backend-827563b0830f.herokuapp.com/api/reports/${transactionType}`, {
@@ -92,5 +74,9 @@ export const getPeriodDataAPI = async ({
 
 export const updateBalanceAPI = async (value) => {
   const { data } = await axios.patch("/api/user/balance", value);
+  return data;
+};
+export const getBalanceAPI = async () => {
+  const { data } = await axios.get("/api/user/balance");
   return data;
 };
