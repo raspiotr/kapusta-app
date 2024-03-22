@@ -66,7 +66,7 @@ const ChartComponent = ({ data }) => {
     categorySpacing: 0,
     layout: {
       padding: {
-        top: 50,
+        top: 200,
       },
     },
   };
