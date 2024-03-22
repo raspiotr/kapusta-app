@@ -1,12 +1,15 @@
-import { useState, useEffect } from 'react';
-import './ReportsList.module.scss';
-import { getPeriodDataAPI } from '../../../../api/apiTransaction';
-import { selectSelectedMonth, selectSelectedYear } from '../../../../redux/reducers/calendarReducer';
-import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useState, useEffect } from "react";
+import "./ReportsList.module.scss";
+import { getPeriodDataAPI } from "../../../../api/apiTransaction";
+import {
+  selectSelectedMonth,
+  selectSelectedYear,
+} from "../../../../redux/reducers/calendarReducer";
+import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 export const ReportsList = ({ transactionType }) => {
-  const [active, setActive] = useState('');
+  const [active, setActive] = useState("");
   const [reports, setReports] = useState([]);
   const selectedMonth = useSelector(selectSelectedMonth);
   const selectedYear = useSelector(selectSelectedYear);
@@ -14,11 +17,17 @@ export const ReportsList = ({ transactionType }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMDkzMjk2NCwiZXhwIjoxNzExNTM3NzY0fQ.Xf8oOxwtX-tiLZ2Pvv33qcXCkSAs-JJgEsM8Jyzxqqc";
-        const result = await getReportsData(transactionType, selectedYear, selectedMonth + 1, token);
+        const token =
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMDkzMjk2NCwiZXhwIjoxNzExNTM3NzY0fQ.Xf8oOxwtX-tiLZ2Pvv33qcXCkSAs-JJgEsM8Jyzxqqc";
+        const result = await getReportsData(
+          transactionType,
+          selectedYear,
+          selectedMonth + 1,
+          token
+        );
         setReports(result);
       } catch (error) {
-        console.error('Błąd pobierania danych z API:', error.message);
+        console.error("Błąd pobierania danych z API:", error.message);
       }
     };
 
@@ -27,14 +36,17 @@ export const ReportsList = ({ transactionType }) => {
 
   const getReportsData = async (transactionType, year, month, token) => {
     try {
-      const result = await getPeriodDataAPI({ transactionType, year, month, token });
+      const result = await getPeriodDataAPI({
+        transactionType,
+        year,
+        month,
+        token,
+      });
       return result.data;
     } catch (error) {
-      throw new Error('Błąd pobierania danych z API: ' + error.message);
+      throw new Error("Błąd pobierania danych z API: " + error.message);
     }
   };
-
- 
 
   const handleItemClick = (item) => {
     setActive(item);
@@ -43,19 +55,18 @@ export const ReportsList = ({ transactionType }) => {
 
   return (
     <div>
-     
       <ul>
-        {reports.map(item => (
+        {reports.map((item) => (
           <li
             key={item.id}
             onClick={() => handleItemClick(item)}
-            className={`${item === active ? 'active' : ''}`}
+            className={`${item === active ? "active" : ""}`}
           >
             <p>{item.category}</p>
             <svg
               width="56"
               height="56"
-              className={item.iconName === active ? 'active' : ''}
+              className={item.iconName === active ? "active" : ""}
             >
               <use href={`${item.categoryImageUrl}#${item.iconName}`}></use>
             </svg>
@@ -68,7 +79,7 @@ export const ReportsList = ({ transactionType }) => {
 };
 
 ReportsList.propTypes = {
-  transactionType: PropTypes.string.isRequired,
+  transactionType: PropTypes.bool.isRequired,
 };
 
 export default ReportsList;

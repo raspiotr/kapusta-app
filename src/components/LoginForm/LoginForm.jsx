@@ -74,7 +74,7 @@ const LoginForm = () => {
         <div className={scss.buttons}>
           <button type="submit">{register ? "SIGN UP " : "LOG IN"}</button>
           <button type="button" onClick={() => setRegister(!register)}>
-            {register ? "REGISTRATION" : "LOGIN"}
+            {register ? "LOGIN" : "REGISTRATION"}
           </button>
         </div>
       </form>
