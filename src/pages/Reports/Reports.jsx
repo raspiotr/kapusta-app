@@ -1,4 +1,4 @@
-// import ChartComponent from "../../components/Charts/Charts";
+import ChartComponent from "../../components/Charts/Charts";
 import { ReportsInfo } from "../../components/Reports/ReportsInfo/ReportsInfo";
 import ReportsNav from "../../components/Reports/ReportsNav/ReportsNav";
 import scss from "./Reports.module.scss";
@@ -24,7 +24,7 @@ const Reports = () => {
     <div className={scss.box}>
       <ReportsNav />
       <ReportsInfo />
-      {/* <ChartComponent data={chartData} /> */}
+      <ChartComponent data={chartData} />
     </div>
   );
 };
