@@ -1,3 +1,5 @@
+@import "../../assets/variables";
+
 .form {
   width: 100%;
   display: flex;
@@ -112,13 +114,14 @@
     width: 130px;
     border-radius: 22px;
     background-color: #f5f6fb;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
 
     &:hover {
       scale: 1.1;
     }
 
     &:first-child {
-      background-color: darkorange;
+      background-color: $accentColor;
       color: white;
     }
   }

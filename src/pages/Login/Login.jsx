@@ -1,5 +1,6 @@
-import Container from "../../components/Container/Container";
 import LoginForm from "../../components/LoginForm/LoginForm";
+import scss from "./Login.module.scss";
+import bigLogo from "../../images/PNG/big_logo.png";
 
 const Login = () => {
   const handleLogin = (formData) => {
@@ -7,9 +8,12 @@ const Login = () => {
   };
 
   return (
-    <Container>
+    <div className={scss.container}>
+      <div className={scss.logo}>
+        <img src={bigLogo} alt="kapusta logo" />
+      </div>
       <LoginForm onLogin={handleLogin} />
-    </Container>
+    </div>
   );
 };
 

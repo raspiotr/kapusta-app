@@ -1,3 +1,13 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 6;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .modal {
   position: fixed;
   top: 50%;
@@ -11,44 +21,41 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
   background-color: #ffffff;
-
-  .closeIcon {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 12px;
-    height: 12px;
-    stroke: #52555f;
-  }
+  z-index: 4;
 
   p {
     font-size: 14px;
     margin-bottom: 30px;
     margin-top: 5px;
   }
+}
 
-  .buttonContainer {
-    display: flex;
-    justify-content: space-between;
-    padding: 0px 10px;
-  }
+.closeIcon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 12px;
+  height: 12px;
+  stroke: #52555f;
+}
 
-  .button {
-    width: 125px;
-    height: 44px;
-    border-radius: 16px;
-    font-size: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s, border 0.3s;
-  }
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 10px;
+}
 
-  .button.yes {
-    background-color: #ff751d;
-    color: white;
-    border: none;
-  }
+.button {
+  width: 125px;
+  height: 44px;
+  border-radius: 16px;
+  font-size: 12px;
+  transition: background-color 0.3s, color 0.3s, border 0.3s;
+  background-color: #ff751d;
+  color: white;
+  border: none;
 
-  .button.no {
+  &:nth-last-child(1) {
     background-color: white;
     color: black;
     border: 2px solid #f2f5fc;

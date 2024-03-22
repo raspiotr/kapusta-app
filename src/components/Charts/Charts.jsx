@@ -1,5 +1,7 @@
+import React, { useEffect } from 'react';
 import { Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 import {
   CategoryScale,
   LinearScale,
@@ -9,21 +11,22 @@ import {
   Legend,
 } from "chart.js/auto";
 
-Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+Chart.register(CategoryScale, LinearScale, BarElement, ChartDataLabels, Title, Tooltip, Legend);
 
 const ChartComponent = ({ data }) => {
-  const labels = data.map((item) => item.category);
+  const sortedData = [...data].sort((a, b) => b.amount - a.amount);
+  const labels = sortedData.map((item) => item.category);
+  const amounts = sortedData.map((item) => item.amount);
+
   const chartData = {
     labels,
     datasets: [
       {
         label: "Расходы",
-        data: data.map((item) => item.amount),
-        backgroundColor: "rgba(75,192,192,0.2)",
-        borderColor: "rgba(75,192,192,1)",
-        borderWidth: 1,
-        hoverBackgroundColor: "rgba(75,192,192,0.4)",
-        hoverBorderColor: "rgba(75,192,192,1)",
+        data: sortedData.map((item) => item.amount),
+        backgroundColor: ["#FF751D", "#FFDAC0", "#FFDAC0"],
+        hoverBackgroundColor: "#a41765",
+        borderRadius: 10,
       },
     ],
   };
@@ -33,14 +36,37 @@ const ChartComponent = ({ data }) => {
       legend: {
         display: false,
       },
+      datalabels: {
+        anchor: 'end',
+        align: 'top',
+        font: {
+          size: 12,
+          weight: 'bold',
+        },
+      },
     },
     scales: {
-      y: {
-        beginAtZero: true,
-        ticks: { display: false },
+      x: {
         grid: {
           display: false,
         },
+      },
+      y: {
+        grid: {
+          color: '#F5F6FB',
+          lineWidth: 2,
+        },
+        ticks: {
+          stepSize: 500,
+        },
+      },
+    },
+    indexAxis: 'x',
+    barThickness: 38,
+    categorySpacing: 0,
+    layout: {
+      padding: {
+        top: 50,
       },
     },
   };

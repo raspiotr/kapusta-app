@@ -1,15 +1,88 @@
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+@import "../../assets/variables";
 
 .form {
   display: flex;
-  justify-content: center;
+  align-items: center;
   flex-direction: column;
   margin-top: 50px;
   padding: 20px;
+  border-radius: 30px;
+  background-color: $mainColor;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  color: $secondaryTextColor;
+  margin-bottom: 40px;
+  width: 280px;
+  @media screen and (min-width: 768px) {
+    width: 326px;
+    padding: 40px 80px 20px;
+  }
+}
+
+.firstText {
+  text-align: center;
+}
+
+.titles {
+  font-size: small;
+  font-weight: 400;
+  color: black;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.inputs {
+  border: 0;
+  background-color: $secondaryColor;
+  width: 240px;
+  height: 52px;
+  border-radius: 26px;
+  padding-left: 20px;
+  @media screen and (min-width: 768px) {
+    width: 280px;
+  }
+}
+
+.googleLogin {
+  width: 122px;
+  height: 40px;
   border-radius: 20px;
-  background-color: white;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $secondaryColor;
+  & a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 30px 0;
+  @media screen and (min-width: 768px) {
+    gap: 15px;
+  }
+  & button {
+    height: 44px;
+    width: 130px;
+    border-radius: 16px;
+    background-color: #f5f6fb;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    color: $secondaryTextColor;
+
+    &:hover {
+      scale: 1.1;
+    }
+
+    &:first-child {
+      background-color: $accentColor;
+      color: white;
+    }
+  }
 }
