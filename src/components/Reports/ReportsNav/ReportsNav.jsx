@@ -1,25 +1,46 @@
 import { Link } from "react-router-dom";
-import {Balance} from '../../Balance/Balance'
-import {Periods} from './Periods/Periods'
-import styles from './ReportsNav.module.scss';
+import { Periods } from "./Periods/Periods";
+import { useMediaQuery } from "react-responsive";
+import styles from "./ReportsNav.module.scss";
+import arrow from "../../../images/SVG/arrow.svg";
+import { Balance } from "../../Balance/Balance";
 
+const ReportsNav = ({ balance }) => {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const isDesktop = useMediaQuery({ minWidth: 1280 });
 
-  const ReportsNav = () => {
+  const balanceBox = (
+    <>
+      <div className={styles.balance}>
+        <p className={styles.title}>Balance:</p>
+        <div className={styles.amount}>
+          {balance}
+          <span>UTH</span>
+        </div>
+      </div>
+    </>
+  );
 
- 
-    
   return (
-    <main className={styles.mainContainer}>
     <div className={styles.box}>
-      <Link to="/">Go back</Link>
-      <div className={styles.box}>
-        <Periods/>
-        <div className={styles.balance}>
-      <Balance></Balance>
-      </div>
-      </div>
-      </div>
-      </main>
+      <Link to="/">
+        <img src={arrow} alt="" />
+        {!isMobile && <span className={styles.text}>Main page</span>}
+      </Link>
+      <>
+        {isMobile ? (
+          <>
+            <Periods />
+            {balanceBox}
+          </>
+        ) : (
+          <>
+            {isDesktop ? <Balance /> : balanceBox}
+            <Periods />
+          </>
+        )}
+      </>
+    </div>
   );
 };
-export default ReportsNav
+export default ReportsNav;
