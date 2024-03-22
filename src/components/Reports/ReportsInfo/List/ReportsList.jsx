@@ -1,30 +1,27 @@
-import { useState, useEffect } from "react";
-import "./ReportsList.module.scss";
-import { getPeriodDataAPI } from "../../../../api/apiTransaction";
-import {
-  selectSelectedMonth,
-  selectSelectedYear,
-} from "../../../../redux/reducers/calendarReducer";
-import { useSelector } from "react-redux";
-import PropTypes from "prop-types";
+
+import { useState, useEffect } from 'react';
+
+import './ReportsList.module.scss';
+import { getPeriodDataAPI } from '../../../../api/apiTransaction';
+import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { selectSelectedMonth, selectSelectedYear } from '../../../../redux/reducers/calendarReducer';
+
 
 export const ReportsList = ({ transactionType }) => {
   const [active, setActive] = useState("");
   const [reports, setReports] = useState([]);
-  const selectedMonth = useSelector(selectSelectedMonth);
-  const selectedYear = useSelector(selectSelectedYear);
+  const selectedMonth = useSelector(selectSelectedMonth); // Używamy wartości z Reduxa dla miesiąca
+  const selectedYear = useSelector(selectSelectedYear); // Używamy wartości z Reduxa dla roku
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token =
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMDkzMjk2NCwiZXhwIjoxNzExNTM3NzY0fQ.Xf8oOxwtX-tiLZ2Pvv33qcXCkSAs-JJgEsM8Jyzxqqc";
-        const result = await getReportsData(
-          transactionType,
-          selectedYear,
-          selectedMonth + 1,
-          token
-        );
+
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMDkzMjk2NCwiZXhwIjoxNzExNTM3NzY0fQ.Xf8oOxwtX-tiLZ2Pvv33qcXCkSAs-JJgEsM8Jyzxqqc";
+        const monthIndex = selectedMonth; // Używamy wartości z Reduxa dla miesiąca
+        const result = await getReportsData(transactionType, selectedYear, monthIndex + 1, token); // Dodajemy 1, ponieważ miesiące są indeksowane od 0
+
         setReports(result);
       } catch (error) {
         console.error("Błąd pobierania danych z API:", error.message);
@@ -32,7 +29,7 @@ export const ReportsList = ({ transactionType }) => {
     };
 
     fetchData();
-  }, [selectedMonth, selectedYear, transactionType]); // Tutaj dodajemy te zależności
+  }, [selectedYear, selectedMonth, transactionType]); // Dodajemy selectedYear i selectedMonth do zależności useEffect
 
   const getReportsData = async (transactionType, year, month, token) => {
     try {

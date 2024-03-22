@@ -1,14 +1,15 @@
 import { combineReducers } from 'redux';
-import balanceReducer from './reducers/balanceReducer';
-import reportsQueryReducer from './reducers/reportsQuery.reducer';
-import calendarReducer from './reducers/calendarReducer'; // Dodaj import dla calendarReducer
-import reportsReducer from './reducers/reportsReducer'; // Dodaj import dla reportsReducer
 
+import reportsQueryReducer from './reportsQuery.reducer';
+import calendarReducer from './calendarReducer'; 
+import reportsReducer from '.reportsReducer'; 
+import {transactionReducer} from './transactionReducer';
 const rootReducer = combineReducers({
-  balance: balanceReducer,
+  
   reportsQuery: reportsQueryReducer,
   calendar: calendarReducer,
-  reports: reportsReducer, // Dodaj reducer dla kalendarza
+  reports: reportsReducer, 
+  transactions: transactionReducer,
 });
 
 export default rootReducer;
