@@ -13,17 +13,15 @@ const CheckUserGoogleRedir = lazy(() =>
 function App() {
   return (
     <>
-      <Suspense fallback={<h3>Loading...</h3>}>
-        <Routes>
-          <Route path="/" element={<Header />}>
-            <Route path="login" element={<Login />} />
-            <Route index element={<Home />}></Route>
-            <Route path="reports" element={<Reports />} />
-            <Route path="/user-check" element={<CheckUserGoogleRedir />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </Suspense>
+      <Routes>
+        <Route path="/" element={<Header />}>
+          <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="reports" element={<Reports />} />
+          <Route path="user-check" element={<CheckUserGoogleRedir />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
     </>
   );
 }
