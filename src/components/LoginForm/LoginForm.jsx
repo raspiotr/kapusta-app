@@ -11,7 +11,19 @@ const LoginForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Login: ", { email, name, password });
+    if (
+      register
+        ? email === "" || password === "" || name === ""
+        : email === "" || password === ""
+    ) {
+      console.log("This is a required field");
+    } else {
+      console.log(
+        register
+          ? `Register: ${email} ${name} ${password}`
+          : `Login: ${email} ${password}`
+      );
+    }
   };
 
   return (
@@ -60,8 +72,8 @@ const LoginForm = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <div className={scss.buttons}>
-          <button name="toSubmit">{register ? "LOG IN" : "SIGN UP "}</button>
-          <button onClick={() => setRegister(!register)}>
+          <button type="submit">{register ? "SIGN UP " : "LOG IN"}</button>
+          <button type="button" onClick={() => setRegister(!register)}>
             {register ? "REGISTRATION" : "LOGIN"}
           </button>
         </div>
