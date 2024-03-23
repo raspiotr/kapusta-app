@@ -1,17 +1,20 @@
-import  { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+// import { useDispatch } from "react-redux";
 import scss from "./Transaction.module.scss";
 import { addCategory } from "../../api/apiCategory";
 import { addTransactionAPI } from "../../api/apiTransaction";
 import calculator from "../../images/SVG/calculator.svg";
-import { newTransaction, updateAuthBalance } from "../../redux/reducers/transactionReducer";
+// import {
+//   newTransaction,
+//   updateAuthBalance,
+// } from "../../redux/reducers/transactionReducer";
 
-const Transaction = () => {
+const Transaction = ({ isActive, selectedDate }) => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [value, setValue] = useState("");
   const [categories, setCategories] = useState([]);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -39,32 +42,33 @@ const Transaction = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const date = new Date();
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
+    const date = selectedDate;
+    const type = isActive ? "expense" : "income";
     const body = {
-      day,
-      month,
-      year,
+      day: date.getDate(),
+      month: date.getMonth() + 1,
+      year: date.getFullYear(),
+      type: isActive ? "expense" : "income",
       description,
       category,
       amount: value,
     };
-    let type = "expense" || "income";
-    let token ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZmQ5OTlhODU0MGRlMjFkYTkxODk2MSIsImlhdCI6MTcxMTExODc3MiwiZXhwIjoxNzExNzIzNTcyfQ.Rk1yYyi-D4rwxwKlgvCYD0NYT7Vtcx75_OLbhEOpefY'
+
+    console.log(body);
+
+    // let token =
+    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZmQ5OTlhODU0MGRlMjFkYTkxODk2MSIsImlhdCI6MTcxMTExODc3MiwiZXhwIjoxNzExNzIzNTcyfQ.Rk1yYyi-D4rwxwKlgvCYD0NYT7Vtcx75_OLbhEOpefY";
     try {
-      const response = await addTransactionAPI({ type, body, token });
-      dispatch(newTransaction(response.data.transaction));
-      dispatch(updateAuthBalance(response.data.newBalance))
+      // await addTransactionAPI({ type, body, token });
+      // dispatch(newTransaction(response.data.transaction));
+      // dispatch(updateAuthBalance(response.data.newBalance))
       setDescription("");
       setCategory("");
       setValue("");
-  } catch (error) {
+    } catch (error) {
       console.error(error.message);
-  }
+    }
   };
-  
 
   const fetchCategories = async () => {
     try {

@@ -2,7 +2,7 @@ import scss from "./Input.module.scss";
 import Transaction from "../Transaction/Transaction";
 import arrow from "../../images/SVG/arrow.svg";
 
-const Input = ({ isOpen, closeModal }) => {
+const Input = ({ isOpen, closeModal, isActive, selectedDate }) => {
   return (
     <div className={`${scss.modal} ${isOpen ? scss.open : ""}`}>
       <div className={scss.modalContent}>
@@ -11,7 +11,7 @@ const Input = ({ isOpen, closeModal }) => {
             <img src={arrow} alt="" />
           </button>
         </div>
-        <Transaction />
+        <Transaction isActive={isActive} selectedDate={selectedDate} />
       </div>
     </div>
   );

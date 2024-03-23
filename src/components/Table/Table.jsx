@@ -23,8 +23,6 @@ const Table = ({ isActive }) => {
 
   const deleteTransaction = async (event) => {
     const id = event.target.id;
-    console.log("id", id);
-
     try {
       return await deleteTransactionAPI(id);
     } catch (error) {

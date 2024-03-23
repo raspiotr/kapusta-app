@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { filteredDataAction } from "../../../redux/reportsQuery/reportsQuery.slice";
+// import { useDispatch } from "react-redux";
+// import { filteredDataAction } from "../../../redux/reportsQuery/reportsQuery.slice";
 import scss from "./ReportsInfo.module.scss";
 import Button from "../ReportsNav/Periods/Button/Button";
 import { getExpenseCategoriesAPI } from "../../../api/apiTransaction";
@@ -13,11 +13,11 @@ export const ReportsInfo = () => {
   const [expensesTotal, setExpensesTotal] = useState(0);
   const [incomeTotal, setIncomeTotal] = useState(0);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const handleClick = () => {
     setTransactionType(!transactionType);
-    dispatch(filteredDataAction([]));
+    // dispatch(filteredDataAction([]));
   };
 
   useEffect(() => {
