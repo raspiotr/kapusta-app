@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import {Balance} from "../../components/Balance/Balance";
+import { Balance } from "../../components/Balance/Balance";
 import Buttons from "../../components/Buttons/Buttons";
 import Calendar from "../../components/Calendar/Calendar";
 import scss from "./Home.module.scss";
@@ -19,7 +19,9 @@ const Home = () => {
   const isDesktop = useMediaQuery({ minWidth: 1280 });
   const [date, setDate] = useState(new Date());
 
-  useEffect(() => {}, [date]);
+  useEffect(() => {
+    setDate(new Date());
+  }, []);
 
   const handleClick = () => {
     setIsActive(!isActive);
@@ -62,7 +64,12 @@ const Home = () => {
       {isMobile ? (
         <>
           <Calendar selectedDate={date} setSelectedDate={setDate} />
-          <Input isOpen={isOpen} closeModal={openModalBtn} />
+          <Input
+            selectedDate={date}
+            isActive={isActive}
+            isOpen={isOpen}
+            closeModal={openModalBtn}
+          />
           <Table isActive={isActive} />
         </>
       ) : (
@@ -70,7 +77,7 @@ const Home = () => {
           <div className={scss.mainWindow}>
             <div className={scss.upWindow}>
               <Calendar selectedDate={date} setSelectedDate={setDate} />
-              <Transaction />
+              <Transaction isActive={isActive} selectedDate={date} />
             </div>
             <div className={scss.bottomWindow}>
               <Table isActive={isActive} />

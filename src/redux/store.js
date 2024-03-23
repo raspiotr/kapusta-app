@@ -1,23 +1,26 @@
-import { combineReducers } from "redux";
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
+import { tasksReducer } from './contacts/tasksSlice';
+import { filtersReducer } from './contacts/filtersSlice';
+import { authReducer } from './auth/slice';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer, persistStore } from 'redux-persist';
 
-import balanceReducer from "./reducers/balanceReducer";
-import reportsQueryReducer from "./reducers/reportsQuery.reducer";
-import calendarReducer from "./reducers/calendarReducer";
-import reportsReducer from "./reducers/reportsReducer";
-import { transactionReducer } from "./reducers/transactionReducer";
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['token'],
+};
 
-const rootReducer = combineReducers({
-  transaction: transactionReducer,
-  balance: balanceReducer,
-  reportsQuery: reportsQueryReducer,
-  calendar: calendarReducer,
-  reports: reportsReducer,
+export const store = configureStore({
+  reducer: {
+    auth: persistReducer(persistConfig, authReducer),
+    contacts: tasksReducer,
+    filters: filtersReducer,
+  },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
-// Apply thunk middleware
-const store = configureStore({
-  reducer: rootReducer,
-});
-
-export default store;
+export const persistor = persistStore(store);
