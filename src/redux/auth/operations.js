@@ -4,9 +4,12 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = "https://kapusta-backend-827563b0830f.herokuapp.com";
 
+
 const setAuthorizationToken = (token) => {
   axios.defaults.headers.common.Authorization = token ? `Bearer ${token}` : "";
 };
+
+// setAuthorizationToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZmVkNTJjMzYxMjE0NDViMmRkNDI0OSIsImlhdCI6MTcxMTE5OTUzMiwiZXhwIjoxNzExODA0MzMyfQ.yrelo4Nez6BawmYgKWYzUJpQHNHJCO9Jp80KRJCAplU");
 
 export const register = createAsyncThunk(
   "/api/auth/register",
