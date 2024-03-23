@@ -4,43 +4,42 @@ import { setBalance } from "../../redux/reducers/balanceReducer";
 import AsksModals from "../AsksModals/AsksModal";
 import HelloModal from "../HelloModal/HelloModal";
 import scss from "./Balance.module.scss";
-import { updateBalance } from '../../redux/actions/transactionActions';
+//import { updateBalance } from "../../redux/actions/transactionActions";
 
 export const Balance = () => {
   const dispatch = useDispatch();
-  const [inputValue, setInputValue] = useState('');
+  const balanceFromRedux = useSelector((state) => state.balance.balance);
+  const [inputValue, setInputValue] = useState(balanceFromRedux);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
 
+  const confirmBalance = async () => {
+    dispatch(setBalance(inputValue));
+    console.log(`Your balance: ${inputValue} UTH is confirmed`);
+  };
+
+  //funkcja
+
   const openModalBtn = () => {
     setIsOpen(!isOpen);
   };
-  
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      await dispatch(updateBalance(inputValue));
-      console.log(`Your balance: ${inputValue} UAH is confirmed`);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
 
   return (
-    <div className={scss.container}>
-          <AsksModals
+    <>
+      <AsksModals
+        //funkcja
         isOpen={isOpen}
         closeModal={openModalBtn}
         text={"Are you sure?"}
       />
-      <form onSubmit={handleSubmit}>
+      <div className={scss.container}>
         <label className={scss.name}>Balance: </label>
         <div className={scss.box}>
           <div className={scss.balanceBox}>
-                    {inputValue === 0 && (
+            {inputValue === 0 && (
               <div className={scss.parent}>
                 <HelloModal />
               </div>
@@ -51,17 +50,20 @@ export const Balance = () => {
               type="number"
               value={inputValue}
               onChange={handleInputChange}
-              placeholder="00.00"
+              // placeholder="00.00"
               min="0"
             />
             <span className={scss.currency}>UAH</span>
           </div>
-          <button  onClick={(confirmBalance, openModalBtn)} type="submit" className={scss.confirm}>
+
+          <button
+            onClick={(confirmBalance, openModalBtn)}
+            className={scss.confirm}
+          >
             Confirm
           </button>
         </div>
-      </form>
-    </div>
-
+      </div>
+    </>
   );
 };

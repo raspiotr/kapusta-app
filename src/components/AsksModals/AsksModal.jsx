@@ -2,6 +2,8 @@ import scss from "./AsksModal.module.scss";
 import closeIcon from "../../images/SVG/icons.svg";
 
 const AsksModal = ({ text, closeModal, isOpen }) => {
+  // funkcja
+
   return (
     <>
       {isOpen ? (
@@ -15,7 +17,7 @@ const AsksModal = ({ text, closeModal, isOpen }) => {
               <button className={scss.button} onClick={closeModal}>
                 Yes
               </button>
-              <button className={scss.button} onClick={closeModal}>
+              <button className={scss.button} onClick={{ closeModal }}>
                 No
               </button>
             </div>

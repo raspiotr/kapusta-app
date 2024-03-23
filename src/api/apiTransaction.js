@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZmQ5OTlhODU0MGRlMjFkYTkxODk2MSIsImlhdCI6MTcxMTExODc3MiwiZXhwIjoxNzExNzIzNTcyfQ.Rk1yYyi-D4rwxwKlgvCYD0NYT7Vtcx75_OLbhEOpefY";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMTEyOTg1MiwiZXhwIjoxNzExNzM0NjUyfQ.zLvIAbLh2g_1QLURUuUTTi4P-z9NHqS1htU7OF38fOQ";
+
+axios.defaults.baseURL = "https://kapusta-backend-827563b0830f.herokuapp.com/";
 
 export const getTransactionsAPI = async ({ type }) => {
   const req = await axios.get(`/api/transactions/${type}`, {
@@ -13,7 +15,7 @@ export const getTransactionsAPI = async ({ type }) => {
 };
 
 export const addTransactionAPI = async ({ type, body, token }) => {
-  const req = await axios.post(`https://kapusta-backend-827563b0830f.herokuapp.com/api/transactions/${type}`, body, {
+  const req = await axios.post(`/api/transactions/${type}`, body, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -39,10 +41,8 @@ export const deleteTransactionAPI = async (id) => {
   return req.data;
 };
 
-
-
 export const getExpenseCategoriesAPI = async ({ transactionType, token }) => {
-  const req = await axios.get(`https://kapusta-backend-827563b0830f.herokuapp.com/api/reports/${transactionType}`, {
+  const req = await axios.get(`/api/reports/${transactionType}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -51,7 +51,7 @@ export const getExpenseCategoriesAPI = async ({ transactionType, token }) => {
 };
 
 export const getIncomeCategoriesAPI = async () => {
-  const { data } = await axios.get("https://kapusta-backend-827563b0830f.herokuapp.com/api/reports/income");
+  const { data } = await axios.get("/api/reports/income");
   return data;
 };
 
@@ -59,10 +59,11 @@ export const getPeriodDataAPI = async ({
   transactionType,
   year,
   month,
-  token,
+  day,
+  // token,
 }) => {
   const req = await axios.get(
-    `https://kapusta-backend-827563b0830f.herokuapp.com/api/reports/${transactionType}/${year}/${month}`,
+    `/api/reports/${transactionType}/${year}/${month}/${day}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,

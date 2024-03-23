@@ -1,5 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { addTransactionAPI, getBalanceAPI, updateBalanceAPI } from '../../api/apiTransaction'; // Dodaj import akcji getBalanceAPI oraz updateBalanceAPI
+import { createSlice } from "@reduxjs/toolkit";
+import {
+  addTransactionAPI,
+  getBalanceAPI,
+  updateBalanceAPI,
+} from "../../api/apiTransaction"; // Dodaj import akcji getBalanceAPI oraz updateBalanceAPI
 
 const initialState = {
   transactions: [],
@@ -9,14 +13,14 @@ const initialState = {
 };
 
 export const transactionReducer = createSlice({
-  name: 'transactions',
+  name: "transactions",
   initialState,
   reducers: {
     newTransaction: (state, action) => {
       state.transactions.push(action.payload); // Dodawanie nowej transakcji do tablicy
     },
     updateAuthBalance: (state, action) => {
-      console.log('test');
+      console.log("test");
       console.log(action.payload);
       state.newBalance = action.payload;
     },
@@ -29,7 +33,7 @@ export const transactionReducer = createSlice({
       })
       .addCase(addTransactionAPI.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.transactions.push(action.payload.data.transaction); 
+        state.transactions.push(action.payload.data.transaction);
         state.newBalance = action.payload.newBalance;
         // Dodawanie nowej transakcji do tablicy po zapisie na serwerze
       })
