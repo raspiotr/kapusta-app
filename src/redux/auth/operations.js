@@ -1,11 +1,16 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = "https://connections-api.herokuapp.com";
+
+axios.defaults.baseURL = "https://kapusta-backend-827563b0830f.herokuapp.com/";
+
 
 const setAuthorizationToken = (token) => {
   axios.defaults.headers.common.Authorization = token ? `Bearer ${token}` : "";
 };
+
+setAuthorizationToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZmVkNTJjMzYxMjE0NDViMmRkNDI0OSIsImlhdCI6MTcxMTE5OTUzMiwiZXhwIjoxNzExODA0MzMyfQ.yrelo4Nez6BawmYgKWYzUJpQHNHJCO9Jp80KRJCAplU");
+
 
 // email: 'bg@bg.com';
 // name: 'bgtest23';

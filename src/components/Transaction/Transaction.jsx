@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
-// import { useDispatch } from "react-redux";
+ import { useDispatch } from "react-redux";
 import scss from "./Transaction.module.scss";
 import { addCategory } from "../../api/apiCategory";
-import { addTransactionAPI } from "../../api/apiTransaction";
+import { addTransaction } from "../../redux/contacts/operations";
 import calculator from "../../images/SVG/calculator.svg";
-// import {
-//   newTransaction,
-//   updateAuthBalance,
-// } from "../../redux/reducers/transactionReducer";
+
 
 const Transaction = ({ isActive, selectedDate }) => {
+  const dispatch = useDispatch();
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [value, setValue] = useState("");
@@ -43,7 +41,7 @@ const Transaction = ({ isActive, selectedDate }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const date = selectedDate;
-    const type = isActive ? "expense" : "income";
+    
     const body = {
       day: date.getDate(),
       month: date.getMonth() + 1,
@@ -56,12 +54,9 @@ const Transaction = ({ isActive, selectedDate }) => {
 
     console.log(body);
 
-    // let token =
-    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZmQ5OTlhODU0MGRlMjFkYTkxODk2MSIsImlhdCI6MTcxMTExODc3MiwiZXhwIjoxNzExNzIzNTcyfQ.Rk1yYyi-D4rwxwKlgvCYD0NYT7Vtcx75_OLbhEOpefY";
+  
     try {
-      // await addTransactionAPI({ type, body, token });
-      // dispatch(newTransaction(response.data.transaction));
-      // dispatch(updateAuthBalance(response.data.newBalance))
+      dispatch(addTransaction(body ));
       setDescription("");
       setCategory("");
       setValue("");
