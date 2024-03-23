@@ -1,15 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { register, login, logout, refreshUser } from "./operations";
+import {
+  register,
+  login,
+  logout,
+  refreshUser,
+  updateBalance,
+} from "./operations";
 import Notiflix from "notiflix";
 
 const setCommonState = (state, action) => {
   state.isLoggedIn = true;
   state.user.name = action.payload.user.name;
   state.user.email = action.payload.user.email;
-  //
   state.user.balance = action.payload.user.balance;
   state.user.avatarUrl = action.payload.user.avatarUrl;
-  //
   state.token = action.payload.token;
   Notiflix.Notify.success("Hooray! You have successfully logged in.", {
     position: "center-top",
@@ -30,11 +34,15 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(register.fulfilled, setCommonState);
     builder.addCase(register.rejected, () => {
-      Notiflix.Notify.failure("Something went wrong... Registration failed.", {
-        position: "center-top",
-        timeout: 8000,
-      });
+      Notiflix.Notify.failure(
+        "User with the provided email address is already registered. Please log in.",
+        {
+          position: "center-top",
+          timeout: 8000,
+        }
+      );
     });
+
     builder.addCase(login.fulfilled, setCommonState);
     builder.addCase(login.rejected, () => {
       Notiflix.Notify.failure("Login failed! Wrong email or password.", {
@@ -42,6 +50,7 @@ const authSlice = createSlice({
         timeout: 8000,
       });
     });
+
     builder.addCase(logout.fulfilled, (state) => {
       state.user = { name: null, email: null, balance: 0, avatarUrl: "" };
       state.token = null;
@@ -51,6 +60,15 @@ const authSlice = createSlice({
         timeout: 8000,
       });
     });
+
+    builder.addCase(updateBalance.fulfilled, (state, action) => {
+      state.user.balance = action.payload.balance;
+      Notiflix.Notify.info("Balance updated.", {
+        position: "center-top",
+        timeout: 8000,
+      });
+    });
+
     builder.addCase(refreshUser.pending, (state) => {
       state.isRefreshing = true;
     });
@@ -58,10 +76,8 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.user.name = action.payload.user.name;
       state.user.email = action.payload.user.email;
-      //
       state.user.balance = action.payload.user.balance;
       state.user.avatarUrl = action.payload.user.avatarUrl;
-      //
       state.isRefreshing = false;
     });
     builder.addCase(refreshUser.rejected, (state) => {
