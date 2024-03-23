@@ -1,7 +1,30 @@
-
 import React, { useState, useEffect } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, Cell, LabelList, ResponsiveContainer, ReferenceLine } from "recharts";
 import scss from "./Charts.module.scss";
+// =======
+// import { Bar } from "react-chartjs-2";
+// import scss from "./Charts.module.scss";
+// import Chart from "chart.js/auto";
+// import ChartDataLabels from "chartjs-plugin-datalabels";
+// import {
+//   CategoryScale,
+//   LinearScale,
+//   BarElement,
+//   Title,
+//   Tooltip,
+//   Legend,
+// } from "chart.js/auto";
+
+// Chart.register(
+//   CategoryScale,
+//   LinearScale,
+//   BarElement,
+//   ChartDataLabels,
+//   Title,
+//   Tooltip,
+//   Legend
+// );
+// >>>>>>> 
 
 const ChartComponent = ({ data }) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -99,6 +122,7 @@ const HorizontalBarChart = ({ data }) => {
   );
 };
 
+
 const CustomizedTick = ({ x, y, payload }) => {
   return (
     <g transform={`translate(${x},${y})`}>
@@ -112,6 +136,12 @@ const CustomizedTick = ({ x, y, payload }) => {
         {payload.value}
       </text>
     </g>
+// =======
+//   return (
+//     <div className={scss.box}>
+//       <Bar data={chartData} options={options} />
+//     </div>
+// >>>>>>>
   );
 };
 
