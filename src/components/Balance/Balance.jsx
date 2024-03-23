@@ -1,15 +1,15 @@
 import { useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { setBalance } from "../../redux/reducers/balanceReducer";
-//import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import AsksModals from "../AsksModals/AsksModal";
 import HelloModal from "../HelloModal/HelloModal";
 import scss from "./Balance.module.scss";
-//import { updateBalance } from "../../redux/actions/transactionActions";
+import { selectUser } from "../../redux/auth/selectors";
+import { updateBalance } from "../../redux/auth/operations";
+import Notiflix from "notiflix";
 
 export const Balance = () => {
-  // const dispatch = useDispatch();
-  // const balanceFromRedux = useSelector((state) => state.balance.balance);
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
   const [inputValue, setInputValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -17,23 +17,36 @@ export const Balance = () => {
     setInputValue(event.target.value);
   };
 
-  // const confirmBalance = async () => {
-  //   dispatch(setBalance(inputValue));
-  //   console.log(`Your balance: ${inputValue} UTH is confirmed`);
-  // };
-
-  //funkcja
+  const handleConfirmBalance = () => {
+    dispatch(updateBalance(inputValue));
+    return setIsOpen(!isOpen);
+  };
 
   const openModalBtn = () => {
+    if (inputValue < 0) {
+      setInputValue(user.balance.toFixed(2));
+      return Notiflix.Notify.failure(
+        "Balance must be a positive number - not updated.",
+        {
+          position: "center-top",
+          timeout: 8000,
+        }
+      );
+    }
+    setIsOpen(!isOpen);
+  };
+
+  const closeModalBtn = () => {
+    setInputValue(user.balance.toFixed(2));
     setIsOpen(!isOpen);
   };
 
   return (
     <>
       <AsksModals
-        //funkcja
         isOpen={isOpen}
-        closeModal={openModalBtn}
+        closeModal={closeModalBtn}
+        actionConfirm={handleConfirmBalance}
         text={"Are you sure?"}
       />
       <div className={scss.container}>
@@ -51,7 +64,7 @@ export const Balance = () => {
               type="number"
               value={inputValue}
               onChange={handleInputChange}
-              // placeholder="00.00"
+              placeholder={user.balance.toFixed(2)}
               min="0"
             />
             <span className={scss.currency}>UAH</span>

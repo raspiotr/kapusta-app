@@ -7,7 +7,7 @@ import AsksModals from "../AsksModals/AsksModal";
 import MediaQuery from "react-responsive";
 import scss from "./Header.module.scss";
 import icons from "../../images/SVG/icons.svg";
-import { selectUser } from "../../redux/auth/selectors";
+import { selectUser, selectIsLoggedIn } from "../../redux/auth/selectors";
 import { logout } from "../../redux/auth/operations";
 
 export const Header = () => {
@@ -19,6 +19,7 @@ export const Header = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const user = useSelector(selectUser);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const openModalBtn = () => {
     setIsOpen(!isOpen);
@@ -54,39 +55,29 @@ export const Header = () => {
             <use xlinkHref={`${icons}#icon-logo`} />
           </svg>
 
-          <div className={scss.usermenu}>
-            {user ? (
+          {isLoggedIn && (
+            <div className={scss.usermenu}>
               <img src={user.avatarUrl} className={scss.avatar} />
-            ) : (
-              <>
-                <svg className={scss.avatar}>
-                  <use xlinkHref={`${icons}#icon-avatar`} />
-                </svg>
-              </>
-            )}
 
-            <MediaQuery minWidth={772}>
-              {user ? (
+              <MediaQuery minWidth={772}>
                 <span className={scss.userName}>{user.name}</span>
+
+                <div className={scss.separator}></div>
+              </MediaQuery>
+
+              {isMobile ? (
+                <button onClick={openModalBtn} className={scss.exitLink}>
+                  <svg className={scss.actions}>
+                    <use xlinkHref={`${icons}#icon-logout`} />
+                  </svg>
+                </button>
               ) : (
-                <span className={scss.userName}>{"User Name"}</span>
+                <button onClick={openModalBtn} className={scss.exitLink}>
+                  Exit
+                </button>
               )}
-
-              <div className={scss.separator}></div>
-            </MediaQuery>
-
-            {isMobile ? (
-              <button onClick={openModalBtn} className={scss.exitLink}>
-                <svg className={scss.actions}>
-                  <use xlinkHref={`${icons}#icon-logout`} />
-                </svg>
-              </button>
-            ) : (
-              <button onClick={openModalBtn} className={scss.exitLink}>
-                Exit
-              </button>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </header>
       <Suspense fallback={<div>Loading...</div>}>

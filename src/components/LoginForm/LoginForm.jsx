@@ -91,6 +91,7 @@ const LoginForm = () => {
           type="email"
           placeholder="your@email.com"
           name="email"
+          autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />

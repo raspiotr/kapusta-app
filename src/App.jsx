@@ -13,10 +13,10 @@ import { useAuth } from "./hooks";
 const Home = lazy(() => import("./pages/Home/Home"));
 const Login = lazy(() => import("./pages/Login/Login"));
 const Reports = lazy(() => import("./pages/Reports/Reports"));
-const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 const CheckUserGoogleRedir = lazy(() =>
   import("./pages/CheckUserGoogleRedir/CheckUserGoogleRedir")
 );
+const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +54,7 @@ function App() {
             />
           }
         />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );

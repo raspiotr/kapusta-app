@@ -13,7 +13,12 @@ import arrowPlus from "../../images/SVG/arrow+.svg";
 import arrowMinus from "../../images/SVG/arrow-.svg";
 import { nanoid } from "@reduxjs/toolkit";
 
-const Reports = ({ balance }) => {
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/auth/selectors";
+
+const Reports = () => {
+  const user = useSelector(selectUser);
+
   //const [amount, setAmount] = useState(0);
   const [isActiveBtn, setIsActiveBtn] = useState([]);
   const [isType, setIsType] = useState(true);
@@ -29,7 +34,7 @@ const Reports = ({ balance }) => {
       <div className={scss.balance}>
         <p className={scss.title}>Balance:</p>
         <div className={scss.amount}>
-          {balance}
+          {user.balance.toFixed(2)}
           <span>UTH</span>
         </div>
       </div>
