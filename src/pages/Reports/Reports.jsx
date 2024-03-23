@@ -1,4 +1,4 @@
-import ChartComponent from "../../components/Charts/Charts";
+import ChartComponent from "../../components/Charts/Charts.jsx";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { useEffect, useState } from "react";

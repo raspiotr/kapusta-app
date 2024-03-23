@@ -69,7 +69,7 @@ const VerticalBarChart = ({ data }) => {
             // offset={20}
             fontSize={12}
             fill="#52555F"
-            formatter={(value) => `$${value}`}
+            formatter={(value) => `$${parseFloat(value).toFixed(2)}`}
           />
           {sortData.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
@@ -82,7 +82,7 @@ const VerticalBarChart = ({ data }) => {
 
 const HorizontalBarChart = ({ data }) => {
   const sortedData = [...data].sort((a, b) => b.sum - a.sum);
-  const itemHeight = 60;
+  const itemHeight = 180;
   const containerHeight = data.length * itemHeight;
   const colors = ["#FF751D", "#FED9BF", "#FED9BF"];
 
@@ -103,7 +103,7 @@ const HorizontalBarChart = ({ data }) => {
           position="top"
           fontSize={12}
           fill="#52555F"
-          formatter={(value) => `$${value}`}
+          formatter={(value) => `$${parseFloat(value).toFixed(2)}`}
         />
         {sortedData.map((entry, index) => (
           <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
@@ -121,7 +121,7 @@ const CustomizedTick = ({ x, y, payload }) => {
         fill="#52555F"
         fontSize={12}
         textAnchor="middle"
-        transform="rotate(-15)"
+        transform="rotate(-5)"
       >
         {payload.value}
       </text>
