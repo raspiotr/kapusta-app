@@ -1,6 +1,7 @@
 import { useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { setBalance } from "../../redux/reducers/balanceReducer";
+//import { useSelector } from "react-redux";
 import AsksModals from "../AsksModals/AsksModal";
 import HelloModal from "../HelloModal/HelloModal";
 import scss from "./Balance.module.scss";
