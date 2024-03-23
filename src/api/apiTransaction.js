@@ -7,11 +7,7 @@ axios.defaults.baseURL = "https://kapusta-backend-827563b0830f.herokuapp.com/";
 
 // do reports
 export const getAllReportsAPI = async ({ type, year, month }) => {
-  const req = await axios.get(`/api/reports/${type}/${year}/${month}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const req = await axios.get(`/api/reports/${type}/${year}/${month}`);
   return req.data;
 };
 // do reports

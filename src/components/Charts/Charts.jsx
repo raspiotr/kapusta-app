@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
 import { Bar } from "react-chartjs-2";
+import scss from "./Charts.module.scss";
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import {
@@ -78,7 +78,11 @@ const ChartComponent = ({ data }) => {
     },
   };
 
-  return <Bar data={chartData} options={options} />;
+  return (
+    <div className={scss.box}>
+      <Bar data={chartData} options={options} />
+    </div>
+  );
 };
 
 export default ChartComponent;
