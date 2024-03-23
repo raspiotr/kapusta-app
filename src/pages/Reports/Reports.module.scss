@@ -2,9 +2,8 @@
 
 .list {
   display: flex;
-
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
   height: 80px;
-  border: 1px solid transparent;
   border-radius: 30px;
   background-color: #fff;
   background-color: --primary-bg-color;
@@ -139,13 +138,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
   font-weight: 600;
   width: 180px;
   height: 44px;
   border-radius: 22px;
   border: 3px solid #fff;
-  font-size: 12px;
 }
 
 .text {
@@ -169,15 +166,19 @@
   width: 90px;
   text-align: center;
   gap: 10px;
-  & button:hover {
-    scale: 1.1;
+
+  & button {
+    background-color: $secondaryColor;
+    border-radius: 20px;
+    :hover {
+      scale: 1.1;
+    }
   }
 }
 
 .activeButton {
-  background-color: #ffdac0;
-  border-radius: 20px;
+  background-color: #ffdac0 !important;
   & img {
-    color: white;
+    fill: $accentColor;
   }
 }

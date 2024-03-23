@@ -45,7 +45,6 @@ const Reports = () => {
     const type = isType ? "expense" : "income";
     try {
       const data = await getAllReportsAPI({ type, year, month });
-      console.log(data.data);
       return setReports(data.data);
     } catch (error) {
       console.error(error.message);
@@ -70,8 +69,8 @@ const Reports = () => {
         return [...prevState, index];
       }
     });
-    console.log(index, chartData);
   };
+
 
   return (
     <>
@@ -120,23 +119,21 @@ const Reports = () => {
             ></Button>
           </div>
           <div className={scss.categoriesBox}>
-            {reports
-              ? reports.map((data, index) => (
-                  <div className={scss.category} key={nanoid()}>
-                    <span>{data.total.toFixed(2)}</span>
-                    <button
-                      className={
-                        isActiveBtn.includes(index) ? scss.activeButton : null
-                      }
-                      onClick={() => checkDetail(index, data.descriptions)}
-                    >
-                      <div></div>
-                      <img src={data.categoryImageUrl} />
-                    </button>
-                    <div>{data.category}</div>
-                  </div>
-                ))
-              : ""}
+            {reports &&
+              reports.map((data, index) => (
+                <div className={scss.category} key={nanoid()}>
+                  <span>{data.total.toFixed(2)}</span>
+                  <button
+                    className={
+                      isActiveBtn.includes(index) ? scss.activeButton : null
+                    }
+                    onClick={() => checkDetail(index, data.descriptions)}
+                  >
+                    <img src={data.categoryImageUrl} />
+                  </button>
+                  <div>{data.category}</div>
+                </div>
+              ))}
           </div>
         </div>
       </div>
