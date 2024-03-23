@@ -5,18 +5,22 @@ import scss from "./Reports.module.scss";
 
 // ----- to jest tylko testowo ----------
 const chartData = [
-  { category: "Продукты", amount: "2000" },
-  { category: "Транспорт", amount: "1500" },
-  { category: "Развлечения", amount: "1000" },
-  { category: "Продукты", amount: "2000" },
-  { category: "Транспорт", amount: "1500" },
-  { category: "Развлечения", amount: "1000" },
-  { category: "Продукты", amount: "2000" },
-  { category: "Транспорт", amount: "1500" },
-  { category: "Развлечения", amount: "1000" },
-  { category: "Продукты", amount: "2000" },
-  { category: "Транспорт", amount: "1500" },
-  { category: "Развлечения", amount: "1000" },
+  { 
+    categoryImageUrl: "https://kapusta-backend-827563b0830f.herokuapp.com/products.svg",
+    category: "products",
+    descriptions: [
+      { description: "mleko", sum: 10.99 },
+      { description: "warzywa", sum: 179.98 },
+      { description: "mleko", sum: 20 },
+      { description: "warzywa", sum: 300 },
+      { description: "mleko", sum: 80 },
+      { description: "warzywa", sum: 200 },
+      { description: "mleko", sum: 65 },
+      { description: "owoce", sum: 130 },
+      { description: "mleko", sum: 60 },
+      { description: "owoce", sum: 150 },
+    ]
+  },
 ];
 // ----------------------------------------
 const Reports = () => {
