@@ -1,9 +1,20 @@
 import axios from "axios";
 
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMTEyOTg1MiwiZXhwIjoxNzExNzM0NjUyfQ.zLvIAbLh2g_1QLURUuUTTi4P-z9NHqS1htU7OF38fOQ";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMTIxMTUwNSwiZXhwIjoxNzExODE2MzA1fQ.L0zPdzEVZO5dowzEX8OzZs0_TayKxytmv61X1Y5mfng";
 
 axios.defaults.baseURL = "https://kapusta-backend-827563b0830f.herokuapp.com/";
+
+// do reports
+export const getAllReportsAPI = async ({ type, year, month }) => {
+  const req = await axios.get(`/api/reports/${type}/${year}/${month}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return req.data;
+};
+// do reports
 
 export const getTransactionsAPI = async ({ type }) => {
   const req = await axios.get(`/api/transactions/${type}`, {
