@@ -8,6 +8,7 @@ const LoginForm = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [register, setRegister] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -16,6 +17,7 @@ const LoginForm = () => {
         ? email === "" || password === "" || name === ""
         : email === "" || password === ""
     ) {
+      setIsEmpty(true);
       console.log("This is a required field");
     } else {
       console.log(
@@ -51,6 +53,11 @@ const LoginForm = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        {isEmpty && !email ? (
+          <div className={scss.redAlert}>
+            <p>This is a required field</p>
+          </div>
+        ) : null}
         {register && (
           <>
             <h5 className={scss.titles}>User name:</h5>
@@ -61,6 +68,11 @@ const LoginForm = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
+            {isEmpty && !email ? (
+              <div className={scss.redAlert}>
+                <p>This is a required field</p>
+              </div>
+            ) : null}
           </>
         )}
         <h5 className={scss.titles}>Password:</h5>
@@ -71,6 +83,11 @@ const LoginForm = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        {isEmpty && !email ? (
+          <div className={scss.redAlert}>
+            <p>This is a required field</p>
+          </div>
+        ) : null}
         <div className={scss.buttons}>
           <button type="submit">{register ? "SIGN UP " : "LOG IN"}</button>
           <button type="button" onClick={() => setRegister(!register)}>
