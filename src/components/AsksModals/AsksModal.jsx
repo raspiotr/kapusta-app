@@ -1,7 +1,9 @@
 import scss from "./AsksModal.module.scss";
 import closeIcon from "../../images/SVG/icons.svg";
 
-const AsksModal = ({ text, closeModal, isOpen }) => {
+const AsksModal = ({ text, closeModal, isOpen, actionConfirm }) => {
+  // funkcja
+
   return (
     <>
       {isOpen ? (
@@ -12,7 +14,7 @@ const AsksModal = ({ text, closeModal, isOpen }) => {
             </svg>
             <p>{text}</p>
             <div className={scss.buttonContainer}>
-              <button className={scss.button} onClick={closeModal}>
+              <button className={scss.button} onClick={actionConfirm}>
                 Yes
               </button>
               <button className={scss.button} onClick={closeModal}>

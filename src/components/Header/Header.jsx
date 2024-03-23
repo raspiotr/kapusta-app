@@ -1,18 +1,24 @@
 import { Outlet } from "react-router-dom";
 import { Suspense, useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import BackgroundCont from "../../components/BackgroundCont/BackgroundCont";
 import Container from "../../components/Container/Container";
 import AsksModals from "../AsksModals/AsksModal";
 import MediaQuery from "react-responsive";
 import scss from "./Header.module.scss";
 import icons from "../../images/SVG/icons.svg";
+import { selectUser } from "../../redux/auth/selectors";
+import { logout } from "../../redux/auth/operations";
 
-const Header = ({ user }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const mockUser = {
-    firstName: "John",
-    lastName: "Doe",
+export const Header = () => {
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+    return setIsOpen(!isOpen);
   };
+
+  const [isOpen, setIsOpen] = useState(false);
+  const user = useSelector(selectUser);
 
   const openModalBtn = () => {
     setIsOpen(!isOpen);
@@ -39,6 +45,7 @@ const Header = ({ user }) => {
       <AsksModals
         isOpen={isOpen}
         closeModal={openModalBtn}
+        actionConfirm={handleLogout}
         text={"Do you really want to leave?"}
       />
       <header>
@@ -48,19 +55,21 @@ const Header = ({ user }) => {
           </svg>
 
           <div className={scss.usermenu}>
-            <svg className={scss.avatar}>
-              <use xlinkHref={`${icons}#icon-avatar`} />
-            </svg>
+            {user ? (
+              <img src={user.avatarUrl} className={scss.avatar} />
+            ) : (
+              <>
+                <svg className={scss.avatar}>
+                  <use xlinkHref={`${icons}#icon-avatar`} />
+                </svg>
+              </>
+            )}
 
             <MediaQuery minWidth={772}>
               {user ? (
-                <span className={scss.userName}>
-                  {user.firstName} {user.lastName}
-                </span>
+                <span className={scss.userName}>{user.name}</span>
               ) : (
-                <span className={scss.userName}>
-                  {mockUser.firstName} {mockUser.lastName}
-                </span>
+                <span className={scss.userName}>{"User Name"}</span>
               )}
 
               <div className={scss.separator}></div>
@@ -91,4 +100,3 @@ const Header = ({ user }) => {
     </>
   );
 };
-export default Header;

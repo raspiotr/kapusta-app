@@ -1,16 +1,26 @@
-import { createStore, combineReducers } from 'redux';
-import balanceReducer from './reducers/balanceReducer';
-import reportsQueryReducer from './reducers/reportsQuery.reducer';
-import calendarReducer from './reducers/calendarReducer';
-import reportsReducer from './reducers/reportsReducer';
+import { configureStore } from '@reduxjs/toolkit';
+import { tasksReducer } from './contacts/tasksSlice';
+import { filtersReducer } from './contacts/filtersSlice';
+import { authReducer } from './auth/slice';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer, persistStore } from 'redux-persist';
 
-const rootReducer = combineReducers({
-  balance: balanceReducer,
-  reportsQuery: reportsQueryReducer,
-  calendar: calendarReducer,
-  reports: reportsReducer
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['token'],
+};
+
+export const store = configureStore({
+  reducer: {
+    auth: persistReducer(persistConfig, authReducer),
+    transactions: tasksReducer,
+    filters: filtersReducer,
+  },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
-const store = createStore(rootReducer);
-
-export default store;
+export const persistor = persistStore(store);

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, Cell, LabelList, ResponsiveContainer, ReferenceLine } from "recharts";
 import scss from "./Charts.module.scss";
@@ -19,6 +20,7 @@ const ChartComponent = ({ data }) => {
 
   const getChartOrientation = () => {
     return screenWidth < 772 ? "vertical" : "horizontal";
+
   };
   
   return (

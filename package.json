@@ -17,6 +17,7 @@
     "axios": "^1.6.8",
     "chart.js": "^4.4.2",
     "chartjs-plugin-datalabels": "^2.2.0",
+    "nanoid": "^5.0.6",
     "normalize.css": "^8.0.1",
     "notiflix": "^3.2.7",
     "prop-types": "^15.8.1",
@@ -31,6 +32,7 @@
     "recharts": "^2.12.3",
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",
+    "redux-thunk": "^3.1.0",
     "sass": "^1.72.0",
     "styled-components": "^6.1.8"
   },

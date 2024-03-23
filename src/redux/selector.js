@@ -1,1 +1,0 @@
-export const selectReports = state => state.reports;

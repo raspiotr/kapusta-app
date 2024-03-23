@@ -1,7 +1,20 @@
 import axios from "axios";
 
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMDkzMjk2NCwiZXhwIjoxNzExNTM3NzY0fQ.Xf8oOxwtX-tiLZ2Pvv33qcXCkSAs-JJgEsM8Jyzxqqc";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMTIxMTUwNSwiZXhwIjoxNzExODE2MzA1fQ.L0zPdzEVZO5dowzEX8OzZs0_TayKxytmv61X1Y5mfng";
+
+axios.defaults.baseURL = "https://kapusta-backend-827563b0830f.herokuapp.com/";
+
+// do reports
+export const getAllReportsAPI = async ({ type, year, month }) => {
+  const req = await axios.get(`/api/reports/${type}/${year}/${month}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return req.data;
+};
+// do reports
 
 export const getTransactionsAPI = async ({ type }) => {
   const req = await axios.get(`/api/transactions/${type}`, {
@@ -12,7 +25,7 @@ export const getTransactionsAPI = async ({ type }) => {
   return req.data;
 };
 
-export const addTransactionAPI = async ({ type, body }) => {
+export const addTransactionAPI = async ({ type, body, token }) => {
   const req = await axios.post(`/api/transactions/${type}`, body, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -39,28 +52,8 @@ export const deleteTransactionAPI = async (id) => {
   return req.data;
 };
 
-export const addIncomeAPI = async (info) => {
-  const { data } = await axios.post("/api/transaction/income", info);
-  return data;
-};
-
-export const getIncomeAPI = async () => {
-  const { data } = await axios.get("/api/transaction/income");
-  return data;
-};
-
-export const addExpenseAPI = async (info) => {
-  const { data } = await axios.post("/api/transaction/expense", info);
-  return data;
-};
-
-export const getExpenseAPI = async () => {
-  const { data } = await axios.get("/api/transaction/expense");
-  return data;
-};
-
 export const getExpenseCategoriesAPI = async ({ transactionType, token }) => {
-  const req = await axios.get(`https://kapusta-backend-827563b0830f.herokuapp.com/api/reports/${transactionType}`, {
+  const req = await axios.get(`/api/reports/${transactionType}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -69,7 +62,7 @@ export const getExpenseCategoriesAPI = async ({ transactionType, token }) => {
 };
 
 export const getIncomeCategoriesAPI = async () => {
-  const { data } = await axios.get("https://kapusta-backend-827563b0830f.herokuapp.com/api/reports/income");
+  const { data } = await axios.get("/api/reports/income");
   return data;
 };
 
@@ -77,10 +70,11 @@ export const getPeriodDataAPI = async ({
   transactionType,
   year,
   month,
-  token,
+  day,
+  // token,
 }) => {
   const req = await axios.get(
-    `https://kapusta-backend-827563b0830f.herokuapp.com/api/reports/${transactionType}/${year}/${month}`,
+    `/api/reports/${transactionType}/${year}/${month}/${day}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -92,5 +86,9 @@ export const getPeriodDataAPI = async ({
 
 export const updateBalanceAPI = async (value) => {
   const { data } = await axios.patch("/api/user/balance", value);
+  return data;
+};
+export const getBalanceAPI = async () => {
+  const { data } = await axios.get("/api/user/balance");
   return data;
 };

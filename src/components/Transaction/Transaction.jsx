@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
+ import { useDispatch } from "react-redux";
 import scss from "./Transaction.module.scss";
 import { addCategory } from "../../api/apiCategory";
-import { addTransactionAPI } from "../../api/apiTransaction";
+import { addTransaction } from "../../redux/contacts/operations";
 import calculator from "../../images/SVG/calculator.svg";
 
-const Transaction = () => {
+
+const Transaction = ({ isActive, selectedDate }) => {
+  const dispatch = useDispatch();
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [value, setValue] = useState("");
   const [categories, setCategories] = useState([]);
+  // const dispatch = useDispatch();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -34,34 +38,34 @@ const Transaction = () => {
     setValue("");
   };
 
-  const addTransaction = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const date = new Date();
-
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-
+    const date = selectedDate;
+    
     const body = {
-      day,
-      month,
-      year,
+      day: date.getDate(),
+      month: date.getMonth() + 1,
+      year: date.getFullYear(),
+      type: isActive ? "expense" : "income",
       description,
       category,
       amount: value,
     };
-    let type = "expense" || "income";
+
+    console.log(body);
+
+  
     try {
-      return await addTransactionAPI({ type, body });
+      dispatch(addTransaction(body ));
+      setDescription("");
+      setCategory("");
+      setValue("");
     } catch (error) {
       console.error(error.message);
     }
-    setDescription("");
-    setCategory("");
-    setValue("");
   };
 
-  const getCategory = async () => {
+  const fetchCategories = async () => {
     try {
       const categories = await addCategory();
       return setCategories(categories.data);
@@ -71,11 +75,11 @@ const Transaction = () => {
   };
 
   useEffect(() => {
-    getCategory();
+    fetchCategories();
   }, []);
 
   return (
-    <form className={scss.form}>
+    <form className={scss.form} onSubmit={handleSubmit}>
       <div className={scss.inputsBox}>
         <input
           name="description"
@@ -113,7 +117,7 @@ const Transaction = () => {
         </div>
       </div>
       <div className={scss.buttons}>
-        <button onClick={addTransaction}>INPUT</button>
+        <button type="submit">INPUT</button>
         <button onClick={handleClear}>CLEAR</button>
       </div>
     </form>
