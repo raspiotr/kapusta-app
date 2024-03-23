@@ -45,15 +45,7 @@ function App() {
           path="/reports"
           element={<PrivateRoute redirectTo="/login" component={<Reports />} />}
         />
-        <Route
-          path="/user-check"
-          element={
-            <RestrictedRoute
-              redirectTo="/"
-              component={<CheckUserGoogleRedir />}
-            />
-          }
-        />
+        <Route path="/user-check" element={<CheckUserGoogleRedir />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
