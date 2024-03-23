@@ -35,7 +35,7 @@ const ChartComponent = ({ data }) => {
   return (
     <div className={scss.chartContainer}>
       {getChartOrientation() === "vertical" ? (
-        <VerticalBarChart data={data.descriptions} />
+        <VerticalBarChart data={data} />
       ) : (
         <HorizontalBarChart data={data} />
       )}
@@ -44,7 +44,7 @@ const ChartComponent = ({ data }) => {
 };
 
 const VerticalBarChart = ({ data }) => {
-  const sortData = data.slice().sort((a, b) => b.sum - a.sum);
+  const sortData = [...data].sort((a, b) => b.sum - a.sum);
   const itemHeight = 45;
   const containerHeight = data.length * itemHeight;
   const colors = ["#FF751D", "#FED9BF", "#FED9BF"];
