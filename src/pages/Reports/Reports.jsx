@@ -66,6 +66,7 @@ const Reports = ({ balance }) => {
     });
   };
 
+
   return (
     <>
       <div className={scss.boxNav}>
