@@ -1,37 +1,70 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { register, login, logout, refreshUser } from './operations';
+import { createSlice } from "@reduxjs/toolkit";
+import { register, login, logout, refreshUser } from "./operations";
+import Notiflix from "notiflix";
 
 const setCommonState = (state, action) => {
   state.isLoggedIn = true;
   state.user.name = action.payload.user.name;
-  state.user.email = action.payload.user.name;
+  state.user.email = action.payload.user.email;
+  //
+  state.user.balance = action.payload.user.balance;
+  state.user.avatarUrl = action.payload.user.avatarUrl;
+  //
   state.token = action.payload.token;
+  Notiflix.Notify.success("Hooray! You have successfully logged in.", {
+    position: "center-top",
+    timeout: 8000,
+  });
 };
 
 const initialState = {
   isLoggedIn: false,
-  user: { name: null, email: null },
+  user: { name: null, email: null, balance: 0, avatarUrl: "" },
   token: null,
   isRefreshing: false,
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder.addCase(register.fulfilled, setCommonState);
+    builder.addCase(register.rejected, () => {
+      Notiflix.Notify.failure("Something went wrong... Registration failed.", {
+        position: "center-top",
+        timeout: 8000,
+      });
+    });
     builder.addCase(login.fulfilled, setCommonState);
-    builder.addCase(logout.fulfilled, () => initialState);
-    builder.addCase(refreshUser.pending, state => {
+    builder.addCase(login.rejected, () => {
+      Notiflix.Notify.failure("Login failed! Wrong email or password.", {
+        position: "center-top",
+        timeout: 8000,
+      });
+    });
+    builder.addCase(logout.fulfilled, (state) => {
+      state.user = { name: null, email: null, balance: 0, avatarUrl: "" };
+      state.token = null;
+      state.isLoggedIn = false;
+      Notiflix.Notify.info("You have logged out.", {
+        position: "center-top",
+        timeout: 8000,
+      });
+    });
+    builder.addCase(refreshUser.pending, (state) => {
       state.isRefreshing = true;
     });
     builder.addCase(refreshUser.fulfilled, (state, action) => {
       state.isLoggedIn = true;
-      state.user.name = action.payload.name;
-      state.user.email = action.payload.email;
+      state.user.name = action.payload.user.name;
+      state.user.email = action.payload.user.email;
+      //
+      state.user.balance = action.payload.user.balance;
+      state.user.avatarUrl = action.payload.user.avatarUrl;
+      //
       state.isRefreshing = false;
     });
-    builder.addCase(refreshUser.rejected, state => {
+    builder.addCase(refreshUser.rejected, (state) => {
       state.isRefreshing = false;
     });
   },
