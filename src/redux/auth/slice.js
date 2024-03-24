@@ -31,6 +31,21 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
+  reducers: {
+    setUserData(state, action) {
+      const { token, name, email, balance, avatarUrl } = action.payload;
+      state.isLoggedIn = true;
+      state.user.name = name;
+      state.user.email = email;
+      state.user.balance = balance;
+      state.user.avatarUrl = avatarUrl;
+      state.token = token;
+      Notiflix.Notify.success("Hooray! You have successfully logged in.", {
+        position: "center-top",
+        timeout: 8000,
+      });
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(register.fulfilled, setCommonState);
     builder.addCase(register.rejected, () => {
@@ -87,3 +102,4 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
+export const { setUserData } = authSlice.actions;
