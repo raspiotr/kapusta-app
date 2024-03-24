@@ -16,24 +16,6 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   if (
-  //     registerAction
-  //       ? email === "" || password === "" || name === ""
-  //       : email === "" || password === ""
-  //   ) {
-  //     setIsEmpty(true);
-  //     console.log("This is a required field");
-  //   } else {
-  //     console.log(
-  //       registerAction
-  //         ? `Register: ${email} ${name} ${password}`
-  //         : `Login: ${email} ${password}`
-  //     );
-  //   }
-  // };
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
