@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { useEffect, useState } from "react";
 import scss from "./Reports.module.scss";
-import { getAllReportsAPI } from "../../api/apiTransaction";
+import { getAllReportsAPI, getAmountAPI } from "../../api/apiTransaction";
 import Button from "../../components/Reports/Periods/Button/Button";
 import { Periods } from "../../components/Reports/Periods/Periods";
 import { Balance } from "../../components/Balance/Balance";
@@ -19,7 +19,7 @@ import { selectUser } from "../../redux/auth/selectors";
 const Reports = () => {
   const user = useSelector(selectUser);
 
-  //const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState([0, 0]);
   const [isActiveBtn, setIsActiveBtn] = useState([]);
   const [isType, setIsType] = useState(true);
   const [date, setDate] = useState(new Date());
@@ -35,7 +35,7 @@ const Reports = () => {
         <p className={scss.title}>Balance:</p>
         <div className={scss.amount}>
           {user.balance.toFixed(2)}
-          <span>UTH</span>
+          <span>PLN</span>
         </div>
       </div>
     </>
@@ -45,7 +45,11 @@ const Reports = () => {
     const type = isType ? "expense" : "income";
     try {
       const data = await getAllReportsAPI({ type, year, month });
-      return setReports(data.data);
+      const expense = await getAmountAPI({ type: "expense", year, month });
+      const income = await getAmountAPI({ type: "income", year, month });
+      setAmount([expense.totalExpense, income.totalIncome]);
+      setReports(data.data);
+      return;
     } catch (error) {
       console.error(error.message);
     }
@@ -71,7 +75,6 @@ const Reports = () => {
     });
   };
 
-
   return (
     <>
       <div className={scss.boxNav}>
@@ -93,50 +96,60 @@ const Reports = () => {
           )}
         </>
       </div>
-      <div>
-        <ul className={scss.list}>
-          <li className={scss.item}>
-            <p className={scss.itemText}>Expense:</p>
-            <span className={scss.itemExpenses}>{0}.00</span>
-          </li>
-          <li className={scss.item}>
-            <p className={scss.itemText}>Income:</p>
-            <span className={scss.itemIncome}>{0}.00</span>
-          </li>
-        </ul>
-        <div className={scss.bigBox}>
-          <div className={scss.box}>
-            <Button
-              icon={arrowMinus}
-              value={isType}
-              setValue={setIsType}
-            ></Button>
-            <p className={scss.navText}>{isType ? "Expense" : "Income"}</p>
-            <Button
-              icon={arrowPlus}
-              value={isType}
-              setValue={setIsType}
-            ></Button>
-          </div>
-          <div className={scss.categoriesBox}>
-            {reports &&
-              reports.map((data, index) => (
-                <div className={scss.category} key={nanoid()}>
-                  <span>{data.total.toFixed(2)}</span>
-                  <button
-                    className={
-                      isActiveBtn.includes(index) ? scss.activeButton : null
-                    }
-                    onClick={() => checkDetail(index, data.descriptions)}
-                  >
-                    <img src={data.categoryImageUrl} />
-                  </button>
-                  <div>{data.category}</div>
-                </div>
-              ))}
+      {amount[0] || amount[1] ? (
+        <div>
+          <ul className={scss.list}>
+            <li className={scss.item}>
+              <p className={scss.itemText}>Expense:</p>
+              <span className={scss.itemExpenses}>
+                {amount[0] && "- "}
+                {amount[0].toFixed(2)} PLN
+              </span>
+            </li>
+            <li className={scss.item}>
+              <p className={scss.itemText}>Income:</p>
+              <span className={scss.itemIncome}>
+                {amount[1] && "+ "}
+                {amount[1].toFixed(2)} PLN
+              </span>
+            </li>
+          </ul>
+          <div className={scss.bigBox}>
+            <div className={scss.box}>
+              <Button
+                icon={arrowMinus}
+                value={isType}
+                setValue={setIsType}
+              ></Button>
+              <p className={scss.navText}>{isType ? "Expense" : "Income"}</p>
+              <Button
+                icon={arrowPlus}
+                value={isType}
+                setValue={setIsType}
+              ></Button>
+            </div>
+            <div className={scss.categoriesBox}>
+              {reports &&
+                reports.map((data, index) => (
+                  <div className={scss.category} key={nanoid()}>
+                    <span>{data.total.toFixed(2)}</span>
+                    <button
+                      className={
+                        isActiveBtn.includes(index) ? scss.activeButton : null
+                      }
+                      onClick={() => checkDetail(index, data.descriptions)}
+                    >
+                      <img src={data.categoryImageUrl} />
+                    </button>
+                    <div>{data.category}</div>
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
       {chartData[0] && <ChartComponent data={chartData} />}
     </>
   );

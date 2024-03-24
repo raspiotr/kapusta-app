@@ -5,6 +5,10 @@ import scss from "./Summary.module.scss";
 const Summary = () => {
   const [summary, setSummary] = useState([]);
 
+  const summaryEmpty = Array.from({ length: 6 }, (_, index) => {
+    return summary[index] || { month: "", total: "" };
+  });
+
   const showSummary = async () => {
     let type = "expense" || "income";
 
@@ -31,7 +35,7 @@ const Summary = () => {
           </tr>
         </thead>
         <tbody>
-          {summary.map((item, index) => (
+          {summaryEmpty.map((item, index) => (
             <tr key={index}>
               <td>{item.month}</td>
               <td>{item.total}</td>

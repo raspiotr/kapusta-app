@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
- import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import scss from "./Transaction.module.scss";
 import { addCategory } from "../../api/apiCategory";
 import { addTransaction } from "../../redux/contacts/operations";
 import calculator from "../../images/SVG/calculator.svg";
-
 
 const Transaction = ({ isActive, selectedDate }) => {
   const dispatch = useDispatch();
@@ -12,7 +11,6 @@ const Transaction = ({ isActive, selectedDate }) => {
   const [category, setCategory] = useState("");
   const [value, setValue] = useState("");
   const [categories, setCategories] = useState([]);
-  // const dispatch = useDispatch();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -41,7 +39,7 @@ const Transaction = ({ isActive, selectedDate }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const date = selectedDate;
-    
+
     const body = {
       day: date.getDate(),
       month: date.getMonth() + 1,
@@ -54,9 +52,8 @@ const Transaction = ({ isActive, selectedDate }) => {
 
     console.log(body);
 
-  
     try {
-      dispatch(addTransaction(body ));
+      dispatch(addTransaction(body));
       setDescription("");
       setCategory("");
       setValue("");
@@ -108,7 +105,7 @@ const Transaction = ({ isActive, selectedDate }) => {
             onChange={handleChange}
             className={scss.value}
             value={value}
-            placeholder="UTH"
+            placeholder="PLN"
             type="number"
           />
           <samp className={scss.calculator}>

@@ -5,12 +5,22 @@ const token =
 
 axios.defaults.baseURL = "https://kapusta-backend-827563b0830f.herokuapp.com/";
 
-// do reports
+// bartek
 export const getAllReportsAPI = async ({ type, year, month }) => {
   const req = await axios.get(`/api/reports/${type}/${year}/${month}`);
   return req.data;
 };
-// do reports
+
+export const getAmountAPI = async ({ type, year, month }) => {
+  const req = await axios.get(`/api/reports/${type}/${year}/${month}`);
+  return req.data;
+};
+
+export const getSummaryAPI = async ({ type }) => {
+  const req = await axios.get(`/api/reports/${type}`);
+  return req.data;
+};
+// do bartek
 
 export const getTransactionsAPI = async ({ type }) => {
   const req = await axios.get(`/api/transactions/${type}`, {
@@ -23,15 +33,6 @@ export const getTransactionsAPI = async ({ type }) => {
 
 export const addTransactionAPI = async ({ type, body, token }) => {
   const req = await axios.post(`/api/transactions/${type}`, body, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return req.data;
-};
-
-export const getSummaryAPI = async ({ type }) => {
-  const req = await axios.get(`/api/reports/${type}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

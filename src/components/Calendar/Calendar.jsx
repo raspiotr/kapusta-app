@@ -14,6 +14,7 @@ const Calendar = ({ selectedDate, setSelectedDate }) => {
         onChange={setSelectedDate}
         dateFormat="dd.MM.yyyy"
         popperPlacement="bottom-start"
+        maxDate={new Date()}
       />
     </div>
   );
