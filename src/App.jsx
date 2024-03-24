@@ -2,6 +2,7 @@ import css from "./App.module.scss";
 import { useEffect, lazy } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+import "normalize.css";
 
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 import { RestrictedRoute } from "./components/RestrictedRoute/RestrictedRoute";
