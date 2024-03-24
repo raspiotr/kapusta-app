@@ -7,14 +7,25 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectTransactions } from "../../redux/contacts/selectors.js";
 import { getTransaction } from "../../redux/contacts/operations.js";
 import { removeTransaction } from "../../redux/contacts/operations.js";
+import { selectUser } from "../../redux/auth/selectors.js";
+import { setNewBalance } from "../../redux/auth/slice.js";
 
 const Table = ({ isActive }) => {
+  const user = useSelector(selectUser);
+  const balance = user.balance;
+
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
   const dispatch = useDispatch();
   const transaction = useSelector(selectTransactions);
 
-  const deleteTransaction = (id) => {
+  const deleteTransaction = (id, amount) => {
+    const valuePositive = Math.abs(amount);
+    const change = isActive ? valuePositive : valuePositive * -1;
+    const newBalance = Number(balance) + change;
+    console.log(newBalance);
+    dispatch(setNewBalance({ balance: newBalance }));
+
     dispatch(removeTransaction(id));
   };
 
@@ -102,7 +113,7 @@ const Table = ({ isActive }) => {
             <td>
               <button
                 className={scss.trashButton}
-                onClick={() => deleteTransaction(row._id)}
+                onClick={() => deleteTransaction(row._id, row.amount)}
               >
                 <img id={row._id} src={trash} alt="" />
               </button>

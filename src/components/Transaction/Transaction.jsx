@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import scss from "./Transaction.module.scss";
 import { addCategory } from "../../api/apiCategory";
 import { addTransaction } from "../../redux/contacts/operations";
 import calculator from "../../images/SVG/calculator.svg";
+import { setNewBalance } from "../../redux/auth/slice";
+import { selectUser } from "../../redux/auth/selectors";
 
 const Transaction = ({ isActive, selectedDate }) => {
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const balance = user.balance;
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [value, setValue] = useState("");
@@ -36,7 +40,7 @@ const Transaction = ({ isActive, selectedDate }) => {
     setValue("");
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const date = selectedDate;
 
@@ -49,15 +53,16 @@ const Transaction = ({ isActive, selectedDate }) => {
       category,
       amount: value,
     };
+    const valuePositive = Math.abs(value);
+    const change = isActive ? valuePositive * -1 : valuePositive;
+    const newBalance = Number(balance) + change;
+    console.log(newBalance);
+    dispatch(setNewBalance({ balance: newBalance }));
 
-    try {
-      dispatch(addTransaction(body));
-      setDescription("");
-      setCategory("");
-      setValue("");
-    } catch (error) {
-      console.error(error.message);
-    }
+    dispatch(addTransaction(body));
+    setDescription("");
+    setCategory("");
+    setValue("");
   };
 
   const fetchCategories = async () => {

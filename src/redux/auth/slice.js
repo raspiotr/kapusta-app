@@ -45,6 +45,10 @@ const authSlice = createSlice({
         timeout: 8000,
       });
     },
+    setNewBalance(state, action) {
+      const { balance } = action.payload;
+      state.user.balance = balance;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(register.fulfilled, setCommonState);
@@ -102,4 +106,4 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-export const { setUserData } = authSlice.actions;
+export const { setUserData, setNewBalance } = authSlice.actions;
