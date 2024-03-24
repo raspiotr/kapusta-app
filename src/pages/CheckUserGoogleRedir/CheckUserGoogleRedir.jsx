@@ -1,11 +1,13 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import css from "./ChceckUserGoogleRedir.module.scss";
+import { setUserData } from "../../redux/auth/slice";
 
 const CheckUserGoogleRedir = () => {
   const [searchParams] = useSearchParams();
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,8 +30,13 @@ const CheckUserGoogleRedir = () => {
         );
 
         if (response.status === 200) {
-          const name = response.data.user.name;
-          console.log("Zalogowano użytkownika:", name);
+          const user = response.data.user;
+          const { name, email, balance, avatarUrl } = user;
+          const isLoggedIn = true;
+          const token = response.data.token;
+          dispatch(
+            setUserData({ isLoggedIn, name, email, balance, avatarUrl, token })
+          );
           navigate("/", { replace: true });
         } else {
           navigate("/login", { replace: true });
