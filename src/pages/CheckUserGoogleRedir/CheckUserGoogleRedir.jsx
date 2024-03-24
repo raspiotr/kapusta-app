@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import css from "./ChceckUserGoogleRedir.module.scss";
 
 const CheckUserGoogleRedir = () => {
   const navigate = useNavigate();
@@ -8,9 +9,9 @@ const CheckUserGoogleRedir = () => {
   useEffect(() => {
     const checkUser = async () => {
       // Pobierz token z nagłówka "AuthToken"
-      const token = window.location.headers?.get("AuthToken") || null;
-      // const token =
-      //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZmM4YzcxODU0MGRlMjFkYTkxODY4ZCIsImlhdCI6MTcxMTE0MzI3OSwiZXhwIjoxNzExNzQ4MDc5fQ.j9INlHWFPOSrh76XsS8QjTl_qjdqG4Zm5YrRcP9WCRM";
+      const token =
+        window?.location?.headers?.get("AuthToken") ||
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZmVlYWM1MzYxMjE0NDViMmRkNDY3OCIsImlhdCI6MTcxMTI3MTg0NiwiZXhwIjoxNzExODc2NjQ2fQ.dzsF1W3k-waQYQWmHmkNv4xdLAilB-gCatYGVtJak5A";
       if (token === null) {
         navigate("/login", { replace: true });
       }
@@ -26,15 +27,15 @@ const CheckUserGoogleRedir = () => {
         );
 
         if (response.status === 200) {
-          const name = response.data.user.name;
-          console.log("Zalogowano użytkownika:", name);
-          navigate("/", { replace: true });
+          const user = response.data.user;
+          console.log("Zalogowano użytkownika:", user);
+          // navigate("/", { replace: true });
         } else {
-          navigate("/login", { replace: true });
+          //  navigate("/login", { replace: true });
         }
       } catch (error) {
         console.error("Błąd:", error);
-        navigate("/login", { replace: true });
+        // navigate("/login", { replace: true });
       }
     };
 
@@ -43,8 +44,8 @@ const CheckUserGoogleRedir = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Redirecting...</h1>
+    <div className={css.RedirBox}>
+      <b className={css.RedirText}>Redirecting...</b>
     </div>
   );
 };

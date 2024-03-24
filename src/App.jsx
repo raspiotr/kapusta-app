@@ -38,11 +38,11 @@ function App() {
           element={<PrivateRoute redirectTo="/login" component={<Home />} />}
         />
         <Route
-          path="login"
+          path="/login"
           element={<RestrictedRoute redirectTo="/" component={<Login />} />}
         />
         <Route
-          path="reports"
+          path="/reports"
           element={<PrivateRoute redirectTo="/login" component={<Reports />} />}
         />
       </Route>
