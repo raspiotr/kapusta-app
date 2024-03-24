@@ -27,23 +27,23 @@ const tasksSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(getTransaction.fulfilled, (state, actions) => {
+      .addCase(getTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.transactions.data.transactions= actions.payload
+        state.transactions = action.payload
       })
 
-      .addCase(addTransaction.fulfilled, (state, actions) => {
+      .addCase(addTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.transactions.push(actions.payload);
+        state.transactions.push(action.payload);
       })
 
-      .addCase(removeTransaction.fulfilled, (state, actions) => {
+      .addCase(removeTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         const index = state.transactions.filter(
-          transaction => transaction.id !== actions.payload.id
+          transaction => transaction.id !== action.payload.id
         );
 
         state.transactions.splice(index, 1);
