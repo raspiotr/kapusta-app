@@ -1,4 +1,10 @@
+import css from "./NotFound.module.scss";
+
 const NotFound = () => {
-  return <h1>Not Found</h1>;
+  return (
+    <div className={css.NFBox}>
+      <b className={css.NFText}>NOT FOUND...</b>
+    </div>
+  );
 };
 export default NotFound;
