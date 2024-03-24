@@ -8,7 +8,6 @@ export const getTransaction = createAsyncThunk(
   async (type, thunkAPI) => {
     try {
       const response = await axios.get(`/api/transactions/${type}`);
-      console.log(response.data.data)
       return response.data.data;
     } catch (error) {
       thunkAPI.rejectWithValue(error.message);
@@ -21,18 +20,16 @@ export const addTransaction = createAsyncThunk(
   async (body, thunkAPI) => {
     const { type, ...rest } = body;
     const sendBody = {
-      ...rest
+      ...rest,
     };
     try {
       const response = await axios.post(`/api/transactions/${type}`, sendBody);
-      console.log(response.data.data.transaction)
       return response.data.data.transaction;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
-
 
 export const removeTransaction = createAsyncThunk(
   "transactions/removeTransaction",

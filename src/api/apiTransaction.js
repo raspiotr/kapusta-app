@@ -1,8 +1,5 @@
 import axios from "axios";
 
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMTIxMTUwNSwiZXhwIjoxNzExODE2MzA1fQ.L0zPdzEVZO5dowzEX8OzZs0_TayKxytmv61X1Y5mfng";
-
 axios.defaults.baseURL = "https://kapusta-backend-827563b0830f.herokuapp.com/";
 
 // bartek

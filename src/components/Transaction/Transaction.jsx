@@ -50,8 +50,6 @@ const Transaction = ({ isActive, selectedDate }) => {
       amount: value,
     };
 
-    console.log(body);
-
     try {
       dispatch(addTransaction(body));
       setDescription("");
