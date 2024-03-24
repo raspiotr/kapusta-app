@@ -23,8 +23,6 @@ export const Balance = () => {
   };
 
   const openModalBtn = () => {
-    console.log(user.balance.toFixed(2));
-
     if (inputValue < 0) {
       setInputValue(user.balance.toFixed(2));
       Notiflix.Notify.failure(

@@ -38,7 +38,7 @@ const Summary = () => {
           {summaryEmpty.map((item, index) => (
             <tr key={index}>
               <td>{item.month}</td>
-              <td>{item.total}</td>
+              <td>{item.total && Number(item.total).toFixed(2)}</td>
             </tr>
           ))}
         </tbody>
