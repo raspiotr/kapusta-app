@@ -11,8 +11,8 @@ const Buttons = ({ isActive, handleClick }) => {
         style={
           isActive
             ? {
-                backgroundColor: `${isMobile ? "darkorange" : "white"}`,
-                color: `${isMobile ? "white" : "darkorange"}`,
+                backgroundColor: `${isMobile ? "#ff751d" : "white"}`,
+                color: `${isMobile ? "white" : "#ff751d"}`,
               }
             : {}
         }
@@ -25,8 +25,8 @@ const Buttons = ({ isActive, handleClick }) => {
         style={
           !isActive
             ? {
-                backgroundColor: `${isMobile ? "darkorange" : "white"}`,
-                color: `${isMobile ? "white" : "darkorange"}`,
+                backgroundColor: `${isMobile ? "#ff751d" : "white"}`,
+                color: `${isMobile ? "white" : "#ff751d"}`,
               }
             : {}
         }

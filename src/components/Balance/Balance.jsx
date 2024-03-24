@@ -19,21 +19,24 @@ export const Balance = () => {
 
   const handleConfirmBalance = () => {
     dispatch(updateBalance(inputValue));
-    return setIsOpen(!isOpen);
+    setIsOpen(!isOpen);
   };
 
   const openModalBtn = () => {
+    console.log(user.balance.toFixed(2));
+
     if (inputValue < 0) {
       setInputValue(user.balance.toFixed(2));
-      return Notiflix.Notify.failure(
+      Notiflix.Notify.failure(
         "Balance must be a positive number - not updated.",
         {
           position: "center-top",
           timeout: 8000,
         }
       );
+    } else {
+      setIsOpen(!isOpen);
     }
-    setIsOpen(!isOpen);
   };
 
   const closeModalBtn = () => {
@@ -53,7 +56,7 @@ export const Balance = () => {
         <label className={scss.name}>Balance: </label>
         <div className={scss.box}>
           <div className={scss.balanceBox}>
-            {inputValue === 0 && (
+            {user.balance <= 0 && inputValue <= 0 && (
               <div className={scss.parent}>
                 <HelloModal />
               </div>
@@ -65,9 +68,9 @@ export const Balance = () => {
               value={inputValue}
               onChange={handleInputChange}
               placeholder={user.balance.toFixed(2)}
-              min="0"
+              min="0.01"
             />
-            <span className={scss.currency}>UAH</span>
+            <span className={scss.currency}>PLN</span>
           </div>
 
           <button onClick={openModalBtn} className={scss.confirm}>
