@@ -45,6 +45,7 @@ const authSlice = createSlice({
         timeout: 8000,
         showOnlyTheLastOne: true,
       });
+      location.reload();
     },
     setNewBalance(state, action) {
       const { balance } = action.payload;
