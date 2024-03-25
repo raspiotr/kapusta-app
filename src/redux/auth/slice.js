@@ -43,7 +43,12 @@ const authSlice = createSlice({
       Notiflix.Notify.success("Hooray! You have successfully logged in.", {
         position: "center-top",
         timeout: 8000,
+        showOnlyTheLastOne: true,
       });
+    },
+    setNewBalance(state, action) {
+      const { balance } = action.payload;
+      state.user.balance = balance;
     },
   },
   extraReducers: (builder) => {
@@ -102,4 +107,4 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-export const { setUserData } = authSlice.actions;
+export const { setUserData, setNewBalance } = authSlice.actions;

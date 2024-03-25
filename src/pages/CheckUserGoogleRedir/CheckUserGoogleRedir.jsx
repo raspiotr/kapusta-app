@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -6,12 +6,13 @@ import css from "./ChceckUserGoogleRedir.module.scss";
 import { setUserData } from "../../redux/auth/slice";
 
 const CheckUserGoogleRedir = () => {
+  const [token, setToken] = useState("");
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = searchParams.get("token");
+    setToken(searchParams.get("token"));
     const checkUser = async () => {
       // Pobierz token z URL
 
@@ -49,7 +50,7 @@ const CheckUserGoogleRedir = () => {
 
     checkUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [token]);
 
   return (
     <div className={css.RedirBox}>

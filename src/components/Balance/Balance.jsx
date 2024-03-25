@@ -24,7 +24,7 @@ export const Balance = () => {
 
   const openModalBtn = () => {
     if (inputValue < 0) {
-      setInputValue(user.balance.toFixed(2));
+      setInputValue(user.balance);
       Notiflix.Notify.failure(
         "Balance must be a positive number - not updated.",
         {
@@ -38,7 +38,7 @@ export const Balance = () => {
   };
 
   const closeModalBtn = () => {
-    setInputValue(user.balance.toFixed(2));
+    setInputValue(user.balance);
     setIsOpen(!isOpen);
   };
 
@@ -65,7 +65,7 @@ export const Balance = () => {
               type="number"
               value={inputValue}
               onChange={handleInputChange}
-              placeholder={user.balance.toFixed(2)}
+              placeholder={user.balance}
               min="0.01"
             />
             <span className={scss.currency}>PLN</span>
