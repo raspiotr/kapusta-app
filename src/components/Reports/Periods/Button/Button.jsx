@@ -26,9 +26,10 @@ const Button = ({ value, setValue, icon, next }) => {
 };
 
 Button.propTypes = {
-  // isType: PropTypes.bool,
-  // setIsType: PropTypes.func,
+  value: PropTypes.oneOfType([PropTypes.bool, PropTypes.instanceOf(Date)]),
+  setValue: PropTypes.func,
   icon: PropTypes.string.isRequired,
+  next: PropTypes.bool,
 };
 
 export default Button;

@@ -1,5 +1,6 @@
 import scss from "./Table.module.scss";
 import { useMediaQuery } from "react-responsive";
+import PropTypes from "prop-types";
 
 import { useEffect } from "react";
 import trash from "../../images/SVG/delete.svg";
@@ -23,7 +24,6 @@ const Table = ({ isActive }) => {
     const valuePositive = Math.abs(amount);
     const change = isActive ? valuePositive : valuePositive * -1;
     const newBalance = Number(balance) + change;
-    console.log(newBalance);
     dispatch(setNewBalance({ balance: newBalance }));
 
     dispatch(removeTransaction(id));
@@ -123,6 +123,10 @@ const Table = ({ isActive }) => {
       </tbody>
     </table>
   );
+};
+
+Table.propTypes = {
+  isActive: PropTypes.bool.isRequired,
 };
 
 export default Table;

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { getSummaryAPI } from "../../api/apiTransaction";
 import scss from "./Summary.module.scss";
+import PropTypes from "prop-types";
 
-const Summary = () => {
+const Summary = ({ isActive }) => {
   const [summary, setSummary] = useState([]);
 
   const summaryEmpty = Array.from({ length: 6 }, (_, index) => {
@@ -10,7 +11,7 @@ const Summary = () => {
   });
 
   const showSummary = async () => {
-    let type = "expense" || "income";
+    let type = isActive ? "expense" : "income";
 
     try {
       const req = await getSummaryAPI({ type });
@@ -22,7 +23,7 @@ const Summary = () => {
 
   useEffect(() => {
     showSummary();
-  }, []);
+  }, [isActive]);
 
   return (
     <div className={scss.summarySection}>
@@ -45,6 +46,10 @@ const Summary = () => {
       </table>
     </div>
   );
+};
+
+Summary.propTypes = {
+  isActive: PropTypes.bool.isRequired,
 };
 
 export default Summary;

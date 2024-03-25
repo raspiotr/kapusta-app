@@ -1,11 +1,9 @@
-// import { useState, useEffect } from "react";
-// import { monthNames, getMonth, getYear } from "./Period.Utils";
 import Button from "./Button/Button";
-//import Calendar from "./Calendar/Calendar";
 import styles from "./Period.module.scss";
 import arrowPlus from "../../../images/SVG/arrow+.svg";
 import arrowMinus from "../../../images/SVG/arrow-.svg";
 import { useEffect } from "react";
+import PropTypes from "prop-types";
 
 export const Periods = ({ date, setDate }) => {
   const formatDate = () => {
@@ -35,16 +33,12 @@ export const Periods = ({ date, setDate }) => {
           setValue={setDate}
           next={true}
         ></Button>
-
-        {/* {modalCalendar && (
-          <Calendar
-            currentYear={year}
-            currentMonth={month}
-            onChangeDate={handleButtonClick}
-            onClose={handleModalCalendar}
-          />
-        )} */}
       </div>
     </div>
   );
+};
+
+Periods.propTypes = {
+  date: PropTypes.instanceOf(Date),
+  setDate: PropTypes.func.isRequired,
 };
