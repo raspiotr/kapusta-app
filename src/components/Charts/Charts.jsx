@@ -5,13 +5,13 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  Legend,
   Cell,
   LabelList,
   ResponsiveContainer,
   ReferenceLine,
 } from "recharts";
 import scss from "./Charts.module.scss";
+import PropTypes from "prop-types";
 
 const ChartComponent = ({ data }) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -127,6 +127,24 @@ const CustomizedTick = ({ x, y, payload }) => {
       </text>
     </g>
   );
+};
+
+ChartComponent.propTypes = {
+  data: PropTypes.array.isRequired,
+};
+
+HorizontalBarChart.propTypes = {
+  data: PropTypes.array.isRequired,
+};
+
+VerticalBarChart.propTypes = {
+  data: PropTypes.array.isRequired,
+};
+
+CustomizedTick.propTypes = {
+  x: PropTypes.number,
+  y: PropTypes.number,
+  payload: PropTypes.object,
 };
 
 export default ChartComponent;

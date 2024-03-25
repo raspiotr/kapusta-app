@@ -4,9 +4,6 @@ import { Report } from "notiflix/build/notiflix-report-aio";
 axios.defaults.baseURL = "https://kapusta-backend-827563b0830f.herokuapp.com/";
 axios.defaults.validateStatus();
 
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Zjg0MTYxZDhmNWU4OGJiNWYyZGVhNCIsImlhdCI6MTcxMTEyOTg1MiwiZXhwIjoxNzExNzM0NjUyfQ.zLvIAbLh2g_1QLURUuUTTi4P-z9NHqS1htU7OF38fOQ";
-
 export const registerAPI = async (user) => {
   try {
     const { data } = await axios.post("/api/auth/register", user);

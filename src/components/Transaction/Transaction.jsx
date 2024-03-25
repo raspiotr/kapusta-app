@@ -6,6 +6,7 @@ import { addTransaction } from "../../redux/contacts/operations";
 import calculator from "../../images/SVG/calculator.svg";
 import { setNewBalance } from "../../redux/auth/slice";
 import { selectUser } from "../../redux/auth/selectors";
+import PropTypes from "prop-types";
 
 const Transaction = ({ isActive, selectedDate }) => {
   const dispatch = useDispatch();
@@ -56,7 +57,6 @@ const Transaction = ({ isActive, selectedDate }) => {
     const valuePositive = Math.abs(value);
     const change = isActive ? valuePositive * -1 : valuePositive;
     const newBalance = Number(balance) + change;
-    console.log(newBalance);
     dispatch(setNewBalance({ balance: newBalance }));
 
     dispatch(addTransaction(body));
@@ -122,6 +122,11 @@ const Transaction = ({ isActive, selectedDate }) => {
       </div>
     </form>
   );
+};
+
+Transaction.propTypes = {
+  isActive: PropTypes.bool.isRequired,
+  selectedDate: PropTypes.instanceOf(Date),
 };
 
 export default Transaction;
