@@ -43,6 +43,7 @@ const authSlice = createSlice({
       Notiflix.Notify.success("Hooray! You have successfully logged in.", {
         position: "center-top",
         timeout: 8000,
+        showOnlyTheLastOne: true,
       });
     },
     setNewBalance(state, action) {
