@@ -6,13 +6,13 @@ html body {
   background-color: $mainColor;
 
   @media screen and (min-width: 768px) and (max-width: 1279px) {
-    background-image: url("./images/PNG/kapusta2.png");
+    background-image: url("./images/PNG/cabbage2.png");
     background-repeat: no-repeat;
     background-position: calc(100% - 150px) calc(100% - 50px);
     background-size: 20%;
   }
   @media screen and (min-width: 1280px) {
-    background-image: url("./images/PNG/kapusta.png");
+    background-image: url("./images/PNG/cabbage.png");
     background-size: 100%;
   }
 
