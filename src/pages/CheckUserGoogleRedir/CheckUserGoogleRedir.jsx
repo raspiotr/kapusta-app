@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, startTransition } from "react";
 import { useDispatch } from "react-redux";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -38,17 +38,18 @@ const CheckUserGoogleRedir = () => {
           dispatch(
             setUserData({ isLoggedIn, name, email, balance, avatarUrl, token })
           );
-          navigate("/", { replace: true });
+          navigate("/", { replace: false });
         } else {
-          navigate("/login", { replace: true });
+          navigate("/", { replace: true });
         }
       } catch (error) {
         console.error("Błąd:", error);
-        navigate("/login", { replace: true });
+        navigate("/", { replace: true });
       }
     };
-
-    checkUser();
+    startTransition(() => {
+      checkUser();
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
