@@ -2,12 +2,62 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import scss from "./Transaction.module.scss";
 import { addCategory } from "../../api/apiCategory";
+import { addTransactionAPI } from "../../api/apiTransaction";
+import calculator from "../../Images/SVG/calculator.svg";
+import Select from "react-select";
 import { addTransaction } from "../../redux/contacts/operations";
-import calculator from "../../images/SVG/calculator.svg";
 import { setNewBalance } from "../../redux/auth/slice";
 import { selectUser } from "../../redux/auth/selectors";
 import PropTypes from "prop-types";
 
+const customStyles = {
+  control: (provided) => ({
+    ...provided,
+    borderColor: '#f5f6fb',
+    display: 'flex',
+    height: '48px',
+    minWidth: '200px',
+    width: '100%',
+    maxWidth: '500px',
+    borderWidth: '3px',
+    fontSize: '13px',
+    padding: '0px 12px 0px 10px',
+    marginRight: '14px',
+    borderRadius: '0',
+    '&:hover': {
+      borderColor: 'grey',
+      boxShadow: 'none',
+    },
+    
+  }),
+  menu: (provided) => ({
+    ...provided,
+   height: '480px',
+    boxShadow: '0px 4px 8px 4px rgba(0, 0, 0, 0.1)',
+  }),
+  menuList: (provided) => ({
+    ...provided,
+      overflow: 'visible'
+  }),
+
+  option: (provided, { isFocused, isSelected }) => ({
+    ...provided,
+    backgroundColor: isFocused ? '#F5F6FB' : isSelected ? '#F5F6FB' : null,
+    color: isSelected ? 'black' : '#C7CCDC',
+    padding: 10,
+    fontSize: '14px',
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: '#C7CCDC',
+  }),
+
+  valueContainer: (provided) => ({
+    ...provided,
+    marginTop: '-5px',
+    width: '130px'
+  }),
+};
 const Transaction = ({ isActive, selectedDate }) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
@@ -16,6 +66,10 @@ const Transaction = ({ isActive, selectedDate }) => {
   const [category, setCategory] = useState("");
   const [value, setValue] = useState("");
   const [categories, setCategories] = useState([]);
+
+  const handleCategoryChange = selectedOption => {
+    setCategory(selectedOption);
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -69,10 +123,18 @@ const Transaction = ({ isActive, selectedDate }) => {
     const type = isActive ? "expense" : "income";
     try {
       const categories = await addCategory();
-      const filter = categories.data.filter(
-        (item) => item.categoryType === type
-      );
-      return setCategories(filter);
+
+      const formattedCategories = categories.data.map(cat => ({
+        value: cat.categoryName,
+        label: cat.categoryName
+      }));
+      setCategories(formattedCategories);
+// =======
+//       const filter = categories.data.filter(
+//         (item) => item.categoryType === type
+//       );
+//       return setCategories(filter);
+// >>>>>>> main
     } catch (error) {
       console.error(error.message);
     }
@@ -93,19 +155,15 @@ const Transaction = ({ isActive, selectedDate }) => {
           type="text"
           placeholder="Product description"
         />
-        <input
-          name="category"
-          onChange={handleChange}
-          value={category}
-          className={scss.category}
-          list="category"
-          placeholder="Product category"
-        />
-        <datalist id="category">
-          {categories.map((category) => (
-            <option key={category._id}>{category.categoryName}</option>
-          ))}
-        </datalist>
+       <div className="myCustomSelect">
+          <Select 
+          styles={customStyles}
+            value={category}
+            onChange={handleCategoryChange}
+            options={categories}
+            placeholder="Select category"
+          />
+        </div>
         <div className={scss.valueBox}>
           <input
             name="value"
