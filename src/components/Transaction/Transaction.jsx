@@ -30,24 +30,26 @@ const customStyles = {
   }),
   menu: (provided) => ({
     ...provided,
-    height: "480px",
+    height: "auto",
     boxShadow: "0px 4px 8px 4px rgba(0, 0, 0, 0.1)",
+    
   }),
   menuList: (provided) => ({
     ...provided,
-    overflow: "visible",
+    maxHeight: '450px'
+    
   }),
 
   option: (provided, { isFocused, isSelected }) => ({
     ...provided,
     backgroundColor: isFocused ? "#F5F6FB" : isSelected ? "#F5F6FB" : null,
-    color: isSelected ? "black" : "#C7CCDC",
+    color: isSelected ? "black" : "#757575",
     padding: 10,
     fontSize: "14px",
   }),
   singleValue: (provided) => ({
     ...provided,
-    color: "#C7CCDC",
+    color: "#757575",
   }),
 
   valueContainer: (provided) => ({
