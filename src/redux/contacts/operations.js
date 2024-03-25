@@ -23,7 +23,10 @@ export const addTransaction = createAsyncThunk(
       ...rest,
     };
     try {
+      console.log(sendBody);
+
       const response = await axios.post(`/api/transactions/${type}`, sendBody);
+      console.log(response.data.data.transaction);
       return response.data.data.transaction;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
