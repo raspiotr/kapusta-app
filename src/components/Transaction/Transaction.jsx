@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import scss from "./Transaction.module.scss";
 import { addCategory } from "../../api/apiCategory";
-import { addTransactionAPI } from "../../api/apiTransaction";
-import calculator from "../../Images/SVG/calculator.svg";
+import calculator from "../../images/SVG/calculator.svg";
 import Select from "react-select";
 import { addTransaction } from "../../redux/contacts/operations";
 import { setNewBalance } from "../../redux/auth/slice";
@@ -13,49 +12,48 @@ import PropTypes from "prop-types";
 const customStyles = {
   control: (provided) => ({
     ...provided,
-    borderColor: '#f5f6fb',
-    display: 'flex',
-    height: '48px',
-    minWidth: '200px',
-    width: '100%',
-    maxWidth: '500px',
-    borderWidth: '3px',
-    fontSize: '13px',
-    padding: '0px 12px 0px 10px',
-    marginRight: '14px',
-    borderRadius: '0',
-    '&:hover': {
-      borderColor: 'grey',
-      boxShadow: 'none',
+    borderColor: "#f5f6fb",
+    color: "black",
+    display: "flex",
+    height: "48px",
+    minWidth: "200px",
+    width: "100%",
+    maxWidth: "500px",
+    borderWidth: "3px",
+    padding: "0px 12px 0px 10px",
+    marginRight: "14px",
+    borderRadius: "0",
+    "&:hover": {
+      borderColor: "none",
+      boxShadow: "none",
     },
-    
   }),
   menu: (provided) => ({
     ...provided,
-   height: '480px',
-    boxShadow: '0px 4px 8px 4px rgba(0, 0, 0, 0.1)',
+    height: "480px",
+    boxShadow: "0px 4px 8px 4px rgba(0, 0, 0, 0.1)",
   }),
   menuList: (provided) => ({
     ...provided,
-      overflow: 'visible'
+    overflow: "visible",
   }),
 
   option: (provided, { isFocused, isSelected }) => ({
     ...provided,
-    backgroundColor: isFocused ? '#F5F6FB' : isSelected ? '#F5F6FB' : null,
-    color: isSelected ? 'black' : '#C7CCDC',
+    backgroundColor: isFocused ? "#F5F6FB" : isSelected ? "#F5F6FB" : null,
+    color: isSelected ? "black" : "#C7CCDC",
     padding: 10,
-    fontSize: '14px',
+    fontSize: "14px",
   }),
   singleValue: (provided) => ({
     ...provided,
-    color: '#C7CCDC',
+    color: "#C7CCDC",
   }),
 
   valueContainer: (provided) => ({
     ...provided,
-    marginTop: '-5px',
-    width: '130px'
+    marginTop: "-5px",
+    width: "130px",
   }),
 };
 const Transaction = ({ isActive, selectedDate }) => {
@@ -67,7 +65,7 @@ const Transaction = ({ isActive, selectedDate }) => {
   const [value, setValue] = useState("");
   const [categories, setCategories] = useState([]);
 
-  const handleCategoryChange = selectedOption => {
+  const handleCategoryChange = (selectedOption) => {
     setCategory(selectedOption);
   };
 
@@ -124,17 +122,16 @@ const Transaction = ({ isActive, selectedDate }) => {
     try {
       const categories = await addCategory();
 
-      const formattedCategories = categories.data.map(cat => ({
+      const filter = categories.data.filter(
+        (item) => item.categoryType === type
+      );
+
+      const formattedCategories = filter.map((cat) => ({
         value: cat.categoryName,
-        label: cat.categoryName
+        label: cat.categoryName,
       }));
+
       setCategories(formattedCategories);
-// =======
-//       const filter = categories.data.filter(
-//         (item) => item.categoryType === type
-//       );
-//       return setCategories(filter);
-// >>>>>>> main
     } catch (error) {
       console.error(error.message);
     }
@@ -155,9 +152,9 @@ const Transaction = ({ isActive, selectedDate }) => {
           type="text"
           placeholder="Product description"
         />
-       <div className="myCustomSelect">
-          <Select 
-          styles={customStyles}
+        <div className="myCustomSelect">
+          <Select
+            styles={customStyles}
             value={category}
             onChange={handleCategoryChange}
             options={categories}
