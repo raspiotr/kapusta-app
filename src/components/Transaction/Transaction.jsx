@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-// import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import scss from "./Transaction.module.scss";
 import { addCategory } from "../../api/apiCategory";
 import { addTransactionAPI } from "../../api/apiTransaction";
 import calculator from "../../Images/SVG/calculator.svg";
 import Select from "react-select";
-// import {
-//   newTransaction,
-//   updateAuthBalance,
-// } from "../../redux/reducers/transactionReducer";
+import { addTransaction } from "../../redux/contacts/operations";
+import { setNewBalance } from "../../redux/auth/slice";
+import { selectUser } from "../../redux/auth/selectors";
+import PropTypes from "prop-types";
 
 const customStyles = {
   control: (provided) => ({
@@ -59,11 +59,13 @@ const customStyles = {
   }),
 };
 const Transaction = ({ isActive, selectedDate }) => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const balance = user.balance;
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [value, setValue] = useState("");
   const [categories, setCategories] = useState([]);
-  // const dispatch = useDispatch();
 
   const handleCategoryChange = selectedOption => {
     setCategory(selectedOption);
@@ -93,10 +95,10 @@ const Transaction = ({ isActive, selectedDate }) => {
     setValue("");
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const date = selectedDate;
-    const type = isActive ? "expense" : "income";
+
     const body = {
       day: date.getDate(),
       month: date.getMonth() + 1,
@@ -106,31 +108,33 @@ const Transaction = ({ isActive, selectedDate }) => {
       category,
       amount: value,
     };
+    const valuePositive = Math.abs(value);
+    const change = isActive ? valuePositive * -1 : valuePositive;
+    const newBalance = Number(balance) + change;
+    dispatch(setNewBalance({ balance: newBalance }));
 
-    console.log(body);
-
-    // let token =
-    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZmQ5OTlhODU0MGRlMjFkYTkxODk2MSIsImlhdCI6MTcxMTExODc3MiwiZXhwIjoxNzExNzIzNTcyfQ.Rk1yYyi-D4rwxwKlgvCYD0NYT7Vtcx75_OLbhEOpefY";
-    try {
-      // await addTransactionAPI({ type, body, token });
-      // dispatch(newTransaction(response.data.transaction));
-      // dispatch(updateAuthBalance(response.data.newBalance))
-      setDescription("");
-      setCategory("");
-      setValue("");
-    } catch (error) {
-      console.error(error.message);
-    }
+    dispatch(addTransaction(body));
+    setDescription("");
+    setCategory("");
+    setValue("");
   };
 
   const fetchCategories = async () => {
+    const type = isActive ? "expense" : "income";
     try {
       const categories = await addCategory();
+
       const formattedCategories = categories.data.map(cat => ({
         value: cat.categoryName,
         label: cat.categoryName
       }));
       setCategories(formattedCategories);
+// =======
+//       const filter = categories.data.filter(
+//         (item) => item.categoryType === type
+//       );
+//       return setCategories(filter);
+// >>>>>>> main
     } catch (error) {
       console.error(error.message);
     }
@@ -138,7 +142,7 @@ const Transaction = ({ isActive, selectedDate }) => {
 
   useEffect(() => {
     fetchCategories();
-  }, []);
+  }, [isActive]);
 
   return (
     <form className={scss.form} onSubmit={handleSubmit}>
@@ -166,7 +170,7 @@ const Transaction = ({ isActive, selectedDate }) => {
             onChange={handleChange}
             className={scss.value}
             value={value}
-            placeholder="UTH"
+            placeholder="PLN"
             type="number"
           />
           <samp className={scss.calculator}>
@@ -180,6 +184,11 @@ const Transaction = ({ isActive, selectedDate }) => {
       </div>
     </form>
   );
+};
+
+Transaction.propTypes = {
+  isActive: PropTypes.bool.isRequired,
+  selectedDate: PropTypes.instanceOf(Date),
 };
 
 export default Transaction;

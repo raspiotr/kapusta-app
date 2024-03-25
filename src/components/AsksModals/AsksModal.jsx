@@ -1,9 +1,8 @@
 import scss from "./AsksModal.module.scss";
 import closeIcon from "../../images/SVG/icons.svg";
+import PropTypes from "prop-types";
 
-const AsksModal = ({ text, closeModal, isOpen }) => {
-  // funkcja
-
+const AsksModal = ({ text, closeModal, isOpen, actionConfirm }) => {
   return (
     <>
       {isOpen ? (
@@ -14,10 +13,10 @@ const AsksModal = ({ text, closeModal, isOpen }) => {
             </svg>
             <p>{text}</p>
             <div className={scss.buttonContainer}>
-              <button className={scss.button} onClick={closeModal}>
+              <button className={scss.button} onClick={actionConfirm}>
                 Yes
               </button>
-              <button className={scss.button} onClick={{ closeModal }}>
+              <button className={scss.button} onClick={closeModal}>
                 No
               </button>
             </div>
@@ -26,6 +25,13 @@ const AsksModal = ({ text, closeModal, isOpen }) => {
       ) : null}
     </>
   );
+};
+
+AsksModal.propTypes = {
+  text: PropTypes.string.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  actionConfirm: PropTypes.func.isRequired,
 };
 
 export default AsksModal;

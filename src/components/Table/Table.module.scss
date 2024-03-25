@@ -1,4 +1,11 @@
 @import "../../assets/variables.scss";
+
+.tableBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .table {
   margin-bottom: 50px;
   color: $secondaryTextColor;
@@ -21,10 +28,10 @@
     text-align: left;
     padding: 8px 0;
     &:nth-child(1) {
-      width: 100px;
+      width: 120px;
     }
     &:nth-child(2) {
-      width: 250px;
+      width: 230px;
     }
     &:nth-child(3) {
       width: 150px;
@@ -36,10 +43,10 @@
   @media screen and (min-width: 1280px) {
     th {
       &:nth-child(1) {
-        width: 100px;
+        width: 120px;
       }
       &:nth-child(2) {
-        width: 400px;
+        width: 370px;
       }
       &:nth-child(3) {
         width: 200px;
@@ -58,6 +65,10 @@
       border-bottom: 1px solid #f5f6fb;
     }
   }
+}
+
+.date {
+  text-align: center;
 }
 
 .titles {
@@ -97,4 +108,14 @@
 .amount {
   font-weight: 600;
   text-align: right;
+}
+
+.addTransaction {
+  font-size: 14px;
+  width: 100%;
+  text-align: center;
+  color: $secondaryTextColor;
+  @media screen and (min-width: 768px) {
+    margin-top: 100px;
+  }
 }

@@ -1,0 +1,32 @@
+@import "../../../assets/variables";
+
+.periodbox {
+  text-align: center;
+  position: relative;
+
+  & p {
+    color: $secondaryTextColor;
+    font-size: 14px;
+    @media screen and (min-width: 768px) {
+      margin-top: 0;
+    }
+  }
+}
+
+.periodbutton {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 0 5px;
+  border: none;
+  color: #000000;
+  width: 150px;
+}
+.periodItem {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}

@@ -81,10 +81,10 @@ const Home = () => {
             </div>
             <div className={scss.bottomWindow}>
               <Table isActive={isActive} />
-              {isDesktop && <Summary />}
+              {isDesktop && <Summary isActive={isActive} />}
             </div>
           </div>
-          {!isDesktop && <Summary />}
+          {!isDesktop && <Summary isActive={isActive} />}
         </>
       )}
       {isMobile && <Buttons isActive={isActive} handleClick={handleClick} />}

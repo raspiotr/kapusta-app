@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchContacts, addContact, removeContact } from './operations';
+import {  addTransaction, removeTransaction, getTransaction, } from './operations';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -19,34 +19,34 @@ const isRejectAction = action => {
 };
 
 const tasksSlice = createSlice({
-  name: 'contact',
+  name: 'transactions',
   initialState: {
-    items: [],
+    transactions: [],
     isLoading: false,
     error: null,
   },
   extraReducers: builder => {
     builder
-      .addCase(fetchContacts.fulfilled, (state, actions) => {
+      .addCase(getTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = actions.payload;
+        state.transactions = action.payload
       })
 
-      .addCase(addContact.fulfilled, (state, actions) => {
+      .addCase(addTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items.push(actions.payload);
+        state.transactions.push(action.payload);
       })
 
-      .addCase(removeContact.fulfilled, (state, actions) => {
+      .addCase(removeTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        const index = state.items.findIndex(
-          item => item.id === actions.payload.id
+        const index = state.transactions.filter(
+          transaction => transaction.id !== action.payload.id
         );
 
-        state.items.splice(index, 1);
+        state.transactions.splice(index, 1);
       })
 
       .addMatcher(isPendingAction, handlePending)

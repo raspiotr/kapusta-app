@@ -1,16 +1,21 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState, startTransition } from "react";
+import { useDispatch } from "react-redux";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import css from "./ChceckUserGoogleRedir.module.scss";
+import { setUserData } from "../../redux/auth/slice";
 
 const CheckUserGoogleRedir = () => {
+  const [token, setToken] = useState("");
+  const [searchParams] = useSearchParams();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
+    setToken(searchParams.get("token"));
     const checkUser = async () => {
-      // Pobierz token z nagłówka "AuthToken"
-      const token = window.location.headers?.get("AuthToken") || null;
-      // const token =
-      //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZmM4YzcxODU0MGRlMjFkYTkxODY4ZCIsImlhdCI6MTcxMTE0MzI3OSwiZXhwIjoxNzExNzQ4MDc5fQ.j9INlHWFPOSrh76XsS8QjTl_qjdqG4Zm5YrRcP9WCRM";
+      // Pobierz token z URL
+
       if (token === null) {
         navigate("/login", { replace: true });
       }
@@ -26,25 +31,31 @@ const CheckUserGoogleRedir = () => {
         );
 
         if (response.status === 200) {
-          const name = response.data.user.name;
-          console.log("Zalogowano użytkownika:", name);
-          navigate("/", { replace: true });
+          const user = response.data.user;
+          const { name, email, balance, avatarUrl } = user;
+          const isLoggedIn = true;
+          const token = response.data.token;
+          dispatch(
+            setUserData({ isLoggedIn, name, email, balance, avatarUrl, token })
+          );
+          navigate("/", { replace: false });
         } else {
-          navigate("/login", { replace: true });
+          navigate("/", { replace: true });
         }
       } catch (error) {
         console.error("Błąd:", error);
-        navigate("/login", { replace: true });
+        navigate("/", { replace: true });
       }
     };
-
-    checkUser();
+    startTransition(() => {
+      checkUser();
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [token]);
 
   return (
-    <div>
-      <h1>Redirecting...</h1>
+    <div className={css.RedirBox}>
+      <b className={css.RedirText}>Redirecting...</b>
     </div>
   );
 };

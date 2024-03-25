@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import { getSummaryAPI } from "../../api/apiTransaction";
 import scss from "./Summary.module.scss";
+import PropTypes from "prop-types";
 
-const Summary = () => {
+const Summary = ({ isActive }) => {
   const [summary, setSummary] = useState([]);
 
+  const summaryEmpty = Array.from({ length: 6 }, (_, index) => {
+    return summary[index] || { month: "", total: "" };
+  });
+
   const showSummary = async () => {
-    let type = "expense" || "income";
+    let type = isActive ? "expense" : "income";
 
     try {
       const req = await getSummaryAPI({ type });
@@ -18,7 +23,7 @@ const Summary = () => {
 
   useEffect(() => {
     showSummary();
-  }, []);
+  }, [isActive]);
 
   return (
     <div className={scss.summarySection}>
@@ -31,16 +36,20 @@ const Summary = () => {
           </tr>
         </thead>
         <tbody>
-          {summary.map((item, index) => (
+          {summaryEmpty.map((item, index) => (
             <tr key={index}>
               <td>{item.month}</td>
-              <td>{item.total}</td>
+              <td>{item.total && Number(item.total).toFixed(2)}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
   );
+};
+
+Summary.propTypes = {
+  isActive: PropTypes.bool.isRequired,
 };
 
 export default Summary;

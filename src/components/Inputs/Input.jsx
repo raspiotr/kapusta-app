@@ -1,6 +1,7 @@
 import scss from "./Input.module.scss";
 import Transaction from "../Transaction/Transaction";
 import arrow from "../../images/SVG/arrow.svg";
+import PropTypes from "prop-types";
 
 const Input = ({ isOpen, closeModal, isActive, selectedDate }) => {
   return (
@@ -15,6 +16,13 @@ const Input = ({ isOpen, closeModal, isActive, selectedDate }) => {
       </div>
     </div>
   );
+};
+
+Input.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  actionConfirm: PropTypes.func,
+  isActive: PropTypes.bool.isRequired,
+  selectedDate: PropTypes.instanceOf(Date),
 };
 
 export default Input;

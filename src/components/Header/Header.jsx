@@ -1,18 +1,25 @@
 import { Outlet } from "react-router-dom";
 import { Suspense, useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import BackgroundCont from "../../components/BackgroundCont/BackgroundCont";
 import Container from "../../components/Container/Container";
 import AsksModals from "../AsksModals/AsksModal";
 import MediaQuery from "react-responsive";
 import scss from "./Header.module.scss";
 import icons from "../../images/SVG/icons.svg";
+import { selectUser, selectIsLoggedIn } from "../../redux/auth/selectors";
+import { logout } from "../../redux/auth/operations";
 
-const Header = ({ user }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const mockUser = {
-    firstName: "John",
-    lastName: "Doe",
+export const Header = () => {
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+    return setIsOpen(!isOpen);
   };
+
+  const [isOpen, setIsOpen] = useState(false);
+  const user = useSelector(selectUser);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const openModalBtn = () => {
     setIsOpen(!isOpen);
@@ -39,6 +46,7 @@ const Header = ({ user }) => {
       <AsksModals
         isOpen={isOpen}
         closeModal={openModalBtn}
+        actionConfirm={handleLogout}
         text={"Do you really want to leave?"}
       />
       <header>
@@ -47,37 +55,29 @@ const Header = ({ user }) => {
             <use xlinkHref={`${icons}#icon-logo`} />
           </svg>
 
-          <div className={scss.usermenu}>
-            <svg className={scss.avatar}>
-              <use xlinkHref={`${icons}#icon-avatar`} />
-            </svg>
+          {isLoggedIn && (
+            <div className={scss.usermenu}>
+              <img src={user.avatarUrl} className={scss.avatar} />
 
-            <MediaQuery minWidth={772}>
-              {user ? (
-                <span className={scss.userName}>
-                  {user.firstName} {user.lastName}
-                </span>
+              <MediaQuery minWidth={772}>
+                <span className={scss.userName}>{user.name}</span>
+
+                <div className={scss.separator}></div>
+              </MediaQuery>
+
+              {isMobile ? (
+                <button onClick={openModalBtn} className={scss.exitLink}>
+                  <svg className={scss.actions}>
+                    <use xlinkHref={`${icons}#icon-logout`} />
+                  </svg>
+                </button>
               ) : (
-                <span className={scss.userName}>
-                  {mockUser.firstName} {mockUser.lastName}
-                </span>
+                <button onClick={openModalBtn} className={scss.exitLink}>
+                  Exit
+                </button>
               )}
-
-              <div className={scss.separator}></div>
-            </MediaQuery>
-
-            {isMobile ? (
-              <button onClick={openModalBtn} className={scss.exitLink}>
-                <svg className={scss.actions}>
-                  <use xlinkHref={`${icons}#icon-logout`} />
-                </svg>
-              </button>
-            ) : (
-              <button onClick={openModalBtn} className={scss.exitLink}>
-                Exit
-              </button>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </header>
       <Suspense fallback={<div>Loading...</div>}>
@@ -91,4 +91,3 @@ const Header = ({ user }) => {
     </>
   );
 };
-export default Header;
