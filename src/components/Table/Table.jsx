@@ -43,85 +43,91 @@ const Table = ({ isActive }) => {
   }, [isActive]);
 
   return (
-    <table className={scss.table}>
-      {!isMobile ? (
-        <thead>
-          <tr className={scss.titles}>
-            <th>DATE</th>
-            <th>DESCRIPTION</th>
-            <th>CATEGORY</th>
-            <th>SUM</th>
-            <th></th>
-          </tr>
-        </thead>
-      ) : (
-        ""
-      )}
-      <tbody className={scss.scrollable}>
-        {transaction.map((row) => (
-          <tr key={row._id}>
-            {isMobile ? (
-              <>
-                <td className={scss.dataText}>
-                  <div className={scss.upperText}>{row.description}</div>
-                  <div className={scss.lowerText}>
-                    <div>
-                      {`${String(row.day).padStart(2, "0")}.${String(
-                        row.month
-                      ).padStart(2, "0")}.${row.year}`}
-                    </div>
-                    <div>{row.category}</div>
-                  </div>
-                </td>
-                <td
-                  className={scss.amount}
-                  style={
-                    isActive
-                      ? {
-                          color: "red",
-                        }
-                      : { color: "green" }
-                  }
-                >
-                  {isActive && "- "}
-                  {row.amount} <span>PLN</span>
-                </td>
-              </>
-            ) : (
-              <>
-                <td className={scss.date}>{`${String(row.day).padStart(
-                  2,
-                  "0"
-                )}.${String(row.month).padStart(2, "0")}.${row.year}`}</td>
-                <td>{row.description}</td>
-                <td>{row.category}</td>
-                <td
-                  className={scss.amount}
-                  style={
-                    isActive
-                      ? {
-                          color: "red",
-                        }
-                      : { color: "green" }
-                  }
-                >
-                  {isActive && "- "} {row.amount} <span>PLN</span>
-                </td>
-              </>
-            )}
+    <>
+      {transaction[0] ? (
+        <table className={scss.table}>
+          {!isMobile && (
+            <thead>
+              <tr className={scss.titles}>
+                <th>DATE</th>
+                <th>DESCRIPTION</th>
+                <th>CATEGORY</th>
+                <th>SUM</th>
+                <th></th>
+              </tr>
+            </thead>
+          )}
+          <tbody>
+            {transaction.map((row) => (
+              <tr key={row._id}>
+                {isMobile ? (
+                  <>
+                    <td className={scss.dataText}>
+                      <div className={scss.upperText}>{row.description}</div>
+                      <div className={scss.lowerText}>
+                        <div>
+                          {`${String(row.day).padStart(2, "0")}.${String(
+                            row.month
+                          ).padStart(2, "0")}.${row.year}`}
+                        </div>
+                        <div>{row.category}</div>
+                      </div>
+                    </td>
+                    <td
+                      className={scss.amount}
+                      style={
+                        isActive
+                          ? {
+                              color: "red",
+                            }
+                          : { color: "green" }
+                      }
+                    >
+                      {isActive && "- "}
+                      {row.amount} <span>PLN</span>
+                    </td>
+                  </>
+                ) : (
+                  <>
+                    <td className={scss.date}>{`${String(row.day).padStart(
+                      2,
+                      "0"
+                    )}.${String(row.month).padStart(2, "0")}.${row.year}`}</td>
+                    <td>{row.description}</td>
+                    <td>{row.category}</td>
+                    <td
+                      className={scss.amount}
+                      style={
+                        isActive
+                          ? {
+                              color: "red",
+                            }
+                          : { color: "green" }
+                      }
+                    >
+                      {isActive && "- "} {row.amount} <span>PLN</span>
+                    </td>
+                  </>
+                )}
 
-            <td>
-              <button
-                className={scss.trashButton}
-                onClick={() => deleteTransaction(row._id, row.amount)}
-              >
-                <img id={row._id} src={trash} alt="" />
-              </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+                <td>
+                  <button
+                    className={scss.trashButton}
+                    onClick={() => deleteTransaction(row._id, row.amount)}
+                  >
+                    <img id={row._id} src={trash} alt="" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <div className={scss.addTransaction}>
+          Add transactions to display them in the table
+        </div>
+      )}
+    </>
   );
 };
 

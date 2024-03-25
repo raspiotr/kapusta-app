@@ -66,9 +66,13 @@ const Transaction = ({ isActive, selectedDate }) => {
   };
 
   const fetchCategories = async () => {
+    const type = isActive ? "expense" : "income";
     try {
       const categories = await addCategory();
-      return setCategories(categories.data);
+      const filter = categories.data.filter(
+        (item) => item.categoryType === type
+      );
+      return setCategories(filter);
     } catch (error) {
       console.error(error.message);
     }
@@ -76,7 +80,7 @@ const Transaction = ({ isActive, selectedDate }) => {
 
   useEffect(() => {
     fetchCategories();
-  }, []);
+  }, [isActive]);
 
   return (
     <form className={scss.form} onSubmit={handleSubmit}>
