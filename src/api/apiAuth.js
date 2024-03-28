@@ -40,7 +40,7 @@ export const fullUserInfoAPI = async () => {
   return data;
 };
 
-export const setAuthHeader = () => {
+export const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
