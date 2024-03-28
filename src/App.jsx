@@ -1,5 +1,5 @@
 import css from "./App.module.scss";
-import { useEffect, lazy, Suspense } from "react";
+import { useEffect, lazy } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import "normalize.css";
@@ -32,36 +32,32 @@ function App() {
       <b className={css.RefreshingText}>Refreshing user...</b>
     </div>
   ) : (
-    <Suspense fallback={<h3>Loading...</h3>}>
-      <Routes>
-        <Route path="/" element={<Header />}>
-          <Route
-            index
-            element={<PrivateRoute redirectTo="/login" component={<Home />} />}
-          />
-          <Route
-            path="login"
-            element={<RestrictedRoute redirectTo="/" component={<Login />} />}
-          />
-          <Route
-            path="reports"
-            element={
-              <PrivateRoute redirectTo="/login" component={<Reports />} />
-            }
-          />
-          <Route
-            path="user-check"
-            element={
-              <RestrictedRoute
-                redirectTo="/"
-                component={<CheckUserGoogleRedir />}
-              />
-            }
-          />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </Suspense>
+    <Routes>
+      <Route path="/" element={<Header />}>
+        <Route
+          index
+          element={<PrivateRoute redirectTo="/login" component={<Home />} />}
+        />
+        <Route
+          path="login"
+          element={<RestrictedRoute redirectTo="/" component={<Login />} />}
+        />
+        <Route
+          path="reports"
+          element={<PrivateRoute redirectTo="/login" component={<Reports />} />}
+        />
+        <Route
+          path="user-check"
+          element={
+            <RestrictedRoute
+              redirectTo="/"
+              component={<CheckUserGoogleRedir />}
+            />
+          }
+        />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
 
