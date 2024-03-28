@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Report } from "notiflix/build/notiflix-report-aio";
 
-axios.defaults.baseURL = "https://kapusta-backend-827563b0830f.herokuapp.com/";
+axios.defaults.baseURL = "https://kapusta-app-eafad5d610ef.herokuapp.com/";
 axios.defaults.validateStatus();
 
 export const registerAPI = async (user) => {

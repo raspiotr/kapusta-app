@@ -1,9 +1,9 @@
 {
-  "name": "goit-gr2-kapusta",
+  "name": "kapusta-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://bgal23.github.io/goit-gr2-kapusta/",
+  "homepage": "https://raspiotr.github.io/kapusta-app/",
   "scripts": {
     "dev": "vite",
     "predeploy": "npm run build",
