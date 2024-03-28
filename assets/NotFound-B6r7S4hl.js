@@ -1,0 +1,1 @@
+import{j as t}from"./index-Bp5bKFzL.js";const o="_NFBox_thmzq_1",x="_NFText_thmzq_13",s={NFBox:o,NFText:x},e=()=>t.jsx("div",{className:s.NFBox,children:t.jsx("b",{className:s.NFText,children:"NOT FOUND..."})});export{e as default};
