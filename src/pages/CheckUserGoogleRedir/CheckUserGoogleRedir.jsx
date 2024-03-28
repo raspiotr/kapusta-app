@@ -22,7 +22,7 @@ const CheckUserGoogleRedir = () => {
       // Wyślij żądanie GET z tokenem Bearer
       try {
         const response = await axios.get(
-          "https://kapusta-backend-827563b0830f.herokuapp.com/api/auth/current",
+          "https://kapusta-app-eafad5d610ef.herokuapp.com/api/auth/current",
           {
             headers: {
               Authorization: `Bearer ${token}`,

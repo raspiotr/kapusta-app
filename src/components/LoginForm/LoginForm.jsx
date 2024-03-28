@@ -59,7 +59,7 @@ const LoginForm = () => {
         <div className={scss.googleLogin}>
           <Link
             to={
-              "https://kapusta-backend-827563b0830f.herokuapp.com/api/auth/google"
+              "https://kapusta-app-eafad5d610ef.herokuapp.com/api/auth/google"
             }
           >
             <img src={google} alt="" />

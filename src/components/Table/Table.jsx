@@ -5,9 +5,9 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 import trash from "../../images/SVG/delete.svg";
 import { useSelector, useDispatch } from "react-redux";
-import { selectTransactions } from "../../redux/contacts/selectors.js";
-import { getTransaction } from "../../redux/contacts/operations.js";
-import { removeTransaction } from "../../redux/contacts/operations.js";
+import { selectTransactions } from "../../redux/transactions/selectors.js";
+import { getTransaction } from "../../redux/transactions/operations.js";
+import { removeTransaction } from "../../redux/transactions/operations.js";
 import { selectUser } from "../../redux/auth/selectors.js";
 import { setNewBalance } from "../../redux/auth/slice.js";
 

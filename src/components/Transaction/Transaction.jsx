@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import scss from "./Transaction.module.scss";
 import { addCategory } from "../../api/apiCategory";
-import { addTransaction } from "../../redux/contacts/operations";
+import { addTransaction } from "../../redux/transactions/operations";
 import calculator from "../../images/SVG/calculator.svg";
 import { setNewBalance } from "../../redux/auth/slice";
 import { selectUser } from "../../redux/auth/selectors";

@@ -1,7 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
-import {  addTransaction, removeTransaction, getTransaction, } from './operations';
+import { createSlice } from "@reduxjs/toolkit";
+import {
+  addTransaction,
+  removeTransaction,
+  getTransaction,
+} from "./operations";
 
-const handlePending = state => {
+const handlePending = (state) => {
   state.isLoading = true;
 };
 
@@ -10,27 +14,27 @@ const handleRejected = (state, action) => {
   state.error = action.payload;
 };
 
-const isPendingAction = action => {
-  return action.type.endsWith('/pending');
+const isPendingAction = (action) => {
+  return action.type.endsWith("/pending");
 };
 
-const isRejectAction = action => {
-  return action.type.endsWith('/rejected');
+const isRejectAction = (action) => {
+  return action.type.endsWith("/rejected");
 };
 
-const tasksSlice = createSlice({
-  name: 'transactions',
+const transactionsSlice = createSlice({
+  name: "transactions",
   initialState: {
     transactions: [],
     isLoading: false,
     error: null,
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(getTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.transactions = action.payload
+        state.transactions = action.payload;
       })
 
       .addCase(addTransaction.fulfilled, (state, action) => {
@@ -43,7 +47,7 @@ const tasksSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         const index = state.transactions.filter(
-          transaction => transaction.id !== action.payload.id
+          (transaction) => transaction.id !== action.payload.id
         );
 
         state.transactions.splice(index, 1);
@@ -51,10 +55,10 @@ const tasksSlice = createSlice({
 
       .addMatcher(isPendingAction, handlePending)
       .addMatcher(isRejectAction, handleRejected)
-      .addDefaultCase(state => {
-        state.error = 'someone use old function, fix it!';
+      .addDefaultCase((state) => {
+        state.error = "someone use old function, fix it!";
       });
   },
 });
 
-export const tasksReducer = tasksSlice.reducer;
+export const transactionsReducer = transactionsSlice.reducer;

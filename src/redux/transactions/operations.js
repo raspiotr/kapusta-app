@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = "https://kapusta-app-eafad5d610ef.herokuapp.com/";
+axios.defaults.baseURL = "https://kapusta-app-eafad5d610ef.herokuapp.com";
 
 export const getTransaction = createAsyncThunk(
   "transactions/getTransaction",
