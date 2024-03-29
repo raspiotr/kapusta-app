@@ -80,14 +80,15 @@ export const Header = () => {
           )}
         </div>
       </header>
-      <Suspense fallback={<div>Loading...</div>}>
-        <main>
-          <BackgroundCont />
-          <Container>
+
+      <main>
+        <BackgroundCont />
+        <Container>
+          <Suspense fallback={<div>Loading...</div>}>
             <Outlet />
-          </Container>
-        </main>
-      </Suspense>
+          </Suspense>
+        </Container>
+      </main>
     </>
   );
 };
