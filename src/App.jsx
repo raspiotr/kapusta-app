@@ -1,5 +1,8 @@
 import css from "./App.module.scss";
-import { useEffect, lazy } from "react";
+import {
+  useEffect,
+  //  lazy
+} from "react";
 import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import "normalize.css";
@@ -11,13 +14,19 @@ import { Header } from "./components/Header/Header";
 import { refreshUser } from "./redux/auth/operations";
 import { useAuth } from "./hooks";
 
-const Home = lazy(() => import("./pages/Home/Home"));
-const Login = lazy(() => import("./pages/Login/Login"));
-const Reports = lazy(() => import("./pages/Reports/Reports"));
-const CheckUserGoogleRedir = lazy(() =>
-  import("./pages/CheckUserGoogleRedir/CheckUserGoogleRedir")
-);
-const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
+// const Home = lazy(() => import("./pages/Home/Home"));
+// const Login = lazy(() => import("./pages/Login/Login"));
+// const Reports = lazy(() => import("./pages/Reports/Reports"));
+// const CheckUserGoogleRedir = lazy(() =>
+//   import("./pages/CheckUserGoogleRedir/CheckUserGoogleRedir")
+// );
+// const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
+
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import Reports from "./pages/Reports/Reports";
+import CheckUserGoogleRedir from "./pages/CheckUserGoogleRedir/CheckUserGoogleRedir";
+import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
   const dispatch = useDispatch();
