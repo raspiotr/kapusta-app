@@ -1,4 +1,4 @@
-### KAPUSTA - Budget Management App (frontend)
+### KAPUSTA - Budget Management App (frontend: React.js)
 
 #### Background:
 
